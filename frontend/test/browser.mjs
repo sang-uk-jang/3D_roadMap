@@ -109,6 +109,19 @@ try {
       "../../artifacts/guide/gunja-gates-walk.png", import.meta.url,
     )), fullPage: true });
   }
+  await desktop.locator(".place select").first().selectOption("connector-4-upper");
+  await desktop.locator(".place select").last().selectOption("gs25-b1");
+  await desktop.getByRole("button", { name: "경로 보기", exact: true }).click();
+  await expectJourney(desktop, /4번 출구.*GS25 편의점 유리문 앞/);
+  await arrival.click();
+  await arrival.click();
+  assert.match(await checkpoint.textContent(), /첫 우회전 코너의 GS25 편의점 유리문/);
+  if (process.env.METROLENS_SCREENSHOT === "1") {
+    await desktop.locator(".scrub").fill("770");
+    await desktop.screenshot({ path: fileURLToPath(new URL(
+      "../../artifacts/guide/gunja-gs25-landmark.png", import.meta.url,
+    )), fullPage: true });
+  }
 
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 },
     isMobile: true, hasTouch: true, deviceScaleFactor: 2 });

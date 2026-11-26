@@ -1,6 +1,6 @@
 {
   "notes": "안내도 입체 그림에서 출구 1·2, 3·4, 5·6, 7·8의 합류부와 2·3의 계단 사이 중간참을 판독했다. x/z 위치와 중간참 높이는 비축척 그림에서 추정했다.",
-  "floors": {"M12":4.2,"M2":12.5,"M34":5.7,"M3":14.0,"M56":4.2,"M7":10.2},
+  "floors": {"M12":4.2,"M2":12.5,"M34":4.25,"M3":14.0,"M56":4.2,"M7":10.2},
   "areas": [
     {"id":"Landing_12","floor":"M12","material":"concourse","status":"map-derived","polygons":[[[-19.5,21.1],[-18.9,15],[-12.8,14.8],[-8.9,16.6],[-8.9,22],[-15.9,26.1],[-19.5,25.2]]]},
     {"id":"Landing_2","floor":"M2","material":"concourse","status":"map-derived","polygons":[[[-14.7,17.9],[-8.8,17.9],[-8.7,24.9],[-14.4,24.9]]]},
@@ -10,7 +10,7 @@
     {"id":"Landing_7","floor":"M7","material":"concourse","status":"map-derived","polygons":[[[26.9,32.1],[29.6,29.9],[32.8,33.6],[30,36]]]}
   ],
   "b1Extensions": [
-    [[-23.5,-25.8],[-16.0,-25.8],[-11.5,-21.3],[-9.1,-21.0],[-9.5,-16.5],[-23.5,-15.2]],
+    [[-29.0,-31.8],[-24.6,-34.0],[-20.7,-30.4],[-17.5,-26.0],[-10.0,-25.8],[-9.2,-22.65],[-9.1,-21.0],[-9.5,-16.5],[-23.5,-15.2],[-24.8,-24.0]],
     [[16.7,-17.4],[21.1,-17.4],[22.9,-7.4],[16.7,-7.4],[13.5,-11.1]],
     [[8.6,10.0],[15.6,8.4],[20.5,8.4],[20.5,15.3],[16.1,19.0],[9.2,19.0],[7.0,14.3]]
   ],
@@ -25,6 +25,7 @@
     "Exit 8":["B1_Concourse",14.48,16.75]
   },
   "exitOverrides": {
+    "Exit 4":{"upper":["G",4.9,5.88],"videoReference":"gunja1.mp4 00:09–00:42; gunja2.mp4 00:32–00:53"},
     "Exit 7":{"upper":["G",42.9,48.0],"width":3.8,"bikeRamp":true},
     "Exit 8":{"width":5.8,"kind":"escalator-pair"}
   },
@@ -32,7 +33,7 @@
     {"id":"Exit 2 · Lower flight","label":"2번 출구 아래 계단","kind":"stairs","upper":["Landing_2",-12.04,19.08],"lower":["Landing_12",-15.58,16.64],"width":5.1},
     {"id":"Exit 3 · Lower flight","label":"3번 출구 아래 계단","kind":"stairs","upper":["Landing_3",-12.66,-0.12],"lower":["Landing_34",-16.53,-11.33],"width":4.8},
     {"id":"Exits 1–2 · Shared stairs","label":"1·2번 출구 공용 계단","kind":"stairs","upper":["Landing_12",-11.44,19.48],"lower":["B1_Concourse",-11.12,11.8],"width":5.0},
-    {"id":"Exits 3–4 · Shared stairs","label":"3·4번 출구 공용 계단","kind":"stairs","upper":["Landing_34",-14.74,-17.69],"lower":["B1_Concourse",-18.77,-22.53],"width":4.6,"ceilingBeams":true},
+    {"id":"Exits 3–4 · Shared stairs","label":"3·4번 출구 공용 계단","kind":"stairs","upper":["Landing_34",-14.74,-17.69],"lower":["B1_Concourse",-18.77,-22.53],"width":4.6,"ceilingBeams":true,"wallHandrails":true,"videoReference":"gunja1.mp4 00:46–01:01; gunja2.mp4 00:08–00:23"},
     {"id":"Exits 5–6 · Shared stairs","label":"5·6번 출구 공용 계단","kind":"stairs","upper":["Landing_56",21.52,-14.18],"lower":["B1_Concourse",18.7,-17.18],"width":4.5},
     {"id":"Exit 7 · Lower flight","label":"7번 출구 아래 계단","kind":"stairs","upper":["Landing_7",29.3,31.5],"lower":["B1_Concourse",17.2,13.0],"width":3.8,"bikeRamp":true}
   ]

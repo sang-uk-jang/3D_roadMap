@@ -51,6 +51,13 @@ if modules:
         expected = "Video reference · glazed white column panels" if column.get("style") == "glossy" else "Station wall ceramic"
         assert expected in {slot.material.name for slot in obj.material_slots}
     print(f"PASS: {len(columns)} video-referenced column objects.")
+    if any(item["kind"] == "convenience-store" for item in modules["facilities"]):
+        [shop] = [item for item in modules["facilities"] if item["kind"] == "convenience-store"]
+        store = meshes[shop["id"]]
+        assert store.get("module") == "convenience-store" and store["video_reference"] == shop["reference"]
+        for label in ("GS", "25"):
+            assert f"{shop['id']} · {label} sign" in meshes
+        print("PASS: GS25 glass storefront and both sign elements are present.")
     print(f"PASS: Editable facility modules found: {counts}.")
     for level in ("B1", "B2", "B3"):
         enclosure = meshes[f"{level} · Enclosure walls"]
@@ -72,6 +79,22 @@ if "B1 · Suspended ceiling and strip lights" in meshes:
         material = bpy.data.materials[name]
         assert any(node.type == "TEX_IMAGE" and node.image for node in material.node_tree.nodes), name
     print("PASS: Video surface textures and concourse ceiling included in GLB.")
+if len(detail_files) > 3:
+    station_details = json.loads(detail_files[3].read_text(encoding="utf-8"))
+    for item in station_details["facilities"]:
+        obj = meshes[item["id"]]
+        assert obj.get("module") == item["kind"] and obj.get("video_reference") == item["reference"]
+    for item in station_details["transferMarkings"]:
+        assert meshes[item["id"]].get("module") == "transfer-marking"
+    materials = {slot.material.name for slot in meshes["Exit 4"].material_slots}
+    assert "Video reference · tinted balustrade" in materials
+    print(f"PASS: {len(station_details['facilities'])} marked fixtures, two transfer floor guides and Exit 4 glass rails.")
+    if "B1 · Exit 7 and 8 wall directory · printed station map" in meshes:
+        obj = meshes["B1 · Exit 7 and 8 wall directory · printed station map"]
+        assert obj.data.uv_layers
+        material = obj.material_slots[0].material
+        assert any(node.type == "TEX_IMAGE" and node.image for node in material.node_tree.nodes)
+        print("PASS: The wall directory contains the user's station diagram texture.")
 estimated_boundaries = [obj for name, obj in meshes.items() if any(
     role in name for role in ("Enclosure walls", "Opening guardrails", "Platform track barriers")
 )]

@@ -105,6 +105,32 @@ test("facility entrances and sampled stair treads are available in both travel d
   assert.deepEqual(descending.treads, edge.treads.slice().reverse().map(flight => flight?.slice().reverse() ?? null));
 });
 
+test("recognizable B1 landmarks are valid starting points and destinations", () => {
+  const landmarks = graph.places.filter(place => place.group === "현장 기준점");
+  assert.deepEqual(new Set(landmarks.map(place => place.id)),
+    new Set(["gs25-b1", "column-34", "column-56", "map-board-78"]));
+  for (const place of landmarks) {
+    assert.equal(place.floorId, "B1");
+    assert.ok(findRoute(graph, place.id, "l5-acha"));
+    const route = findRoute(graph, "connector-8-upper", place.id);
+    assert.ok(routeCheckpoints(route, place.name, place.landmark).at(-1).detail.includes(place.landmark));
+  }
+  const gates = graph.places.find(place => place.id === "gates-east");
+  assert.match(gates.landmark, /둥근 타일 기둥/);
+  assert.doesNotMatch(gates.landmark, /GS25/);
+  const shop = landmarks.find(place => place.id === "gs25-b1");
+  const fromExit4 = findRoute(graph, "connector-4-upper", shop.id);
+  const approach = fromExit4.steps.find(step => step.type === "walk" && step.from === "B1");
+  const [x, y, z] = fromExit4.points[approach.startIndex];
+  const before = fromExit4.points[approach.startIndex - 2];
+  const after = fromExit4.points[approach.startIndex + 1];
+  const along = new Vector3(x, y, z).sub(new Vector3(...before)).setY(0);
+  const turn = new Vector3(...after).sub(new Vector3(x, y, z)).setY(0);
+  assert.ok(along.x * turn.z - along.z * turn.x > 0);
+  assert.ok(new Vector3(...nodes.get(shop.id).position).distanceTo(new Vector3(x, y, z)) < 10);
+  assert.match(routeCheckpoints(fromExit4, shop.name, shop.landmark).at(-1).detail, /첫 우회전 코너/);
+});
+
 test("the first-person center descends evenly while the character follows individual treads", () => {
   const points = [new Vector3(0, 4, 0), new Vector3(8, 0, 0)];
   const cumulative = [0, points[0].distanceTo(points[1])];

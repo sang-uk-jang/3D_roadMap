@@ -312,3 +312,4 @@ footer {
   .playback { gap: 6px; }
   .map-legend { gap: 6px 11px; }
 }
+.landmark-hint { margin: 8px 0 2px; font-size: .86rem; color: var(--muted); line-height: 1.45; }

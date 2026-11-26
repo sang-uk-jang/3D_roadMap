@@ -26,6 +26,7 @@ parser.add_argument("--details", type=Path)
 parser.add_argument("--modules", type=Path)
 parser.add_argument("--exit-landings", type=Path)
 parser.add_argument("--video-textures", type=Path)
+parser.add_argument("--station-details", type=Path)
 parser.add_argument("--basename", default="gunja")
 parser.add_argument("--no-preview", action="store_true")
 args = parser.parse_args(sys.argv[sys.argv.index("--") + 1:])
@@ -68,6 +69,9 @@ if args.exit_landings:
                 connector.pop(key, None)
         connector.update(entrance_layout.get("exitOverrides", {}).get(connector["id"], {}))
     connectors.extend(entrance_layout["connectors"])
+station_details = json.loads(args.station_details.read_text(encoding="utf-8")) if args.station_details else None
+if station_details:
+    layout["facilities"].extend(station_details["facilities"])
 
 bpy.ops.wm.read_factory_settings(use_empty=True)
 bpy.context.preferences.filepaths.save_version = 0
@@ -137,7 +141,17 @@ palette = {
     "beamBlue": ("Video reference · blue-grey stair beams", "45586a"),
     "passageGlass": ("Video reference · safety glazing", "86a29d"),
     "gatePurple": ("Video reference · gate reader", "52427c"),
+    "cabinetRed": ("Station map · emergency cabinet red", "a73939"),
+    "cabinetGreen": ("Station map · AED cabinet green", "237f64"),
+    "cabinetBlue": ("Station map · relief cabinet blue", "336c91"),
+    "transferGreen": ("Station map · transfer floor guidance", "287967"),
     "columnPorcelain": ("Video reference · glazed white column panels", "eceeeb"),
+    "storeBlue": ("GS25 storefront · blue lettering", "287c9f"),
+    "storeTeal": ("GS25 storefront · teal trim", "36a6a9"),
+    "storeOrange": ("GS25 storefront · orange glass stripe", "bd5b34"),
+    "storeGlass": ("GS25 storefront · tinted glass", "435958"),
+    "directory": ("Wayfinding map · violet charcoal frame", "423f62"),
+    "mapPaper": ("Wayfinding map · printed source diagram", "f5f4ee"),
     "cap": ("Wall coping", "c0c9c3"),
     "screen": ("Platform barriers · glazing panels", "779597"),
     "frame": ("Platform barriers · dark framing", "3f5457"),
@@ -176,6 +190,11 @@ mats = {key: material(*value) for key, value in palette.items()}
 mats["columnPorcelain"].node_tree.nodes.get("Principled BSDF").inputs["Roughness"].default_value = .22
 mats["passageGlass"].surface_render_method = "BLENDED"
 mats["passageGlass"].node_tree.nodes.get("Principled BSDF").inputs["Alpha"].default_value = .38
+mats["storeGlass"].surface_render_method = "BLENDED"
+mats["storeGlass"].node_tree.nodes.get("Principled BSDF").inputs["Alpha"].default_value = .52
+if station_details:
+    mats["glass"].surface_render_method = "BLENDED"
+    mats["glass"].node_tree.nodes.get("Principled BSDF").inputs["Alpha"].default_value = .43
 surface_uv = {}
 if args.video_textures:
     for key, file, span, roughness in (
@@ -522,17 +541,46 @@ for level in (level for level in elevations if level != "G"):
     make_floor(level)
 
 
-def stairs(geometry, lower, upper, width, kind, filmed=False, open_lower=False, open_upper=False):
+def sloped_strip(geometry, start, end, side, thickness, bottom, top, finish):
+    cross = side * (thickness / 2)
+    lower, upper = Vector((0, 0, bottom)), Vector((0, 0, top))
+    offset = len(geometry.verts)
+    outline = [start - cross, end - cross, end + cross, start + cross]
+    geometry.verts.extend([vertex + lower for vertex in outline] + [vertex + upper for vertex in outline])
+    for face in ((3, 2, 1, 0), (4, 5, 6, 7), (0, 1, 5, 4),
+                 (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7)):
+        geometry.face((offset + i for i in face), finish)
+
+
+def stairs(geometry, lower, upper, width, kind, filmed=False, open_lower=False, open_upper=False,
+           wall_handrails=False):
     delta = upper - lower
     run = Vector((delta.x, delta.y, 0))
     direction = run.normalized()
     side = Vector((-direction.y, direction.x, 0))
     angle = aspect(upper, lower)
-    count = max(4, ceil(delta.z / .48), ceil(run.length / 1.02))
+    max_riser = .20 if filmed or wall_handrails else .48
+    count = max(4, ceil(delta.z / max_riser), ceil(run.length / 1.02))
     tread = run.length / count
     escalator = kind.startswith("escalator")
     pairs = [-width / 4, width / 4] if kind == "escalator-pair" else [0]
     lane_width = width / len(pairs)
+    continuous = station_details and filmed and escalator
+    if continuous:
+        for sign in (-1, 1):
+            rail = side * sign * (width / 2 - .12)
+            a, b = lower + rail, upper + rail
+            sloped_strip(geometry, a, b, side, .21, .14, .43, "beamBlue")
+            sloped_strip(geometry, a, b, side, .065, .40, 1.03, "glass")
+            sloped_strip(geometry, a, b, side, .135, 1.02, 1.14, "frame")
+    if wall_handrails:
+        for sign in (-1, 1):
+            offset = side * sign * (width / 2 - .14)
+            a, b = lower + offset, upper + offset
+            sloped_strip(geometry, a.lerp(b, .04), a.lerp(b, .96), side, .061, .87, .931, "steel")
+            for fraction in (.14, .38, .62, .86):
+                bracket = a.lerp(b, fraction) + side * sign * .10
+                geometry.box(bracket + Vector((0, 0, .858)), (.073, .25, .073), "steel", angle)
     for i in range(count):
         pos = lower + direction * ((i + .5) * tread)
         pos.z += delta.z * ((i + 1) / count)
@@ -545,6 +593,8 @@ def stairs(geometry, lower, upper, width, kind, filmed=False, open_lower=False, 
                      "yellow" if escalator else "tread", angle)
         for shift in pairs:
             for edge in (-1, 1):
+                if continuous:
+                    continue
                 offset = shift + edge * (lane_width / 2 - .10)
                 if abs(offset) < .15 and ((open_lower and i * tread < 1.9)
                                          or (open_upper and (count - i - 1) * tread < 1.9)):
@@ -572,10 +622,12 @@ def bicycle_guide(geometry, lower, upper, stair_width):
         geometry.quad([start - edge, end - edge, end + edge, start + edge], "bikeGuide")
 
 
-def mesh_text(name, body, location, rotation, size, key, group):
+def mesh_text(name, body, location, rotation, size, key, group, font=None):
     curve = bpy.data.curves.new(name, "FONT")
     curve.body, curve.align_x, curve.align_y = body, "CENTER", "CENTER"
     curve.size, curve.extrude = size, .012
+    if font:
+        curve.font = font
     obj = bpy.data.objects.new(name, curve)
     group.objects.link(obj)
     obj.location, obj.rotation_euler = location, rotation
@@ -663,13 +715,16 @@ for connector in connectors:
         stairs(geometry, mid, top, width, connector.get("upperKind", kind), filmed, open_lower=True)
         geometry.box(mid - Vector((0, 0, .22)), (width * .83, width * .83, .44), "concrete")
     else:
-        stairs(geometry, bottom, top, width, kind, filmed)
+        stairs(geometry, bottom, top, width, kind, filmed,
+               wall_handrails=connector.get("wallHandrails", False))
     if connector.get("bikeRamp"):
         bicycle_guide(geometry, bottom, top, width)
     geometry.create(connector["id"], circulation,
-                    "map anchors; video-informed appearance" if filmed else "map-derived; dimensions estimated",
+                    "video-informed geometry; dimensions estimated" if "videoReference" in connector
+                    else "map-derived; dimensions estimated",
                     lower=lower[0], upper=upper[0], connector_type=kind,
-                    bicycle_guide=bool(connector.get("bikeRamp")))
+                    bicycle_guide=bool(connector.get("bikeRamp")),
+                    **({"video_reference": connector["videoReference"]} if "videoReference" in connector else {}))
     runs = all_runs[connector["id"]]
     if connector.get("ceilingBeams"):
         overhead = Geometry()
@@ -899,6 +954,125 @@ def stainless_gate(geometry, gate, index):
     geometry.box(gate + Vector((.22, .31, .68)), (.43, .12, .51), "gateGlass")
 
 
+sign_font = None
+if station_details:
+    font_path = Path("C:/Windows/Fonts/malgun.ttf")
+    if font_path.is_file():
+        sign_font = bpy.data.fonts.load(str(font_path))
+
+
+def station_sign(geo, facility, pos, group, level):
+    angle = radians(facility["face"])
+    width = facility["width"]
+    height = 3.05
+    geo.box(pos + Vector((0, 0, height)), (width, .15, .63), "ink", angle)
+    for x in (-width / 2 + .47, width / 2 - .47):
+        if level == "B1":
+            geo.box(module_point(pos, (x, 0, 3.66), angle), (.068, .073, .61), "frame", angle)
+        else:
+            geo.box(module_point(pos, (x, 0, 1.51), angle), (.105, .105, 3.02), "frame", angle)
+    for reverse in (False, True):
+        heading = angle + (pi if reverse else 0)
+        lines = [(facility["title"], height + .116, .28), (facility["subtitle"], height - .143, .16)] \
+            if sign_font else [(facility["subtitle"], height, .29)]
+        for index, (caption, z, size) in enumerate(lines, 1):
+            mesh_text(f"{facility['id']} · {'back' if reverse else 'front'} {index}", caption,
+                      module_point(pos, (0, -.083, z), heading),
+                      (radians(90), 0, heading), size, "signWhite", group, sign_font)["floor"] = level
+
+
+def safety_cabinet(geo, facility, pos, group, level):
+    kind = facility["kind"]
+    angle = radians(facility.get("face", 0))
+    width, depth, height, finish, caption = {
+        "hydrant": (.80, .37, 1.45, "cabinetRed", "FIRE"),
+        "sos": (.35, .24, 1.23, "cabinetRed", "SOS"),
+        "aed": (.61, .34, 1.43, "cabinetGreen", "AED"),
+        "relief": (.84, .40, .98, "cabinetBlue", "RELIEF"),
+    }[kind]
+
+    def part(x, y, z, size, coat):
+        geo.box(module_point(pos, (x, y, z), angle), size, coat, angle)
+
+    part(0, 0, height / 2, (width, depth, height), finish)
+    part(0, 0, .08, (width + .04, depth + .04, .16), "frame")
+    part(0, -depth / 2, height * .52, (width * .72, .036, height * .49), "frame")
+    part(0, -depth / 2 - .022, height * .52, (width * .60, .031, height * .41),
+         "steel" if kind == "sos" else "passageGlass")
+    if kind == "sos":
+        part(0, -depth / 2 - .042, height * .49, (.12, .032, .12), "gateStop")
+    else:
+        part(width * .32, -depth / 2 - .024, height * .35, (.065, .071, .17), "steel")
+    module_label(f"{facility['id']} · face label", caption,
+                 module_point(pos, (0, -depth / 2 - .028, height * .84), angle),
+                 angle, min(.18, width * .34), group, floor=level)
+
+
+def gs25_front(geo, facility, pos, group, level):
+    width = 8.2
+    proportion = facility["width"] / width
+
+    def block(x, y, z, size, finish):
+        geo.box(pos + Vector((x * proportion, y, z)), (size[0] * proportion, size[1], size[2]), finish)
+
+    for x in (-width / 2, width / 2):
+        block(x, -.46, 1.55, (.12, 1.02, 3.10), "frame")
+    block(0, -.96, 1.52, (width, .12, 3.04), "frame")
+    block(0, -.44, .065, (width, .98, .13), "tile")
+    block(0, .035, 2.83, (width, .27, .48), "frame")
+    block(.38, .191, 2.84, (2.52, .046, .34), "tile")
+    block(0, .09, .19, (width, .15, .31), "storeTeal")
+    block(0, .137, 1.05, (width, .036, .071), "storeOrange")
+    edges = (-width / 2, -2.23, -.40, .38, 1.16, 2.57, width / 2)
+    for x in edges:
+        block(x, .058, 1.45, (.061, .16, 2.35), "steel")
+    for lo, hi in zip(edges, edges[1:]):
+        block((lo + hi) / 2, .062, 1.45, (hi - lo - .066, .06, 2.32), "storeGlass")
+    for x in (.30, .46):
+        block(x, .166, 1.31, (.055, .13, .46), "steel")
+    block(.38, .126, .048, (1.57, .34, .083), "steel")
+    for x in (-2.95, -1.29, 2.3, 3.71):
+        for row, height in enumerate((.55, 1.05, 1.55, 2.05)):
+            block(x, -.70, height, (1.19, .51, .09), "tile")
+            for i in range(5):
+                finish = ("cabinetGreen", "cabinetRed", "steel", "bezel", "cabinetBlue")[(row + i) % 5]
+                block(x + (i - 2) * .20, -.56, height + .15, (.144, .16, .23), finish)
+    for caption, x, finish in (("GS", .72, "storeBlue"), ("25", .17, "storeTeal")):
+        mesh_text(f"{facility['id']} · {caption} sign", caption,
+                  pos + Vector((x * proportion, .225, 2.84)), (radians(90), 0, pi),
+                  .285 * proportion, finish, group)["floor"] = level
+
+
+def wall_directory(geo, facility, pos, group, level):
+    angle = radians(facility["face"])
+    width, height = 2.25, 1.58
+    geo.box(pos + Vector((0, 0, 1.87)), (width, .13, height), "directory", angle)
+    geo.box(module_point(pos, (0, -.073, 1.75), angle), (2.13, .021, 1.24), "tile", angle)
+
+    shader = mats["mapPaper"].node_tree.nodes.get("Principled BSDF")
+    if not shader.inputs["Base Color"].is_linked:
+        image = bpy.data.images.load(str(Path(layout["source"]).resolve()), check_existing=True)
+        image.scale(1024, 1024)
+        image.pack()
+        texture = mats["mapPaper"].node_tree.nodes.new("ShaderNodeTexImage")
+        texture.image = image
+        mats["mapPaper"].node_tree.links.new(texture.outputs["Color"], shader.inputs["Base Color"])
+    printed = Geometry()
+    printed.quad([module_point(pos, (x, -.089, z), angle) for x, z in
+                  ((-.982, 1.15), (.06, 1.15), (.06, 2.34), (-.982, 2.34))], "mapPaper")
+    label = printed.create(f"{facility['id']} · printed station map", group,
+                           "source station diagram; mounting position estimated", floor=level)
+    uv = label.data.uv_layers.new(name="Directory print UV")
+    for loop, value in zip(label.data.polygons[0].loop_indices, ((0, 0), (1, 0), (1, 1), (0, 1))):
+        uv.data[loop].uv = value
+    for row in range(9):
+        geo.box(module_point(pos, (.60, -.089, 1.31 + row * .113), angle),
+                (.64, .017, .023), "wallGrout" if row % 3 else "directory", angle)
+    mesh_text(f"{facility['id']} · heading", "역 안내도" if sign_font else "STATION MAP",
+              module_point(pos, (0, -.085, 2.53), angle), (radians(90), 0, angle),
+              .18, "signWhite", group, sign_font)["floor"] = level
+
+
 module_groups = {}
 for facility in layout["facilities"]:
     level = level_of(facility["area"])
@@ -958,8 +1132,9 @@ for facility in layout["facilities"]:
                 part((x, -.96, .86), (.43, .10, .14), "frame")
                 part((x, -.96, .48), (.67, .10, .17), "frame")
             part((0, -.43, 2.30), (5.38, .31, .45), "signBlue")
-            module_label(f"{facility['id']} · sign", "TICKETS  /  TOP-UP",
-                         module_point(pos, (0, -.59, 2.31), angle), angle, .34, group, floor=level)
+            mesh_text(f"{facility['id']} · sign", "교통카드 · 보증금 환급" if sign_font else "TICKETS  /  TOP-UP",
+                      module_point(pos, (0, -.59, 2.31), angle), (radians(90), 0, angle),
+                      .33, "signWhite", group, sign_font)["floor"] = level
     elif kind == "column":
         column_fixture(geo, pos, facility, group, level)
     elif kind == "frontage":
@@ -982,6 +1157,14 @@ for facility in layout["facilities"]:
             geo.box(pos + Vector((0, y, 3.67)), (.067, .067, .77), "frame")
         module_label(f"{facility['id']} · sign", "7   TRAINS",
                      pos + Vector((-.095, 0, 3.02)), radians(-90), .31, group, floor=level)
+    elif kind == "direction-sign":
+        station_sign(geo, facility, pos, group, level)
+    elif kind == "convenience-store":
+        gs25_front(geo, facility, pos, group, level)
+    elif kind == "wall-directory":
+        wall_directory(geo, facility, pos, group, level)
+    elif kind in ("hydrant", "sos", "aed", "relief"):
+        safety_cabinet(geo, facility, pos, group, level)
     elif kind == "benches":
         for i in (-1, 0, 1):
             geo.box(pos + Vector((i * 1.3, 0, .38)), (1.11, .64, .76), "bench")
@@ -993,6 +1176,25 @@ for facility in layout["facilities"]:
     geo.create(facility["id"], group, "map landmarks; dimensions and placement estimated"
                if modules else "schematic placement", floor=level, module=kind,
                **({"video_reference": facility["reference"]} if "reference" in facility else {}))
+
+if station_details:
+    for item in station_details["transferMarkings"]:
+        level = level_of(item["area"])
+        layer = Geometry()
+        height = elevations[level] + .025
+        for start, end in zip(item["points"], item["points"][1:]):
+            a, b = point(start, height), point(end, height)
+            count = max(1, int((b - a).length / 1.32))
+            for i in range(count):
+                center = a.lerp(b, (i + .5) / count)
+                angle = aspect(b, a)
+                layer.box(center, (.69, .20, .035), "transferGreen", angle)
+                if i == count - 1:
+                    for side in (-1, 1):
+                        tip = module_point(center, (-.14, side * .23, 0), angle)
+                        layer.box(tip, (.44, .15, .035), "transferGreen", angle - side * .68)
+        layer.create(item["id"], floor_groups[level], "map-derived guidance; coordinates estimated",
+                     floor=level, module="transfer-marking")
 
 if video_details:
     finishes = collection("B1 · Video reference finishes", floor_groups["B1"])
@@ -1009,13 +1211,22 @@ if video_details:
                              (.66, .14, .043), "yellow", aspect(end, start))
     markings.create("B1 · Tactile paving", finishes, appearance, floor="B1")
     if modules:
-        gate_paving = Geometry()
-        for i in range(28):
-            for shift in (-.19, 0, .19):
-                gate_paving.box((13.7 + i * .49, 2.57 + shift, .024), (.40, .112, .043), "tread")
-        for z in range(-5, 2):
-            gate_paving.box((24.0, -z, .025), (.62, .96, .05), "yellow")
-        gate_paving.create("B1 · East gate approach tactile paving", finishes, appearance, floor="B1")
+        for guide in modules.get("videoTactilePaths", []):
+            paving = Geometry()
+            for start, end in zip(guide["points"], guide["points"][1:]):
+                a, b = point(start, .024), point(end, .024)
+                direction = (b - a).normalized()
+                side = Vector((-direction.y, direction.x, 0))
+                pieces = ceil((b - a).length / .5)
+                length = (b - a).length / pieces
+                angle = aspect(b, a)
+                for i in range(pieces):
+                    center = a.lerp(b, (i + .5) / pieces)
+                    paving.box(center, (length, .59, .033), "tread", angle)
+                    for shift in (-.20, -.10, 0, .10, .20):
+                        paving.box(center + side * shift, (length - .02, .045, .048), "wallTop", angle)
+            paving.create(guide["id"], finishes, appearance, floor="B1",
+                          video_reference=guide["reference"])
     if not modules:
         equipment = Geometry()
         for x in (30.4, 32.1, 33.8):

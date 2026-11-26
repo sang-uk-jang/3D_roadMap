@@ -241,7 +241,7 @@ for item in layout.get("facilityDestinations", [
     {"id": "toilet", "floor": "B2", "point": [-.7, 14], "name": "화장실 앞", "english": "Restroom"},
 ]):
     add_place(add_node(item["id"], item["floor"], *item["point"]),
-              item["name"], item["english"], "시설", item.get("landmark"))
+              item["name"], item["english"], item.get("group", "시설"), item.get("landmark"))
 
 
 STEP = .82

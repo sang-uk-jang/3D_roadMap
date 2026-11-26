@@ -39,7 +39,7 @@ function PlaceSelect({ label, value, onChange, places, destination = false }) {
   return <label className="place">
     <span className={`place-label ${destination ? "destination" : ""}`}><i />{label}</span>
     <select value={value} onChange={event => onChange(event.target.value)} disabled={!places.length}>
-      {["출구", "승강장", "시설"].map(group => <optgroup label={group} key={group}>
+      {["현장 기준점", "출구", "승강장", "시설"].map(group => <optgroup label={group} key={group}>
         {places.filter(place => place.group === group).map(place =>
           <option key={place.id} value={place.id}>{place.name} · {place.floorId === "G" ? "지상" : place.floorId}</option>)}
       </optgroup>)}
@@ -250,6 +250,7 @@ function App() {
       <aside className="guide">
         <section className="card trip">
           <h2>경로 찾기</h2>
+          <p className="landmark-hint">주변에 보이는 현장 기준점을 출발지로 선택할 수 있습니다.</p>
           <form onSubmit={plan}>
             <PlaceSelect label="출발지" value={start} onChange={setStart} places={places} />
             <button className="swap" type="button" onClick={() => { setStart(end); setEnd(start); }}
