@@ -1,0 +1,62 @@
+{
+  "stationId": "gunja",
+  "source": "56.-7호선-군자역.jpg",
+  "coordinateSystem": {
+    "unit": "diagram unit (unmeasured)", "upAxis": "Y",
+    "scaleStatus": "estimated", "planPointOrder": ["x", "z"],
+    "sourceProjection": {"origin": [1710,1690], "x": [10,1.64], "z": [-5.062,3.24], "elevation": [0,-10.56]}
+  },
+  "boundaryPolicy": "Walls and platform barriers are inferred from exposed station outlines. Stair and passage mouths remain open. Wall locations, heights, thicknesses, and floor heights are unmeasured.",
+  "floors": {"G": 20.93, "B1": 0, "B2": -20.93, "B3": -41.86},
+  "areas": [
+    {"id":"B1_Concourse","floor":"B1","material":"concourse","boundary":"wall","status":"map-derived","polygons":[[[-98,0],[-98,-16.5],[-82,-16.5],[-78,-17.5],[-15,-16],[-12,-22],[-6,-35],[-5,-82],[-8,-82],[-3,-111],[15.5,-111],[14,-10],[98.5,-10.5],[98.5,6.5],[74,6.5],[74,5],[11,6.5],[-0.5,122.5],[-15,122],[-15,42],[-14,11],[-20,14],[-78,2.5],[-78,-1]]],"holes":[[[-0.5,-107],[8.5,-107],[8.5,-88],[-0.5,-88]],[[-12,109],[-4,109],[-4,114],[-12,114]]]},
+    {"id":"B2_Line7_Junggok_Concourse","floor":"B2","material":"concourse","boundary":"wall","status":"map-derived","polygons":[[[-98,1],[-98,-16.5],[-77,-16.5],[-72,-15],[-50,-15],[-49,-13],[-22,-13],[-19,-10],[-19,6],[-57,6],[-80,2.5]]]},
+    {"id":"B2_Line7_Children_Concourse","floor":"B2","material":"concourse","boundary":"wall","status":"map-derived","polygons":[[[19,-10],[39,-10],[39,-12],[75,-12],[75,-10.5],[98.5,-10.5],[98.5,6],[76,6],[76,8.5],[54,7.5],[51,6.5],[19,6.5]]]},
+    {"id":"B2_Line5_Island_Platform","floor":"B2","material":"line5","boundary":"platform","status":"map-derived","polygons":[[[-7.5,96.5],[-7.5,56],[-10,53],[-10,33],[-7.5,30],[-7.5,-52],[-8.5,-55],[-8.5,-76],[-7.5,-79],[-7.5,-108],[6.5,-108],[6.5,-64],[8,-62],[8,-48],[6.5,-46],[6.5,28],[9,30],[9,51],[6.5,54],[6.5,96.5]]]},
+    {"id":"B3_Line7_North_Side_Platform","floor":"B3","material":"line7","boundary":"platform","status":"map-derived","polygons":[[[-108,-20],[-52,-20],[-52,-21.5],[-15,-21.5],[-15,-25],[9,-25],[9,-21.5],[51,-21.5],[51,-20],[100,-20],[100,-13],[-108,-13]]]},
+    {"id":"B3_Line7_South_Side_Platform","floor":"B3","material":"line7","boundary":"platform","status":"map-derived","polygons":[[[-108,-8],[100,-8],[100,0],[67,0],[67,1],[12,1],[12,4],[-12,4],[-12,1],[-48,1],[-48,0],[-108,0]]]},
+    {"id":"B3_North_Transfer_Passage","floor":"B3","material":"concourse","boundary":"wall","status":"map-derived","polygons":[[[-6,-24],[5,-24],[6,-55],[8,-63],[8,-82],[15,-94],[15,-103],[1,-108],[-4,-97],[-3,-83],[-6,-67]]]},
+    {"id":"B3_South_Transfer_Passage","floor":"B3","material":"concourse","boundary":"wall","status":"map-derived","polygons":[[[-12,2],[2,2],[2,19],[-1,22],[-1,62],[-0.5,75],[-2.3,101],[-13,101],[-13,83],[-10,76],[-11,23],[-15,21],[-15,12],[-12,12]]]}
+  ],
+  "connectors": [
+    {"id":"Exit 1","kind":"escalator","upper":["G",-9,53.6],"lower":["B1_Concourse",-21,10],"width":5.1,"exit":1},
+    {"id":"Exit 2","kind":"stairs","upper":["G",-6.3,25.1],"lower":["B1_Concourse",-21,6],"width":5.7,"exit":2},
+    {"id":"Exit 3","kind":"stairs","upper":["G",-11.1,12.7],"lower":["B1_Concourse",-14,-19.2],"width":5.0,"exit":3,"bend":[-13,-8,0.24]},
+    {"id":"Exit 4","kind":"escalator","upper":["G",-2.5,-3],"lower":["B1_Concourse",-13.7,-24],"width":4.3,"exit":4},
+    {"id":"Exit 5","kind":"escalator","upper":["G",37.3,-3.8],"lower":["B1_Concourse",15,-28],"width":4.9,"exit":5},
+    {"id":"Exit 6","kind":"stairs","upper":["G",47.3,8.8],"lower":["B1_Concourse",21,-10],"width":4.6,"exit":6},
+    {"id":"Exit 7","kind":"stairs","upper":["G",42.3,49.3],"lower":["B1_Concourse",12,9],"width":5.0,"exit":7},
+    {"id":"Exit 8","kind":"escalator","upper":["G",26.6,56.9],"lower":["B1_Concourse",10,15],"width":5.2,"exit":8},
+    {"id":"Line 7 west B1–B2","kind":"escalator-pair","upper":["B1_Concourse",-67,-5],"lower":["B2_Line7_Junggok_Concourse",-59,-6],"width":6.3,"bend":[-64,1,0.52]},
+    {"id":"Line 7 west B2–B3 north","kind":"escalator","upper":["B2_Line7_Junggok_Concourse",-58,-9],"lower":["B3_Line7_North_Side_Platform",-73,-17.4],"width":3.8},
+    {"id":"Line 7 west B2–B3 south","kind":"escalator","upper":["B2_Line7_Junggok_Concourse",-64,1],"lower":["B3_Line7_South_Side_Platform",-82,-3.8],"width":3.8},
+    {"id":"Line 7 east B1–B2","kind":"escalator-pair","upper":["B1_Concourse",74,-3.2],"lower":["B2_Line7_Children_Concourse",58,-3.3],"width":6.5},
+    {"id":"Line 7 east B2–B3 south","kind":"stairs","upper":["B2_Line7_Children_Concourse",61,6],"lower":["B3_Line7_South_Side_Platform",66,-2.9],"width":4.1,"bend":[63,11,0.58]},
+    {"id":"Line 7 east B2–B3 north","kind":"stairs","upper":["B2_Line7_Children_Concourse",73,-7.2],"lower":["B3_Line7_North_Side_Platform",66,-17.5],"width":4.2},
+    {"id":"Line 5 Janghanpyeong B1–B2","kind":"stairs","upper":["B1_Concourse",-7.6,114],"lower":["B2_Line5_Island_Platform",-2.8,89],"width":5.2,"bend":[-11,104,0.5]},
+    {"id":"Line 5 Achasan B1–B2","kind":"stairs","upper":["B1_Concourse",10.8,-82],"lower":["B2_Line5_Island_Platform",3.1,-101],"width":5.2,"bend":[9,-106,0.49]},
+    {"id":"Transfer Janghanpyeong","kind":"stairs","upper":["B2_Line5_Island_Platform",1.6,94],"lower":["B3_South_Transfer_Passage",-6.3,92],"width":5.4,"bend":[-0.6,110,0.51]},
+    {"id":"Transfer Achasan","kind":"stairs","upper":["B2_Line5_Island_Platform",4,-96],"lower":["B3_North_Transfer_Passage",8.1,-101],"width":5.0,"bend":[13.3,-107,0.5]}
+  ],
+  "elevators": [
+    {"id":"Lift 7 street","point":[79,3.5],"stops":["B1_Concourse","G"],"status":"map-derived"},
+    {"id":"Lift 5 street","point":[-5.3,-87],"stops":["B1_Concourse","G"],"status":"map-derived"},
+    {"id":"Lift south interchange","point":[-4.7,3],"stops":["B3_Line7_South_Side_Platform","B2_Line5_Island_Platform","B1_Concourse"],"status":"estimated"},
+    {"id":"Lift north interchange","point":[-2.5,-23],"stops":["B3_Line7_North_Side_Platform","B2_Line5_Island_Platform","B1_Concourse"],"status":"estimated"}
+  ],
+  "railways": [
+    {"floor":"B2","axis":"z","offsets":[-11.7,10.8],"span":[-114,103],"line":"line5","trainPositions":[90,-96]},
+    {"floor":"B3","axis":"x","offsets":[-11.8,-9.3],"span":[-111,105],"line":"line7","trainPositions":[-95,91]}
+  ],
+  "facilities": [
+    {"id":"Line 7 information","area":"B1_Concourse","kind":"information","point":[-83,-7]},
+    {"id":"Line 7 west gates","area":"B1_Concourse","kind":"gates","point":[-24,-8]},
+    {"id":"Line 7 east gates","area":"B1_Concourse","kind":"gates","point":[28,-4]},
+    {"id":"Line 5 gates","area":"B1_Concourse","kind":"gates","point":[3.3,-42],"rotate":true},
+    {"id":"Toilet block","area":"B2_Line5_Island_Platform","kind":"toilet","point":[-4.8,14]},
+    {"id":"Platform furniture 5A","area":"B2_Line5_Island_Platform","kind":"benches","point":[1,35]},
+    {"id":"Platform furniture 5B","area":"B2_Line5_Island_Platform","kind":"benches","point":[1,-48]},
+    {"id":"Platform furniture 7A","area":"B3_Line7_North_Side_Platform","kind":"benches","point":[-31,-18]},
+    {"id":"Platform furniture 7B","area":"B3_Line7_South_Side_Platform","kind":"benches","point":[27,-3]}
+  ]
+}

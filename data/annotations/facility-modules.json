@@ -1,0 +1,21 @@
+{
+  "source": "56.-7호선-군자역.jpg",
+  "notes": "엘리베이터와 개찰구는 안내도 아이콘·형상과 기존 모형 기준점, 화장실은 B1 단면과 중앙 엘리베이터 쪽 표기, 발권·충전은 B1 단면과 gunja1.mp4 02:50~03:07을 참고했다. 상세 좌표, 문 방향, 개수 및 형상 치수는 모형 값이다.",
+  "connectorClearance": {"Exit 1":[-24,10.7],"Exit 3":[-16.5,-18.7]},
+  "landingPolygons": [{"area":"B1_Concourse","polygon":[[-21,-21.8],[-14.6,-21.8],[-14,-15],[-21,-15]]}],
+  "facilities": [
+    {"id":"Toilet block","area":"B1_Concourse","kind":"toilet","point":[5.4,28],"face":-90},
+    {"id":"Central ticket and recharge","area":"B1_Concourse","kind":"tickets","point":[7.4,-16],"face":-90},
+    {"id":"Ticket and recharge","area":"B1_Concourse","kind":"tickets","point":[32,-8.8],"face":0},
+    {"id":"Line 7 west gates","area":"B1_Concourse","kind":"gates","point":[-30,-8]}
+  ],
+  "destinations": [
+    {"id":"toilet","floor":"B1","point":[1.2,28],"name":"화장실 입구","english":"Restroom entrance"},
+    {"id":"tickets-central","floor":"B1","point":[4.7,-16],"name":"중앙 표 사는 곳·카드 충전","english":"Central tickets & recharge"},
+    {"id":"tickets","floor":"B1","point":[32,-6.1],"name":"표 사는 곳·카드 충전","english":"Tickets & recharge"},
+    {"id":"gates-west","floor":"B1","point":[-33,-7],"name":"7호선 중곡 쪽 개찰구 앞","english":"Line 7 · west fare gates"},
+    {"id":"gates-east","floor":"B1","point":[30.4,-3],"name":"7호선 어린이대공원 쪽 개찰구 앞","english":"Line 7 · east fare gates"},
+    {"id":"gates-5","floor":"B1","point":[3.3,-39.5],"name":"5호선 개찰구 앞","english":"Line 5 · fare gates"},
+    {"id":"lift-b1","floor":"B1","point":[-4.7,5.4],"name":"중앙 엘리베이터 앞","english":"Central elevator"}
+  ]
+}

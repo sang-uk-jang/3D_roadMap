@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.5.14'
+}
+
+group = 'kr.metrolens'
+version = '0.1.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation platform('org.springframework.boot:spring-boot-dependencies:3.5.14')
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+}
+
+tasks.named('processResources') {
+    from('../artifacts/navigation/navigation.json')
+    from('../frontend/dist') {
+        into 'static'
+    }
+}

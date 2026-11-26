@@ -1,0 +1,15 @@
+{
+  "connector": "Exit 4",
+  "bend": [-11.3, -19.5, 0.19],
+  "upperKind": "escalator",
+  "lowerKind": "stairs",
+  "landingPolygon": [[-16.7,-28],[-11.2,-29.1],[-8.5,-26],[-8.5,-23],[-13.7,-22.9],[-16.7,-24]],
+  "evidence": [
+    {"video":"gunja1.mp4","start":9,"end":37,"detail":"4번 출구 표지, 금속·유리 난간, 회색 마감"},
+    {"video":"gunja1.mp4","start":48,"end":64,"detail":"출구 동선 하부 계단, 흰 타일 벽과 점자블록"},
+    {"video":"gunja1.mp4","start":104,"end":138,"detail":"대합실 개찰구의 금속 외장, 상태 표시, 타일 기둥"},
+    {"video":"gunja1.mp4","start":170,"end":187,"detail":"파란 설비 패널과 발권기, 노란 점자블록"},
+    {"video":"gunja2.mp4","start":6,"end":51,"detail":"대합실 돌계단과 금속 에스컬레이터의 마감 재확인, 출구 번호는 판독하지 못함"}
+  ],
+  "placementStatus":"4번 출구 연결 위치는 안내도 모델을 따름. 영상에서 보이는 재료와 시설 양식은 참고하되 대합실 시설의 정확한 좌표 및 개수는 추정."
+}
