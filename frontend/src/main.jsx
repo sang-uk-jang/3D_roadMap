@@ -86,7 +86,7 @@ function App() {
   const places = graph?.places ?? [];
   const startPlace = places.find(item => item.id === route?.start);
   const endPlace = places.find(item => item.id === route?.end);
-  const checkpoints = useMemo(() => routeCheckpoints(route, endPlace?.name), [route, endPlace]);
+  const checkpoints = useMemo(() => routeCheckpoints(route, endPlace?.name, endPlace?.landmark), [route, endPlace]);
   const checkpoint = checkpoints[confirmed];
   const fromIndex = checkpoints[confirmed - 1]?.index ?? 0;
   const completed = checkpoints.length > 0 && confirmed === checkpoints.length;
@@ -272,7 +272,7 @@ function App() {
         </section>
         <details className="provenance">
           <summary>모델과 경로의 기준</summary>
-          <p>층별 연결과 출구 위치는 역사 안내도에 맞췄습니다. 4번 출구 계단·난간과 대합실의 타일, 점자블록, 개찰구 외형은 촬영 영상을 참고했습니다.</p>
+          <p>층별 연결과 출구 위치는 역사 안내도에 맞췄습니다. 바닥과 계단 석재, 벽 타일, B1 천장과 줄 조명은 촬영 영상을 참고했습니다.</p>
           <p>층간 높이와 시설물 세부 위치는 추정치입니다. 에스컬레이터 방향과 시설 이용 가능 여부는 현장에서 확인해 주세요.</p>
         </details>
       </aside>

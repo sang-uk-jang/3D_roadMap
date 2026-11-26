@@ -3,13 +3,18 @@
 import argparse
 from collections import Counter
 import json
-from math import atan2, ceil, cos, radians, sin
+from math import atan2, ceil, cos, pi, radians, sin
 from pathlib import Path
 import sys
 
 import bpy
 from mathutils import Vector
 from mathutils.geometry import delaunay_2d_cdt
+
+
+WALL_HEIGHT = 4.2
+WALL_THICKNESS = .37
+SKIRT_HEIGHT = .92
 
 
 parser = argparse.ArgumentParser()
@@ -19,6 +24,8 @@ parser.add_argument("--preview-dir", type=Path, required=True)
 parser.add_argument("--quick", action="store_true")
 parser.add_argument("--details", type=Path)
 parser.add_argument("--modules", type=Path)
+parser.add_argument("--exit-landings", type=Path)
+parser.add_argument("--video-textures", type=Path)
 parser.add_argument("--basename", default="gunja")
 parser.add_argument("--no-preview", action="store_true")
 args = parser.parse_args(sys.argv[sys.argv.index("--") + 1:])
@@ -47,6 +54,20 @@ if modules:
             connector["lower"][1:] = modules["connectorClearance"][connector["id"]]
     for landing in modules["landingPolygons"]:
         areas[landing["area"]]["polygons"].append(landing["polygon"])
+if args.exit_landings:
+    entrance_layout = json.loads(args.exit_landings.read_text(encoding="utf-8"))
+    elevations.update(entrance_layout["floors"])
+    for area in entrance_layout["areas"]:
+        layout["areas"].append(area)
+        areas[area["id"]] = area
+    areas["B1_Concourse"]["polygons"].extend(entrance_layout["b1Extensions"])
+    for connector in connectors:
+        if connector["id"] in entrance_layout["lowerAnchors"]:
+            connector["lower"] = entrance_layout["lowerAnchors"][connector["id"]]
+            for key in ("bend", "lowerKind", "upperKind"):
+                connector.pop(key, None)
+        connector.update(entrance_layout.get("exitOverrides", {}).get(connector["id"], {}))
+    connectors.extend(entrance_layout["connectors"])
 
 bpy.ops.wm.read_factory_settings(use_empty=True)
 bpy.context.preferences.filepaths.save_version = 0
@@ -72,6 +93,7 @@ fittings = {level: collection(f"{level} · Facilities", group)
             for level, group in floor_groups.items()}
 rail_group = collection("Tracks and trains")
 circulation = collection("Stairs, escalators and elevators")
+stair_enclosures = collection("Stair and escalator passage walls", circulation)
 elevator_group = collection("Module · Elevators", circulation) if modules else circulation
 exit_group = collection("Exits 1–8", floor_groups["G"])
 studio = collection("Preview cameras and lighting")
@@ -99,6 +121,23 @@ palette = {
     "line7": ("Line 7 · sage platforms", "a9bd9e"),
     "slab": ("Slab edges", "9b9e99"),
     "wall": ("Estimated exterior walls", "687774"),
+    "wallCore": ("Station wall structure", "a4aaa6"),
+    "wallGrout": ("Pale tile joints", "adb5b2"),
+    "wallStone": ("Grey granite wall base", "777e7e"),
+    "wallStoneLight": ("Grey granite wall base · alternate", "848b8b"),
+    "wallTile": ("Station wall ceramic", "ebebe5"),
+    "wallTileLight": ("Station wall ceramic · alternate", "e2e5e0"),
+    "wallTop": ("Wall edge trim", "a4aeaa"),
+    "screenHeader": ("Platform screen door header", "d8dfda"),
+    "bikeGuide": ("Bicycle guide ramp · brushed aluminium", "a3aaaa"),
+    "videoFloor": ("Gunja video · concourse granite", "a8a8a1"),
+    "ceilingPanel": ("Video reference · ceiling panels", "b8bcba"),
+    "ceilingJoint": ("Video reference · ceiling grid", "727a80"),
+    "lightDiffuser": ("Video reference · strip light", "fbfffb"),
+    "beamBlue": ("Video reference · blue-grey stair beams", "45586a"),
+    "passageGlass": ("Video reference · safety glazing", "86a29d"),
+    "gatePurple": ("Video reference · gate reader", "52427c"),
+    "columnPorcelain": ("Video reference · glazed white column panels", "eceeeb"),
     "cap": ("Wall coping", "c0c9c3"),
     "screen": ("Platform barriers · glazing panels", "779597"),
     "frame": ("Platform barriers · dark framing", "3f5457"),
@@ -134,6 +173,27 @@ palette = {
     "gateGlass": ("Fare gate swing panels", "588e85"),
 }
 mats = {key: material(*value) for key, value in palette.items()}
+mats["columnPorcelain"].node_tree.nodes.get("Principled BSDF").inputs["Roughness"].default_value = .22
+mats["passageGlass"].surface_render_method = "BLENDED"
+mats["passageGlass"].node_tree.nodes.get("Principled BSDF").inputs["Alpha"].default_value = .38
+surface_uv = {}
+if args.video_textures:
+    for key, file, span, roughness in (
+            ("videoFloor", "concourse-granite.png", 2.3, .58),
+            ("concrete", "stair-granite.png", .95, .67),
+            ("wallTile", "wall-ceramic.png", .88, .43),
+            ("wallTileLight", "wall-ceramic.png", 1.08, .49)):
+        shader = mats[key].node_tree.nodes.get("Principled BSDF")
+        shader.inputs["Roughness"].default_value = roughness
+        image = bpy.data.images.load(str((args.video_textures / file).resolve()), check_existing=True)
+        image.pack()
+        texture = mats[key].node_tree.nodes.new("ShaderNodeTexImage")
+        texture.image = image
+        mats[key].node_tree.links.new(texture.outputs["Color"], shader.inputs["Base Color"])
+        surface_uv[key] = span
+    diffuser = mats["lightDiffuser"].node_tree.nodes.get("Principled BSDF")
+    diffuser.inputs["Emission Color"].default_value = (.88, .98, 1.0, 1)
+    diffuser.inputs["Emission Strength"].default_value = 2.4
 
 
 class Geometry:
@@ -145,6 +205,11 @@ class Geometry:
     def face(self, indices, key):
         self.faces.append(tuple(indices))
         self.keys.append(key)
+
+    def quad(self, vertices, key):
+        offset = len(self.verts)
+        self.verts.extend(vertices)
+        self.face(range(offset, offset + 4), key)
 
     def box(self, center, size, key, angle=0):
         x, y, z = center
@@ -172,6 +237,17 @@ class Geometry:
             mesh.materials.append(mats[key])
         for face, key in zip(mesh.polygons, self.keys):
             face.material_index = indices[key]
+        if surface_uv.keys() & indices.keys():
+            uv = mesh.uv_layers.new(name="Station finish UV")
+            for face, key in zip(mesh.polygons, self.keys):
+                if key not in surface_uv:
+                    continue
+                normal = face.normal
+                axes = ((0, 1) if abs(normal.z) >= max(abs(normal.x), abs(normal.y))
+                        else (1 if abs(normal.x) > abs(normal.y) else 0, 2))
+                for loop in face.loop_indices:
+                    point = mesh.vertices[mesh.loops[loop].vertex_index].co
+                    uv.data[loop].uv = tuple(point[axis] / surface_uv[key] for axis in axes)
         obj = bpy.data.objects.new(name, mesh)
         group.objects.link(obj)
         obj["status"] = status
@@ -282,6 +358,53 @@ def track_edge(level, a, b):
     return False
 
 
+def wall_finish(geometry, a, b, inward, height):
+    length = (b - a).length
+    offset = inward * (WALL_THICKNESS / 2 + .006)
+    rise = Vector((0, 0, 1))
+
+    def panel(start, end, bottom, top, finish):
+        left = a.lerp(b, start) + offset
+        right = a.lerp(b, end) + offset
+        points = [left + rise * bottom, right + rise * bottom, right + rise * top, left + rise * top]
+        if (points[1] - points[0]).cross(points[3] - points[0]).dot(inward) < 0:
+            points.reverse()
+        geometry.quad(points, finish)
+
+    panel(0, 1, 0, height, "wallGrout")
+    # Copy the tile faces a few millimeters forward of the mortar plane.
+    offset += inward * .006
+    columns = max(1, ceil(length / .89))
+    gap = min(.012 * columns / length, .20)
+    rows = round((height - SKIRT_HEIGHT) / .54)
+    for column in range(columns):
+        start = (column + gap) / columns
+        end = (column + 1 - gap) / columns
+        panel(start, end, .075, SKIRT_HEIGHT - .035,
+              "wallStoneLight" if column % 4 == 1 else "wallStone")
+        for row in range(rows):
+            low = SKIRT_HEIGHT + row * (height - SKIRT_HEIGHT) / rows
+            high = SKIRT_HEIGHT + (row + 1) * (height - SKIRT_HEIGHT) / rows
+            panel(start, end, low + .009, high - .009,
+                  "wallTileLight" if (column * 3 + row * 2) % 7 == 2 else "wallTile")
+    panel(0, 1, 0, .063, "frame")
+    panel(0, 1, SKIRT_HEIGHT - .035, SKIRT_HEIGHT, "wallTop")
+
+
+def closed_wall(geometry, start, end, inward, height=WALL_HEIGHT):
+    up = Vector((0, 0, height))
+    half = inward * WALL_THICKNESS / 2
+    offset = len(geometry.verts)
+    base = [start - half, end - half, end + half, start + half]
+    if (base[1] - base[0]).cross(base[3] - base[0]).z < 0:
+        base.reverse()
+    geometry.verts.extend(base + [vertex + up for vertex in base])
+    for face in ((3, 2, 1, 0), (4, 5, 6, 7), (0, 1, 5, 4),
+                 (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7)):
+        geometry.face((offset + j for j in face), "wallTop" if face[0] == 4 else "wallCore")
+    wall_finish(geometry, start, end, inward, height)
+
+
 def boundaries(level, verts, edges, hole_edges):
     y = elevations[level]
     enclosure, barrier, guard = Geometry(), Geometry(), Geometry()
@@ -308,7 +431,7 @@ def boundaries(level, verts, edges, hole_edges):
                 else:
                     segments.append([i, i + 1])
         is_screen = track_edge(level, a, b)
-        rail_only = key in hole_edges
+        rail_only = key in hole_edges or level.startswith("M")
         for start_i, end_i in segments:
             start_p = point(a.lerp(b, start_i / runs), y)
             end_p = point(a.lerp(b, end_i / runs), y)
@@ -321,17 +444,20 @@ def boundaries(level, verts, edges, hole_edges):
                     p = start_p.lerp(end_p, (i + .5) / max(1, ceil(span / 2.3)))
                     guard.box(p + Vector((0, 0, .41)), (.13, .15, .83), "wall")
             elif is_screen:
-                barrier.box(mid + Vector((0, 0, .85)), (span, .23, 1.7), "screen", angle)
-                barrier.box(mid + Vector((0, 0, 1.74)), (span, .36, .16), "frame", angle)
+                barrier.box(mid + Vector((0, 0, 1.16)), (span, .23, 2.32), "screen", angle)
+                barrier.box(mid + Vector((0, 0, 2.57)), (span, .36, .52), "screenHeader", angle)
+                barrier.box(mid + Vector((0, 0, 2.32)), (span, .37, .11), "frame", angle)
                 barrier.box(mid + Vector((0, 0, .16)), (span, .3, .32), "frame", angle)
                 count = max(1, ceil(span / 2.9))
                 for i in range(count):
                     p = start_p.lerp(end_p, (i + .5) / count)
-                    barrier.box(p + Vector((0, 0, .87)), (.13, .28, 1.7), "frame", angle)
+                    barrier.box(p + Vector((0, 0, 1.16)), (.13, .28, 2.32), "frame", angle)
             else:
-                enclosure.box(mid + Vector((0, 0, 1.29)), (span + .04, .43, 2.58), "wall", angle)
-                enclosure.box(mid + Vector((0, 0, 2.61)), (span + .06, .48, .10), "cap", angle)
-    enclosure.create(f"{level} · Enclosure walls", walls[level], "estimated", floor=level)
+                direction = (end_p - start_p).normalized()
+                inward = Vector((-direction.y, direction.x, 0))
+                closed_wall(enclosure, start_p - direction * .035, end_p + direction * .035, inward)
+    enclosure.create(f"{level} · Enclosure walls", walls[level], "estimated",
+                     floor=level, height_diagram_units=WALL_HEIGHT, finish="video reference ceramic and granite")
     barrier.create(f"{level} · Platform track barriers", walls[level], "estimated", floor=level)
     guard.create(f"{level} · Opening guardrails", walls[level], "estimated", floor=level)
 
@@ -363,7 +489,9 @@ def make_floor(level):
     edge_counts, directed = Counter(), {}
     for area in floor_areas:
         geometry = Geometry()
-        edges = slab(verts, triangles[area["id"]], geometry, elevations[level], area["material"])
+        finish = ("videoFloor" if args.video_textures and area["material"] == "concourse"
+                  and (level == "B1" or level.startswith("M")) else area["material"])
+        edges = slab(verts, triangles[area["id"]], geometry, elevations[level], finish)
         edge_counts.update(edges.keys())
         directed.update(edges)
         assert geometry.create(area["id"], floor_meshes[level], area["status"], floor=level)
@@ -390,7 +518,7 @@ def make_floor(level):
                 raise ValueError(f"Connector landing has no slab: {connector['id']} / {area_id}")
 
 
-for level in ("B1", "B2", "B3"):
+for level in (level for level in elevations if level != "G"):
     make_floor(level)
 
 
@@ -432,6 +560,18 @@ def stairs(geometry, lower, upper, width, kind, filmed=False, open_lower=False, 
                                  (tread + .025, .14, .69), "cap", angle)
 
 
+def bicycle_guide(geometry, lower, upper, stair_width):
+    direction = (upper - lower).xy.normalized()
+    across = Vector((-direction.y, direction.x, 0))
+    center = across * (stair_width / 2 - .32)
+    for lateral, band in ((0, .27), (-.14, .035), (.14, .035)):
+        offset = center + across * lateral
+        edge = across * (band / 2)
+        nose = Vector((0, 0, .32 if lateral == 0 else .36))
+        start, end = lower + offset + nose, upper + offset + nose
+        geometry.quad([start - edge, end - edge, end + edge, start + edge], "bikeGuide")
+
+
 def mesh_text(name, body, location, rotation, size, key, group):
     curve = bpy.data.curves.new(name, "FONT")
     curve.body, curve.align_x, curve.align_y = body, "CENTER", "CENTER"
@@ -458,6 +598,54 @@ def module_label(name, body, center, angle, size, group, **metadata):
         obj[key] = value
 
 
+def connector_runs(connector):
+    lower, upper = connector["lower"], connector["upper"]
+    start = point(lower[1:], elevations[level_of(lower[0])])
+    end = point(upper[1:], elevations[level_of(upper[0])])
+    vertices = [start, end]
+    if "bend" in connector:
+        *xz, fraction = connector["bend"]
+        vertices.insert(1, point(xz, start.z + (end.z - start.z) * fraction))
+    return list(zip(vertices, vertices[1:]))
+
+
+def stair_enclosure(segments, width, other_segments):
+    height = 3.35
+    geometry = Geometry()
+    for start, end in segments:
+        tangent = Vector((end.x - start.x, end.y - start.y, 0))
+        run = tangent.length
+        tangent.normalize()
+        normal = Vector((-tangent.y, tangent.x, 0))
+        setback = min(.25, 1.40 / run)
+        count = max(1, ceil(run * (1 - 2 * setback) / .62))
+        for side in (-1, 1):
+            outward = normal * side
+            offset = outward * (width / 2 + WALL_THICKNESS / 2 + .055)
+            a = start.lerp(end, setback) + offset
+            b = start.lerp(end, 1 - setback) + offset
+            spans = []
+            for i in range(count):
+                p = a.lerp(b, (i + .5) / count)
+                for other_a, other_b, other_width in other_segments:
+                    q = other_b - other_a
+                    flat = q.xy
+                    t = min(1, max(0, (p.xy - other_a.xy).dot(flat) / flat.length_squared))
+                    nearest = other_a + t * q
+                    if (p.xy - nearest.xy).length < other_width / 2 + .44 and \
+                            p.z - 1.8 < nearest.z < p.z + height + .48:
+                        break
+                else:
+                    if spans and spans[-1][1] == i:
+                        spans[-1][1] = i + 1
+                    else:
+                        spans.append([i, i + 1])
+            for left, right in spans:
+                closed_wall(geometry, a.lerp(b, left / count), a.lerp(b, right / count), -outward, height)
+    return geometry
+
+
+all_runs = {connector["id"]: connector_runs(connector) for connector in connectors}
 exit_points = {}
 connector_count = 0
 for connector in connectors:
@@ -475,10 +663,33 @@ for connector in connectors:
         stairs(geometry, mid, top, width, connector.get("upperKind", kind), filmed, open_lower=True)
         geometry.box(mid - Vector((0, 0, .22)), (width * .83, width * .83, .44), "concrete")
     else:
-        stairs(geometry, bottom, top, width, kind)
+        stairs(geometry, bottom, top, width, kind, filmed)
+    if connector.get("bikeRamp"):
+        bicycle_guide(geometry, bottom, top, width)
     geometry.create(connector["id"], circulation,
                     "map anchors; video-informed appearance" if filmed else "map-derived; dimensions estimated",
-                    lower=lower[0], upper=upper[0], connector_type=kind)
+                    lower=lower[0], upper=upper[0], connector_type=kind,
+                    bicycle_guide=bool(connector.get("bikeRamp")))
+    runs = all_runs[connector["id"]]
+    if connector.get("ceilingBeams"):
+        overhead = Geometry()
+        start, end = runs[0]
+        angle = aspect(end, start)
+        for i in range(1, 6):
+            center = start.lerp(end, i / 8) + Vector((0, 0, 3.2))
+            overhead.box(center, (.28, width + .62, .27), "beamBlue", angle)
+            if i % 2 == 1:
+                overhead.box(center - Vector((0, 0, .16)), (.13, width * .66, .058),
+                             "lightDiffuser", angle)
+        overhead.create(f"{connector['id']} · Ceiling beams", stair_enclosures,
+                        "video-informed appearance; placement estimated",
+                        floor="B1", interior_only=True)
+    for i, run in enumerate(runs, 1):
+        adjacent = [(*other, item["width"]) for item in connectors
+                    for other in all_runs[item["id"]] if other is not run]
+        enclosure = stair_enclosure([run], width, adjacent)
+        enclosure.create(f"{connector['id']} · Passage walls {i}", stair_enclosures, "estimated",
+                         wall="stair", lower=lower[0], upper=upper[0])
     connector_count += 1
     if "exit" in connector:
         number = connector["exit"]
@@ -502,6 +713,37 @@ for index, (top, end) in enumerate(tunnel_steps, start=1):
            point(top, elevations["B3"]), 2.45, "stairs")
     geometry.create(f"B3 · Tunnel end steps {index}", circulation,
                     "map-derived; tunnel interior outside diagram", floor="B3")
+
+
+if args.video_textures:
+    interior = collection("B1 · Ceiling and strip lighting", floor_groups["B1"])
+    roof = Geometry()
+    area = areas["B1_Concourse"]
+    excluded = [(a, b, connector["width"] / 2 + 1.25) for connector in connectors
+                for a, b in all_runs[connector["id"]]]
+    for x in range(-94, 94, 2):
+        for z in range(-77, 82, 2):
+            corners = [(x + dx, z + dz) for dx in (-1, 1) for dz in (-1, 1)]
+            if not all(any(in_polygon(corner, poly) for poly in area["polygons"])
+                       and not any(in_polygon(corner, hole) for hole in area.get("holes", []) + slots["B1"])
+                       for corner in corners):
+                continue
+            center = point((x, z), 4.17)
+            for a, b, clearance in excluded:
+                direction = (b - a).xy
+                t = min(1, max(0, (center.xy - a.xy).dot(direction) / direction.length_squared))
+                closest = a.lerp(b, t)
+                if .25 < closest.z < 7.4 and (closest.xy - center.xy).length < clearance:
+                    break
+            else:
+                if any((point(lift["point"], 4.17) - center).length < 2.25 for lift in layout["elevators"]):
+                    continue
+                roof.box(center, (2, 2, .12), "ceilingJoint")
+                roof.box(center - Vector((0, 0, .071)), (1.98, 1.98, .03), "ceilingPanel")
+                if (x + z) % 8 == 1:
+                    roof.box(center - Vector((0, 0, .12)), (1.64, .23, .12), "lightDiffuser")
+    roof.create("B1 · Suspended ceiling and strip lights", interior,
+                "video-informed appearance; placement estimated", floor="B1", interior_only=True)
 
 
 for elevator in layout["elevators"]:
@@ -575,6 +817,88 @@ def railway(track):
 for track in layout["railways"]:
     railway(track)
 
+
+def tiled_column(geometry, pos, facility):
+    height = facility.get("height", 4.14)
+    glossy = facility.get("style") == "glossy"
+    if "size" in facility:
+        x, y = (dim / 2 for dim in facility["size"])
+        outline = [Vector((px, py, 0)) for px, py in ((-x, -y), (x, -y), (x, y), (-x, y))]
+    else:
+        radius = facility["radius"]
+        outline = [radius * Vector((cos(i * pi / 12), sin(i * pi / 12), 0)) for i in range(24)]
+    for a, b in zip(outline, outline[1:] + outline[:1]):
+        left, right = pos + a, pos + b
+        geometry.quad([left, right, right + Vector((0, 0, height)), left + Vector((0, 0, height))], "wallGrout")
+        across = b - a
+        outward = Vector((across.y, -across.x, 0)).normalized() * .006
+        divisions = max(1, ceil(across.length / .34))
+        base = .17
+        rows = ceil((height - base) / (1.25 if glossy else .38))
+        for i in range(divisions):
+            margin = 0 if glossy else .027
+            start = left.lerp(right, (i + margin) / divisions) + outward
+            end = left.lerp(right, (i + 1 - margin) / divisions) + outward
+            geometry.quad([start, end, end + Vector((0, 0, base)), start + Vector((0, 0, base))], "steel")
+            for row in range(rows):
+                bottom = base + (height - base) * row / rows + .008
+                top = base + (height - base) * (row + 1) / rows - .008
+                geometry.quad([start + Vector((0, 0, bottom)), end + Vector((0, 0, bottom)),
+                               end + Vector((0, 0, top)), start + Vector((0, 0, top))],
+                              "columnPorcelain" if glossy else "wallTile")
+    # Closed ends preserve the column's solid interior for vertical collision probes.
+    for z, reverse in ((0, True), (height, False)):
+        offset = len(geometry.verts)
+        geometry.verts.extend(pos + p + Vector((0, 0, z)) for p in outline)
+        indices = range(offset, offset + len(outline))
+        geometry.face(reversed(indices) if reverse else indices, "wallTop")
+
+
+def column_fixture(geometry, pos, facility, group, floor):
+    tiled_column(geometry, pos, facility)
+    angle = radians(facility.get("face", 90))
+    depth = facility.get("radius", facility.get("size", [0, 0])[0] / 2)
+    panel = .54 if "radius" in facility else .48
+
+    def fixture(local, size, material):
+        geometry.box(module_point(pos, local, angle), size, material, angle)
+
+    if facility.get("steelStrip"):
+        fixture((0, -depth - .026, .96), (.19, .059, 1.58), "steel")
+    if facility.get("label"):
+        fixture((0, -depth - .037, 1.84), (panel + .11, .12, 2.58), "exit")
+        for numeral, high in zip(facility["label"].split(), (2.58, 1.79)):
+            fixture((0, -depth - .105, high), (panel, .043, .66), "ink")
+            mesh_text(f"{facility['id']} · {numeral}", numeral,
+                      module_point(pos, (0, -depth - .131, high), angle),
+                      (radians(90), 0, angle), .54, "exit", group)["floor"] = floor
+    if facility.get("wayfinding"):
+        fixture((0, -depth - .046, 2.0), (panel + .12, .12, 1.47), "ink")
+        fixture((0, -depth - .110, 1.93), (.36, .025, .36), "stripe5")
+        module_label(f"{facility['id']} · board", facility["wayfinding"],
+                     module_point(pos, (0, -depth - .130, 1.93), angle), angle, .28, group, floor=floor)
+
+
+def stainless_gate(geometry, gate, index):
+    profile = [(-.92, .13), (.92, .13), (.92, .79), (.67, 1.14), (-.67, 1.14), (-.92, .79)]
+    offset = len(geometry.verts)
+    geometry.verts.extend(gate + Vector((x, side * .27, z)) for side in (-1, 1) for x, z in profile)
+    count = len(profile)
+    geometry.face(range(offset, offset + count), "steel")
+    geometry.face(reversed(range(offset + count, offset + 2 * count)), "steel")
+    for i in range(count):
+        following = (i + 1) % count
+        geometry.face((offset + i, offset + count + i, offset + count + following, offset + following),
+                      "wallTop" if i in (2, 3, 4) else "steel")
+    geometry.box(gate + Vector((0, 0, .09)), (1.82, .58, .18), "frame")
+    geometry.box(gate + Vector((-.925, 0, .57)), (.021, .35, .37), "frame")
+    geometry.box(gate + Vector((-.943, 0, .57)), (.016, .265, .27),
+                 "gateGo" if index in (2, 4) else "gateStop")
+    geometry.box(gate + Vector((-.40, 0, 1.18)), (.41, .38, .08), "gatePurple")
+    geometry.box(gate + Vector((-.38, 0, 1.227)), (.19, .16, .016), "bezel")
+    geometry.box(gate + Vector((.22, .31, .68)), (.43, .12, .51), "gateGlass")
+
+
 module_groups = {}
 for facility in layout["facilities"]:
     level = level_of(facility["area"])
@@ -582,12 +906,15 @@ for facility in layout["facilities"]:
     geo = Geometry()
     kind = facility["kind"]
     group = fittings[level]
-    if modules and kind in ("gates", "toilet", "tickets"):
+    if modules and kind in ("gates", "toilet", "tickets", "column"):
         key = (level, kind)
         if key not in module_groups:
             module_groups[key] = collection(f"Module · {kind.title()}", group)
         group = module_groups[key]
-    if kind == "gates":
+    if kind == "gates" and facility.get("videoGate"):
+        for i, lateral in enumerate((-4.22, -2.63, -.93, .75, 3.1)):
+            stainless_gate(geo, pos + Vector((0, -lateral, 0)), i)
+    elif kind == "gates":
         rotation = radians(90) if facility.get("rotate") else 0
         lane = Vector((-sin(rotation), cos(rotation), 0))
         for i in range(-2, 3):
@@ -633,6 +960,28 @@ for facility in layout["facilities"]:
             part((0, -.43, 2.30), (5.38, .31, .45), "signBlue")
             module_label(f"{facility['id']} · sign", "TICKETS  /  TOP-UP",
                          module_point(pos, (0, -.59, 2.31), angle), angle, .34, group, floor=level)
+    elif kind == "column":
+        column_fixture(geo, pos, facility, group, level)
+    elif kind == "frontage":
+        width = facility["width"]
+        geo.box(pos + Vector((0, 0, 1.48)), (width, .15, 2.96), "frame")
+        for i in range(4):
+            panel = pos + Vector(((i - 1.5) * width / 4, .10, 1.48))
+            geo.box(panel, (width / 4 - .1, .061, 2.70), "window")
+            geo.box(panel - Vector((0, 0, .61)), (width / 4 - .1, .076, .060), "yellowSide")
+    elif kind == "partition":
+        width = facility["width"]
+        geo.box(pos + Vector((0, 0, .69)), (.12, width, 1.27), "passageGlass")
+        for y in (-width / 2, 0, width / 2):
+            geo.box(pos + Vector((0, y, .66)), (.17, .12, 1.32), "steel")
+        for h in (.095, 1.34):
+            geo.box(pos + Vector((0, 0, h)), (.17, width, .09), "steel")
+    elif kind == "gate-sign":
+        geo.box(pos + Vector((0, 0, 3.02)), (.17, 4.22, .58), "ink")
+        for y in (-1.65, 1.65):
+            geo.box(pos + Vector((0, y, 3.67)), (.067, .067, .77), "frame")
+        module_label(f"{facility['id']} · sign", "7   TRAINS",
+                     pos + Vector((-.095, 0, 3.02)), radians(-90), .31, group, floor=level)
     elif kind == "benches":
         for i in (-1, 0, 1):
             geo.box(pos + Vector((i * 1.3, 0, .38)), (1.11, .64, .76), "bench")
@@ -642,18 +991,12 @@ for facility in layout["facilities"]:
         geo.box(pos + Vector((0, -size[1] / 2, 1.66)), (size[0] * .76, .10, .53),
                 "window" if kind == "information" else "frame")
     geo.create(facility["id"], group, "map landmarks; dimensions and placement estimated"
-               if modules else "schematic placement", floor=level, module=kind)
+               if modules else "schematic placement", floor=level, module=kind,
+               **({"video_reference": facility["reference"]} if "reference" in facility else {}))
 
 if video_details:
     finishes = collection("B1 · Video reference finishes", floor_groups["B1"])
     appearance = "observed appearance; approximate placement"
-    tiles = Geometry()
-    for x in (-32, -27, -22):
-        for row in range(5):
-            for col in range(9):
-                tiles.box((x + col * .53, 15.72, .28 + row * .51),
-                          (.51, .12, .49), "tile")
-    tiles.create("B1 · Tile facing near exit approach", finishes, appearance, floor="B1")
     markings = Geometry()
     for a, b in (((-38, -7.1), (-16, -7.1)), ((-12, -21), (-9, -9)),
                  ((-15, -7.1), (23, -7.1))):
@@ -665,6 +1008,14 @@ if video_details:
                 markings.box((center.x, center.y + shift, .022),
                              (.66, .14, .043), "yellow", aspect(end, start))
     markings.create("B1 · Tactile paving", finishes, appearance, floor="B1")
+    if modules:
+        gate_paving = Geometry()
+        for i in range(28):
+            for shift in (-.19, 0, .19):
+                gate_paving.box((13.7 + i * .49, 2.57 + shift, .024), (.40, .112, .043), "tread")
+        for z in range(-5, 2):
+            gate_paving.box((24.0, -z, .025), (.62, .96, .05), "yellow")
+        gate_paving.create("B1 · East gate approach tactile paving", finishes, appearance, floor="B1")
     if not modules:
         equipment = Geometry()
         for x in (30.4, 32.1, 33.8):

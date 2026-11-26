@@ -120,7 +120,7 @@ public class StationController {
     public record Graph(String stationId, String scaleStatus, String upAxis, Map<String, Double> floors,
                         List<Node> nodes, List<Edge> edges, List<Place> places) {}
     public record Node(String id, String floorId, List<Double> position) {}
-    public record Place(String id, String floorId, String name, String english, String group) {}
+    public record Place(String id, String floorId, String name, String english, String group, String landmark) {}
     public record Edge(String from, String to, List<List<Double>> geometry, double cost, String kind,
                        String status, String label, boolean videoAppearance, List<List<Double>> treads) {
         Edge reverse() {

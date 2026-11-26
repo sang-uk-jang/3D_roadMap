@@ -6,16 +6,26 @@ const overview = new THREE.Vector3(.428, .324, .844);
 const target = new THREE.Vector3(3, -7, 0);
 const up = new THREE.Vector3(0, 1, 0);
 const accent = 0x007e69;
+const displayFloor = floor => floor.startsWith("M") ? "B1" : floor;
 
 function partFloors(obj) {
   for (let item = obj; item; item = item.parent) {
     const data = item.userData;
-    if (data.floor) return [data.floor];
-    if (data.lower && data.upper) return [data.lower.split("_")[0], data.upper.split("_")[0]];
+    if (data.floor) return [displayFloor(data.floor)];
+    if (data.lower && data.upper) {
+      return [data.lower, data.upper].map(area => area.startsWith("Landing_") ? "B1" : area.split("_")[0]);
+    }
     if (data.stops) return data.stops.split(", ").map(stop => stop.split("_")[0]);
     if ((data.name ?? item.name).startsWith("Exit")) return ["G"];
   }
   return [];
+}
+
+function isInteriorOnly(obj) {
+  for (let item = obj; item; item = item.parent) {
+    if (item.userData.interior_only) return true;
+  }
+  return false;
 }
 
 function mesh(geometry, material, container) {
@@ -129,7 +139,8 @@ export function createStationView(container, report) {
     model?.traverse(obj => {
       if (obj.isMesh) {
         const floors = partFloors(obj);
-        obj.visible = visibleFloor === "all" || floors.includes(visibleFloor);
+        obj.visible = (visibleFloor === "all" || floors.includes(visibleFloor))
+          && (view === "character" || !isInteriorOnly(obj));
       }
     });
     routeLayer.children.forEach(obj => {
@@ -156,6 +167,9 @@ export function createStationView(container, report) {
     const lowest = Math.min(...heights);
     obj.userData.floors = Object.entries({ G: 20.93, B1: 0, B2: -20.93, B3: -41.86 })
       .filter(([, y]) => y >= lowest - .05 && y <= highest + .05).map(([key]) => key);
+    if (highest > .05 && lowest < 20.88 && !obj.userData.floors.includes("B1")) {
+      obj.userData.floors.push("B1");
+    }
     obj.renderOrder = order;
     obj.userData.pointIndex = pointIndex;
   }

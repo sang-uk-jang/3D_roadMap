@@ -32,17 +32,55 @@ test("a continuous, modeled route connects every pair of public destinations", (
   }
 });
 
-test("the Exit 4 route includes its video-informed lower stair and upper escalator", () => {
+test("Exit 3 walks across a flat landing and joins Exit 4 before the common B1 stair", () => {
   const route = findRoute(graph, "connector-4-upper", "l5-acha");
   assert.ok(route.steps[0].video);
   assert.equal(route.steps[0].from, "G");
-  assert.equal(route.steps[0].to, "B1");
-  assert.ok(route.steps[0].detail.includes("계단·에스컬레이터"));
-  const checkpoints = routeCheckpoints(route, "5호선 아차산 방면");
-  assert.deepEqual(checkpoints.map(point => point.kind),
-    ["entry", "landing", "landing", "turn", "entry", "landing", "destination"]);
-  assert.match(checkpoints[1].title, /계단으로 이어지는 중간참/);
-  assert.match(checkpoints[2].detail, /계단으로 내려가 지하 1층/);
+  assert.equal(route.steps[0].to, "M34");
+  assert.equal(route.steps[0].kind, "escalator");
+  const from3 = findRoute(graph, "connector-3-upper", "l5-acha");
+  assert.deepEqual(from3.steps.filter(step => step.kind === "stairs").slice(0, 3)
+    .map(step => [step.from, step.to]), [["G", "M3"], ["M3", "M34"], ["M34", "B1"]]);
+  const landing = from3.steps.find(step => step.kind === "walk" && step.to === "M3");
+  assert.ok(landing.endIndex > landing.startIndex);
+  const flat = from3.points.slice(landing.startIndex, landing.endIndex + 1);
+  assert.ok(flat.every(point => point[1] === flat[0][1]));
+  assert.ok(Math.hypot(flat.at(-1)[0] - flat[0][0], flat.at(-1)[2] - flat[0][2]) > 1);
+  const checkpoints = routeCheckpoints(from3, "5호선 아차산 방면");
+  assert.ok(checkpoints.every(checkpoint => checkpoint.title !== "3번 출구 중간참"));
+  assert.match(checkpoints[0].detail, /중간참을 걸어서/);
+  assert.ok(checkpoints.some(checkpoint => checkpoint.title === "3·4번 출구 합류부"));
+  const cross = findRoute(graph, "connector-3-upper", "connector-4-upper");
+  assert.ok(cross.nodes.every(id => nodes.get(id).floorId !== "B1"));
+});
+
+test("other paired exits share their landings", () => {
+  for (const [start, end, floor] of [[1, 2, "M12"], [5, 6, "M56"], [7, 8, "B1"]]) {
+    const pair = findRoute(graph, `connector-${start}-upper`, `connector-${end}-upper`);
+    assert.ok(pair.steps.some(step => step.kind === "walk" && step.to === floor));
+    assert.ok(pair.nodes.every(id => ["G", floor, "M2", "M7"].includes(nodes.get(id).floorId)));
+  }
+  const route = findRoute(graph, "connector-7-upper", "connector-8-upper");
+  assert.deepEqual(route.steps.filter(step => step.type === "level").map(step => step.kind),
+    ["stairs", "stairs", "escalator-pair"]);
+  assert.ok(route.steps.some(step => step.type === "walk" && step.to === "M7"));
+  assert.equal(routeCheckpoints(route, "8번 출구").length, 2);
+  const cross = findRoute(graph, "connector-4-upper", "l5-acha");
+  assert.deepEqual(routeCheckpoints(cross, "5호선 아차산 방면").map(point => point.title),
+    ["3·4번 출구 합류부", "지하 1층 도착 지점", "지하 2층 도착 지점", "5호선 아차산 방면"]);
+});
+
+test("Exit 4 continues straight through the shared landing and down the common stairs", () => {
+  const route = findRoute(graph, "connector-4-upper", "l5-acha");
+  const [upper, joint, lower] = route.steps;
+  assert.equal(joint.type, "walk");
+  assert.equal(joint.from, "M34");
+  const delta = step => new Vector3(...route.points[step.endIndex])
+    .sub(new Vector3(...route.points[step.startIndex])).setY(0).normalize();
+  assert.ok(delta(upper).dot(delta(joint)) > .995);
+  assert.ok(delta(joint).dot(delta(lower)) > .995);
+  assert.equal(joint.endIndex - joint.startIndex, 1);
+  assert.match(routeCheckpoints(route, "5호선")[1].detail, /직진해 정면 공용 계단/);
 });
 
 test("no unconfirmed step-free vertical links are offered", () => {

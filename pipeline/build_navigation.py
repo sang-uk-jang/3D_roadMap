@@ -27,9 +27,9 @@ def add_node(node_id, floor, x, z):
     return item
 
 
-def add_place(node, name, english, group):
+def add_place(node, name, english, group, landmark=None):
     places.append({"id": node["id"], "floorId": node["floorId"],
-                   "name": name, "english": english, "group": group})
+                   "name": name, "english": english, "group": group, **({"landmark": landmark} if landmark else {})})
 
 
 def add_edge(a, b, points, kind, **data):
@@ -51,16 +51,21 @@ def make_tree(objects, materials=None):
 
 
 DOWN = Vector((0, 0, -1))
-LEVELS = ("B1", "B2", "B3")
+UP = -DOWN
+LEVELS = tuple(level for level in floors if level != "G")
 WALL_OBJECTS = [obj for level in LEVELS
                 for obj in bpy.data.collections[f"{level} · Estimated walls and barriers"].objects]
+STAIR_WALLS = [obj for obj in bpy.data.collections["Stair and escalator passage walls"].objects
+               if obj.get("wall") == "stair"]
 FACILITY_OBJECTS = [obj for level in LEVELS + ("G",)
                     for obj in bpy.data.collections[f"{level} · Facilities"].all_objects]
+CEILINGS = [obj for obj in bpy.context.scene.objects if obj.get("interior_only")]
 LIFTS = [obj for obj in bpy.data.collections["Stairs, escalators and elevators"].all_objects
          if obj.get("module") == "elevator" or obj.name.startswith("Lift ")]
 STAIR_OBJECTS = [obj for obj in bpy.data.collections["Stairs, escalators and elevators"].objects
                  if obj.get("connector_type")]
-BLOCKERS = make_tree(WALL_OBJECTS + FACILITY_OBJECTS + LIFTS)
+BLOCKER_OBJECTS = WALL_OBJECTS + STAIR_WALLS + FACILITY_OBJECTS + LIFTS + CEILINGS
+BLOCKERS = make_tree(BLOCKER_OBJECTS)
 SUPPORT_MATERIALS = {"Stair concrete", "Video reference · escalator tread", "Stair nosing",
                      "Escalator sides and tactile strips"}
 RAIL_MATERIALS = {"Wall coping", "Platform barriers · dark framing", "Video reference · tinted balustrade",
@@ -92,12 +97,20 @@ def bpoint(p):
     return Vector((p[0], -p[2], p[1]))
 
 
-def clear_body(p, obstacle, ceiling=3.2, radius=BODY_RADIUS):
+def blocked_column(foot, obstacle, height=1.82, gap=.07):
+    if obstacle.ray_cast(foot + UP * height, DOWN, height - gap)[0] is not None:
+        return True
+    # If foot and head are both inside a tall solid, the first face above the
+    # head is the outward-facing top, rather than the underside of an overhang.
+    _, normal, _, _ = obstacle.ray_cast(foot + UP * height, UP, 70)
+    return normal is not None and normal.z > .01
+
+
+def clear_body(p, obstacle, ceiling=1.82, radius=BODY_RADIUS):
     corner = radius * .7071
     for dx, dy in ((0, 0), (radius, 0), (-radius, 0), (0, radius), (0, -radius),
                    (corner, corner), (-corner, corner), (corner, -corner), (-corner, -corner)):
-        start = p + Vector((dx, dy, ceiling))
-        if obstacle.ray_cast(start, DOWN, ceiling - .07)[0] is not None:
+        if blocked_column(p + Vector((dx, dy, 0)), obstacle, ceiling):
             return False
     return True
 
@@ -124,7 +137,8 @@ def flight_profile(a, b, stairs, crossing_stairs, name, require_treads=True):
             height = max(height, sample.z)
         contact = Vector((sample.x, sample.y, height + .065))
         if not clear_body(contact, BLOCKERS):
-            raise ValueError(f"{name}: wall or facility intersects stair near {tuple(contact)}")
+            hits = [obj.name for obj in BLOCKER_OBJECTS if not clear_body(contact, make_tree([obj]))]
+            raise ValueError(f"{name}: wall or facility intersects stair near {tuple(contact)}: {hits}")
         if not clear_body(contact, crossing_stairs, 1.82):
             raise ValueError(f"{name}: another stair intersects this flight near {tuple(contact)}")
         if not clear_body(contact, STAIR_RAILS, 1.82):
@@ -208,11 +222,11 @@ for i, connector in enumerate(layout["connectors"]):
         add_place(upper, f"{number}번 출구", f"Exit {number}", "출구")
         label = f"{number}번 출구 연결부"
     else:
-        label = connector_labels[i - 8]
+        label = connector.get("label") or connector_labels[i - 8]
     if "lowerKind" in connector:
         kind = "stairs-escalator"
     add_edge(lower, upper, points, kind, label=label, treads=[approach_profiles[0], *profiles, approach_profiles[1]],
-             videoAppearance=connector["id"] == "Exit 4" and "lowerKind" in connector)
+             videoAppearance=connector["id"] == "Exit 4")
 
 for id_, floor, x, z, name, english, group in [
     ("l5-jang", "B2", -3.6, 68, "5호선 장한평 방면", "Line 5 · Janghanpyeong", "승강장"),
@@ -226,7 +240,8 @@ for id_, floor, x, z, name, english, group in [
 for item in layout.get("facilityDestinations", [
     {"id": "toilet", "floor": "B2", "point": [-.7, 14], "name": "화장실 앞", "english": "Restroom"},
 ]):
-    add_place(add_node(item["id"], item["floor"], *item["point"]), item["name"], item["english"], "시설")
+    add_place(add_node(item["id"], item["floor"], *item["point"]),
+              item["name"], item["english"], "시설", item.get("landmark"))
 
 
 STEP = .82
@@ -245,7 +260,7 @@ class LevelGraph:
         boundaries.extend(LIFTS)
         if floor == "B1" and "B1 · Ticket and recharge equipment" in bpy.data.objects:
             fittings.append(bpy.data.objects["B1 · Ticket and recharge equipment"])
-        self.obstacles = make_tree(boundaries + fittings)
+        self.obstacles = make_tree(boundaries + fittings + STAIR_WALLS)
 
     @lru_cache(maxsize=None)
     def usable(self, x, z):
@@ -253,10 +268,10 @@ class LevelGraph:
             p = Vector((x + dx, -z - dz, self.y + 3))
             if self.slab.ray_cast(p, DOWN, 3.04)[0] is None:
                 return False
-            if self.obstacles.ray_cast(p, DOWN, 2.92)[0] is not None:
+            p.z = self.y
+            if blocked_column(p, self.obstacles, gap=.08):
                 return False
-            p.z = self.y + 1.82
-            if STAIR_SOLIDS.ray_cast(p, DOWN, 1.74)[0] is not None:
+            if blocked_column(p, STAIR_SOLIDS, gap=.08):
                 return False
         return True
 
@@ -324,8 +339,17 @@ def xz(node):
     return x, z
 
 
-for floor in ("B1", "B2", "B3"):
+for floor in LEVELS:
     graph = LevelGraph(floor)
+    for item in layout["facilities"]:
+        if item["kind"] != "column" or areas[item["area"]] != floor:
+            continue
+        x, z = item["point"]
+        rx, rz = (item.get("radius"),) * 2 if "radius" in item else [value / 2 for value in item["size"]]
+        for dx, dz in ((0, 0), (rx, 0), (-rx, 0), (0, rz), (0, -rz)):
+            base = Vector((x + dx, -z - dz, graph.y + .5))
+            if graph.slab.ray_cast(base, DOWN, .55)[0] is None:
+                raise ValueError(f"Column is outside its slab: {item['id']}")
     terminals = [node for node in nodes if node["floorId"] == floor]
     snapped = {node["id"]: graph.snapped(xz(node)) for node in terminals}
     isolated = [node["id"] for node in terminals if snapped[node["id"]] is None]

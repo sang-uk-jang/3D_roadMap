@@ -19,6 +19,16 @@ if modules:
     for connector in layout["connectors"]:
         if connector["id"] in modules["connectorClearance"]:
             connector["lower"][1:] = modules["connectorClearance"][connector["id"]]
+if len(detail_files) > 2:
+    entrances = json.loads(detail_files[2].read_text(encoding="utf-8"))
+    layout["areas"].extend(entrances["areas"])
+    layout["floors"].update(entrances["floors"])
+    for connector in layout["connectors"]:
+        if connector["id"] in entrances["lowerAnchors"]:
+            connector["lower"] = entrances["lowerAnchors"][connector["id"]]
+            connector.pop("bend", None)
+        connector.update(entrances.get("exitOverrides", {}).get(connector["id"], {}))
+    layout["connectors"].extend(entrances["connectors"])
 bpy.ops.wm.read_factory_settings(use_empty=True)
 bpy.ops.import_scene.gltf(filepath=str(model.resolve()))
 meshes = {obj.name: obj for obj in bpy.context.scene.objects if obj.type == "MESH"}
@@ -34,7 +44,34 @@ if modules:
     assert counts == {"elevator": 4, "tickets": 2, "toilet": 1, "gates": 3}, counts
     assert meshes["Toilet block"].get("floor") == "B1"
     assert meshes["Central ticket and recharge"].get("floor") == "B1"
+    columns = [item for item in modules["facilities"] if item["kind"] == "column"]
+    for column in columns:
+        obj = meshes[column["id"]]
+        assert obj.get("module") == "column" and obj.get("video_reference") == column["reference"]
+        expected = "Video reference · glazed white column panels" if column.get("style") == "glossy" else "Station wall ceramic"
+        assert expected in {slot.material.name for slot in obj.material_slots}
+    print(f"PASS: {len(columns)} video-referenced column objects.")
     print(f"PASS: Editable facility modules found: {counts}.")
+    for level in ("B1", "B2", "B3"):
+        enclosure = meshes[f"{level} · Enclosure walls"]
+        assert enclosure.get("height_diagram_units", 0) >= 4
+        assert {"Station wall ceramic", "Grey granite wall base"} <= {
+            slot.material.name for slot in enclosure.material_slots
+        }
+    stair_walls = [obj for obj in meshes.values() if obj.get("wall") == "stair"]
+    assert len(stair_walls) >= len(layout["connectors"])
+    print(f"PASS: Full-height tiled walls on three floors and {len(stair_walls)} stair wall runs.")
+if len(detail_files) > 2 and "Exit 7 · Lower flight" in meshes:
+    assert meshes["Exit 7"].get("bicycle_guide")
+    assert meshes["Exit 7 · Lower flight"].get("bicycle_guide")
+    assert meshes["Exit 8"].get("connector_type") == "escalator-pair"
+    print("PASS: Exit 7 bicycle guides and split staircase, Exit 8 paired escalators.")
+if "B1 · Suspended ceiling and strip lights" in meshes:
+    assert meshes["B1 · Suspended ceiling and strip lights"].get("interior_only")
+    for name in ("Gunja video · concourse granite", "Stair concrete", "Station wall ceramic"):
+        material = bpy.data.materials[name]
+        assert any(node.type == "TEX_IMAGE" and node.image for node in material.node_tree.nodes), name
+    print("PASS: Video surface textures and concourse ceiling included in GLB.")
 estimated_boundaries = [obj for name, obj in meshes.items() if any(
     role in name for role in ("Enclosure walls", "Opening guardrails", "Platform track barriers")
 )]

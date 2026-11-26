@@ -1,4 +1,8 @@
-export const floorNames = { G: "지상", B1: "지하 1층", B2: "지하 2층", B3: "지하 3층" };
+export const floorNames = {
+  G: "지상", B1: "지하 1층", B2: "지하 2층", B3: "지하 3층",
+  M2: "2번 출구 중간참", M3: "3번 출구 중간참", M7: "7번 출구 중간참",
+  M12: "1·2번 출구 합류부", M34: "3·4번 출구 합류부", M56: "5·6번 출구 합류부",
+};
 
 export function findRoute(graph, start, end, { stepFree = false } = {}) {
   const nodes = new Map(graph.nodes.map(node => [node.id, node]));
@@ -72,62 +76,75 @@ export function describeRoute(graph, start, segments) {
       const landmark = result.steps[index + 1]?.title ?? destination?.name;
       if (landmark) step.detail = `${landmark} 쪽으로 이동하세요.`;
     }
-    if (step.video) step.detail += step.from === "G"
+    if (step.kind === "stairs-escalator") step.detail += step.from === "G"
       ? " 에스컬레이터 뒤에 계단이 이어집니다." : " 계단 뒤에 에스컬레이터가 이어집니다.";
   });
   return result;
 }
 
-export function routeCheckpoints(route, destination) {
+export function routeCheckpoints(route, destination, landmark) {
   if (!route?.points.length || route.points.length < 2) return [];
   const points = route.points;
   const checkpoints = new Map();
   const add = (index, item) => { if (index > 0) checkpoints.set(index, { index, ...item }); };
+  const smallLandings = new Set(["M2", "M3", "M7"]);
+  const distance = [0];
+  const turns = [];
+  for (let i = 1; i < points.length; i++) {
+    distance.push(distance[i - 1] + Math.hypot(...points[i].map((axis, j) => axis - points[i - 1][j])));
+  }
 
   for (const step of route.steps) {
     if (step.type === "walk") {
+      if (step.to.startsWith("M")) continue;
       for (let i = Math.max(1, step.startIndex); i < Math.min(points.length - 1, step.endIndex); i++) {
         const [x, , z] = points[i];
         const ax = x - points[i - 1][0], az = z - points[i - 1][2];
         const bx = points[i + 1][0] - x, bz = points[i + 1][2] - z;
-        if (points[i - 1][1] !== points[i][1] || Math.min(Math.hypot(ax, az), Math.hypot(bx, bz)) < .45) continue;
+        if (points[i - 1][1] !== points[i][1] || Math.min(Math.hypot(ax, az), Math.hypot(bx, bz)) < 3) continue;
         const turn = Math.atan2(ax * bz - az * bx, ax * bx + az * bz);
-        if (Math.abs(turn) < Math.PI / 6) continue;
+        if (Math.abs(turn) < Math.PI / 3) continue;
         const direction = Math.abs(turn) > Math.PI * .83 ? "뒤로" : turn > 0 ? "오른쪽으로" : "왼쪽으로";
-        add(i, { kind: "turn", title: `${direction} 도는 지점`,
+        turns.push({ index: i, kind: "turn", title: `${direction} 도는 지점`,
           detail: `${floorNames[step.to]} 통로에서 방향을 바꾸는 지점까지 이동하세요.`,
           depart: `${direction} 돌아` });
       }
       continue;
     }
+    if (smallLandings.has(step.to) || step.to === "G") continue;
     const flights = [];
     for (let i = step.startIndex + 1; i <= step.endIndex; i++) {
       if (Math.abs(points[i][1] - points[i - 1][1]) > .01) flights.push(i);
     }
     if (!flights.length) continue;
-    const departure = step.kind === "stairs" || (step.video && step.from !== "G") ? "계단" : "에스컬레이터";
-    const arrival = step.video && step.from === "G" ? "계단"
-      : step.video ? "에스컬레이터" : departure;
+    const mixed = step.kind === "stairs-escalator";
+    const departure = step.kind === "stairs" || (mixed && step.from !== "G") ? "계단" : "에스컬레이터";
+    const arrival = mixed && step.from === "G" ? "계단" : mixed ? "에스컬레이터" : departure;
     const via = name => name === "계단" ? "계단으로" : "에스컬레이터로";
     const motion = points[flights[0]][1] < points[flights[0] - 1][1] ? "내려" : "올라";
-    add(flights[0] - 1, {
-      kind: "entry", title: `${departure} 입구`,
-      detail: `${step.title} 쪽 입구에 도착하면 확인하세요.`,
-    });
-    if (step.video && flights.length > 1) {
-      add(flights[0], { kind: "landing", title: `${via(arrival)} 이어지는 중간참`,
-        detail: `${via(departure)} ${motion}가 중간참에 도착하면 확인하세요.` });
-    }
     add(flights.at(-1), {
-      kind: "landing", title: `${floorNames[step.to]} 도착 지점`,
+      kind: "landing", title: step.to.startsWith("M") ? floorNames[step.to] : `${floorNames[step.to]} 도착 지점`,
       detail: `${via(arrival)} ${motion}가 ${floorNames[step.to]}에 도착하면 확인하세요.`,
     });
   }
   add(points.length - 1, { kind: "destination", title: destination,
-    detail: "목적지에 도착하면 확인하세요." });
+    detail: landmark ? `${landmark} 앞에 도착하면 확인하세요.` : "목적지에 도착하면 확인하세요." });
+  for (const turn of turns) {
+    if (distance[turn.index] < 8 || [...checkpoints.keys()]
+      .some(index => Math.abs(distance[index] - distance[turn.index]) < 8)) continue;
+    checkpoints.set(turn.index, turn);
+  }
   const ordered = [...checkpoints.values()].sort((a, b) => a.index - b.index);
-  return ordered.map((item, i) => ({
-    ...item, detail: ordered[i - 1]?.kind === "turn"
-      ? `${ordered[i - 1].depart} 이동하세요. ${item.detail}` : item.detail,
-  }));
+  return ordered.map((item, i) => {
+    const previous = ordered[i - 1];
+    const crossesLanding = route.steps.some(step => smallLandings.has(step.to)
+      && step.endIndex > (previous?.index ?? 0) && step.endIndex < item.index);
+    const hints = [];
+    if (previous?.kind === "turn") hints.push(`${previous.depart} 이동하세요.`);
+    if (crossesLanding) hints.push("계단 사이의 평평한 중간참을 걸어서 지나가세요.");
+    if (route.steps[0]?.video && previous?.title === floorNames.M34 && item.title === "지하 1층 도착 지점") {
+      return { ...item, detail: "합류부에서 직진해 정면 공용 계단을 내려가세요." };
+    }
+    return { ...item, detail: [...hints, item.detail].join(" ") };
+  });
 }
