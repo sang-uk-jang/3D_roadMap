@@ -3,6 +3,13 @@ import type { Label } from './station/types'
 export type Lang = 'ko' | 'en'
 
 export function defaultLang(): Lang {
+  // 언어 설정에서 고른 값이 있으면 그것, 없으면 기기 언어
+  try {
+    const saved = localStorage.getItem('subway-guide-lang')
+    if (saved === 'ko' || saved === 'en') return saved
+  } catch {
+    /* 저장소를 못 써도 기기 언어로 */
+  }
   return typeof navigator !== 'undefined' && navigator.language?.toLowerCase().startsWith('ko') ? 'ko' : 'en'
 }
 
@@ -49,6 +56,7 @@ const S = {
   rideBack: { ko: '아직 안 탔어요', en: 'Not on the train yet' },
   offTrain: { ko: '열차에서 내리면', en: 'Off the train' },
   whichStation: { ko: '지금 있는 역', en: 'Current station' },
+  langSetting: { ko: '언어 설정', en: 'Language' },
   noTimetable: { ko: '이 노선은 시간표 자료가 없어요 (코레일 운영 구간).', en: 'No timetable data for this line (operated by Korail).' },
   arrived: { ko: '도착했어요', en: "I'm here" },
   back: { ko: '이전', en: 'Back' },

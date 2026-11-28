@@ -320,7 +320,26 @@ export default function App() {
             )}
             <p className="badge">{t(lang, 'approx')}</p>
           </div>
-          <button className="lang" onClick={() => setLang(lang === 'ko' ? 'en' : 'ko')}>{lang === 'ko' ? 'EN' : '한국어'}</button>
+          {/* 언어 설정: 지금 언어만 보이고, 눌러서 고른다 */}
+          <label className="lang-setting" title={t(lang, 'langSetting')}>
+            <span aria-hidden="true">🌐</span>
+            <select
+              value={lang}
+              aria-label={t(lang, 'langSetting')}
+              onChange={(e) => {
+                const v = e.target.value as Lang
+                setLang(v)
+                try {
+                  localStorage.setItem('subway-guide-lang', v)
+                } catch {
+                  /* 저장 못 해도 이번 화면에는 적용 */
+                }
+              }}
+            >
+              <option value="ko">한국어</option>
+              <option value="en">English</option>
+            </select>
+          </label>
         </header>
 
         {riding ? (

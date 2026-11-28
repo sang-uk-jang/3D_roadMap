@@ -27,7 +27,8 @@
 }
 .panel header { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
 .panel h1 { font-size: 18px; margin: 2px 0; }
-.lang { padding: 4px 10px; }
+.lang-setting { display: inline-flex; align-items: center; gap: 4px; padding: 2px 4px 2px 8px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; font-size: 14px; white-space: nowrap; }
+.lang-setting select { border: 0; background: transparent; font-size: 14px; padding: 4px 2px; }
 .badge { display: inline-block; margin: 2px 0 6px; padding: 1px 8px; border-radius: 999px; background: #fef3c7; color: #92400e; font-size: 11px; }
 
 .plan h2, .guide h2 { font-size: 15px; margin: 12px 0 6px; }
