@@ -89,7 +89,7 @@ test("no unconfirmed step-free vertical links are offered", () => {
 });
 
 test("facility entrances and sampled stair treads are available in both travel directions", () => {
-  for (const id of ["toilet", "tickets", "tickets-central", "gates-west", "gates-east", "gates-5", "lift-b1"]) {
+  for (const id of ["toilet", "tickets-central", "gates-west", "gates-east", "gates-5", "lift-b1"]) {
     assert.equal(graph.places.find(place => place.id === id)?.floorId, "B1");
     assert.ok(findRoute(graph, "connector-4-upper", id));
   }
@@ -103,6 +103,17 @@ test("facility entrances and sampled stair treads are available in both travel d
   const descending = findRoute(graph, edge.to, edge.from);
   assert.deepEqual(ascending.treads, edge.treads);
   assert.deepEqual(descending.treads, edge.treads.slice().reverse().map(flight => flight?.slice().reverse() ?? null));
+});
+
+test("the B1 ticket bank is the only ticket destination and is reached from Exit 4 outside the gates", () => {
+  const ticketPlaces = graph.places.filter(place => /표 사는 곳/.test(place.name));
+  assert.deepEqual(ticketPlaces.map(place => place.id), ["tickets-central"]);
+  const route = findRoute(graph, "connector-4-upper", ticketPlaces[0].id);
+  assert.deepEqual(route.points.at(-1), nodes.get("tickets-central").position);
+  const [west] = nodes.get("gates-west").position;
+  const [east] = nodes.get("gates-east").position;
+  assert.ok(route.points.filter(([, y]) => Math.abs(y - graph.floors.B1) < .1)
+    .every(([x]) => x > west && x < east));
 });
 
 test("recognizable B1 landmarks are valid starting points and destinations", () => {

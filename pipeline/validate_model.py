@@ -41,7 +41,7 @@ assert all(obj.data.polygons for obj in meshes.values())
 if modules:
     counts = {kind: sum(obj.get("module") == kind for obj in meshes.values())
               for kind in ("elevator", "tickets", "toilet", "gates")}
-    assert counts == {"elevator": 4, "tickets": 2, "toilet": 1, "gates": 3}, counts
+    assert counts == {"elevator": 4, "tickets": 1, "toilet": 1, "gates": 3}, counts
     assert meshes["Toilet block"].get("floor") == "B1"
     assert meshes["Central ticket and recharge"].get("floor") == "B1"
     columns = [item for item in modules["facilities"] if item["kind"] == "column"]
@@ -111,6 +111,10 @@ def anchor(endpoint):
 collisions = []
 for connector in layout["connectors"]:
     bottom, top = (anchor(connector[key]) for key in ("lower", "upper"))
+    stair = meshes[connector["id"]]
+    assert "Continuous stair underside and stringer" in {
+        slot.material.name for slot in stair.material_slots
+    }, connector["id"]
     path = [bottom, top]
     if "bend" in connector:
         x, z, fraction = connector["bend"]
@@ -118,6 +122,13 @@ for connector in layout["connectors"]:
     for start, end in zip(path, path[1:]):
         lift = Vector((0, 0, 1.1))
         direction = end - start
+        inverse = stair.matrix_world.inverted()
+        up = Vector((0, 0, 1))
+        for fraction in (.2, .5, .8):
+            center = start.lerp(end, fraction)
+            hit, location, *_ = stair.ray_cast(inverse @ (center - up * .80),
+                                               inverse.to_3x3() @ up, distance=.55)
+            assert hit and abs((stair.matrix_world @ location).z - center.z + .35) < .02, connector["id"]
         for obj in estimated_boundaries:
             inverse = obj.matrix_world.inverted()
             hit, *_ = obj.ray_cast(inverse @ (start + lift),
@@ -130,4 +141,5 @@ assert not collisions, f"Stair centerlines intersect modeled boundaries: {collis
 print(f"PASS: GLB imported with {len(meshes)} editable mesh objects.")
 print(f"PASS: {len(required)} required areas, connectors, signs and wall objects are present.")
 print("PASS: Boundary objects carry estimated status.")
+print("PASS: Continuous stair undersides cover every modeled flight.")
 print(f"PASS: Checked {len(layout['connectors'])} stair/escalator centerlines against walls and barriers.")

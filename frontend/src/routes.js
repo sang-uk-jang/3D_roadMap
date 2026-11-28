@@ -143,7 +143,7 @@ export function routeCheckpoints(route, destination, landmark) {
     if (previous?.kind === "turn") hints.push(`${previous.depart} 이동하세요.`);
     if (crossesLanding) hints.push("계단 사이의 평평한 중간참을 걸어서 지나가세요.");
     if (route.steps[0]?.video && previous?.title === floorNames.M34 && item.title === "지하 1층 도착 지점") {
-      return { ...item, detail: "합류부에서 직진해 정면 공용 계단을 내려가세요. 아래에 노란 3·4번 원형 기둥이 있습니다." };
+      return { ...item, detail: "합류부에서 직진해 정면 공용 계단을 내려가세요. 아래에서 노란 3·4번 원형 기둥과 보라색 5호선 바닥 화살표를 확인하세요." };
     }
     return { ...item, detail: [...hints, item.detail].join(" ") };
   });

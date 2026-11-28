@@ -87,6 +87,7 @@ try {
   await desktop.locator(".place select").last().selectOption("tickets-central");
   await desktop.getByRole("button", { name: "경로 보기", exact: true }).click();
   await expectJourney(desktop, /2번 출구.*중앙 표 사는 곳·카드 충전/);
+  assert.equal(await desktop.locator(".place select").last().locator("option", { hasText: "표 사는 곳" }).count(), 1);
   await desktop.locator(".place select").first().selectOption("connector-3-upper");
   await desktop.locator(".place select").last().selectOption("connector-4-upper");
   await desktop.getByRole("button", { name: "경로 보기", exact: true }).click();

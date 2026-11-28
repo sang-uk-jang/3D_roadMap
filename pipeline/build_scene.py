@@ -14,6 +14,8 @@ from mathutils.geometry import delaunay_2d_cdt
 
 WALL_HEIGHT = 4.2
 WALL_THICKNESS = .37
+SLAB_THICKNESS = .55
+STAIR_HEADROOM = 2.15
 SKIRT_HEIGHT = .92
 
 
@@ -137,6 +139,7 @@ palette = {
     "videoFloor": ("Gunja video · concourse granite", "a8a8a1"),
     "ceilingPanel": ("Video reference · ceiling panels", "b8bcba"),
     "ceilingJoint": ("Video reference · ceiling grid", "727a80"),
+    "stairSoffit": ("Continuous stair underside and stringer", "999e9c"),
     "lightDiffuser": ("Video reference · strip light", "fbfffb"),
     "beamBlue": ("Video reference · blue-grey stair beams", "45586a"),
     "passageGlass": ("Video reference · safety glazing", "86a29d"),
@@ -338,7 +341,9 @@ for connector in connectors:
             vertical = elevations[level] - elevations[level_of(lower[0])]
             if "bend" in connector:
                 vertical *= 1 - connector["bend"][2]
-            opening = min(separation * .62, max(1.35, 4.4 * separation / vertical))
+            # Leave just enough aperture for the descending run below this slab.
+            clearance = STAIR_HEADROOM + SLAB_THICKNESS + .55
+            opening = min(separation - .16, max(1.35, clearance * separation / vertical + .60))
             slots[level].append(strip(xz, other, width + .26, .08, opening))
 
 
@@ -347,7 +352,7 @@ def slab(verts, triangles, geometry, height, finish):
     mapping = {i: index for index, i in enumerate(used)}
     count = len(used)
     geometry.verts.extend(point(verts[i], height) for i in used)
-    geometry.verts.extend(point(verts[i], height - .55) for i in used)
+    geometry.verts.extend(point(verts[i], height - SLAB_THICKNESS) for i in used)
     counts = Counter()
     directed = {}
     for tri in triangles:
@@ -552,6 +557,28 @@ def sloped_strip(geometry, start, end, side, thickness, bottom, top, finish):
         geometry.face((offset + i for i in face), finish)
 
 
+def stair_deck(geometry, lower, upper, direction, side, width, tread_count, finish):
+    run = (upper - lower).xy.length
+    rise = upper.z - lower.z
+    waist = .35
+    # Extrude a single profile with a stepped top and a continuous structural underside.
+    profile = [(0, -waist), (run, rise - waist), (run, rise)]
+    for i in range(tread_count, 0, -1):
+        end = run * (i - 1) / tread_count
+        profile.extend(((end, rise * i / tread_count), (end, rise * (i - 1) / tread_count)))
+    n = len(profile)
+    offset = len(geometry.verts)
+    for lateral in (-width / 2, width / 2):
+        geometry.verts.extend(lower + direction * x + side * lateral + Vector((0, 0, y))
+                              for x, y in profile)
+    geometry.face(range(offset, offset + n), "stairSoffit")
+    geometry.face(reversed(range(offset + n, offset + 2 * n)), "stairSoffit")
+    for i in range(n):
+        j = (i + 1) % n
+        geometry.face((offset + j, offset + i, offset + n + i, offset + n + j),
+                      "stairSoffit" if i == 0 else finish)
+
+
 def stairs(geometry, lower, upper, width, kind, filmed=False, open_lower=False, open_upper=False,
            wall_handrails=False):
     delta = upper - lower
@@ -563,6 +590,8 @@ def stairs(geometry, lower, upper, width, kind, filmed=False, open_lower=False, 
     count = max(4, ceil(delta.z / max_riser), ceil(run.length / 1.02))
     tread = run.length / count
     escalator = kind.startswith("escalator")
+    stair_deck(geometry, lower, upper, direction, side, width, count,
+               "rib" if filmed and escalator else "concrete")
     pairs = [-width / 4, width / 4] if kind == "escalator-pair" else [0]
     lane_width = width / len(pairs)
     continuous = station_details and filmed and escalator
@@ -584,10 +613,6 @@ def stairs(geometry, lower, upper, width, kind, filmed=False, open_lower=False, 
     for i in range(count):
         pos = lower + direction * ((i + .5) * tread)
         pos.z += delta.z * ((i + 1) / count)
-        step = delta.z / count
-        step_material = "rib" if filmed and escalator else "concrete"
-        geometry.box(pos - Vector((0, 0, (step + .48) / 2)),
-                     (tread + .018, width, step + .48), step_material, angle)
         geometry.box(pos - direction * tread * .39 + Vector((0, 0, .018)),
                      (min(.16, tread * .2), width - .12, .036),
                      "yellow" if escalator else "tread", angle)
@@ -697,6 +722,18 @@ def stair_enclosure(segments, width, other_segments):
     return geometry
 
 
+def passage_ceiling(geometry, start, end, width, with_lights=False):
+    run = (end - start).xy
+    side = Vector((-run.y, run.x, 0)).normalized()
+    sloped_strip(geometry, start, end, side, width + .52, 3.34, 3.53, "ceilingPanel")
+    if with_lights:
+        angle = aspect(end, start)
+        count = max(1, round(run.length / 3.8))
+        for i in range(count):
+            p = start.lerp(end, (i + .5) / count) + Vector((0, 0, 3.28))
+            geometry.box(p, (.23, width * .64, .11), "lightDiffuser", angle)
+
+
 all_runs = {connector["id"]: connector_runs(connector) for connector in connectors}
 exit_points = {}
 connector_count = 0
@@ -726,9 +763,19 @@ for connector in connectors:
                     bicycle_guide=bool(connector.get("bikeRamp")),
                     **({"video_reference": connector["videoReference"]} if "videoReference" in connector else {}))
     runs = all_runs[connector["id"]]
+    if destination := connector.get("ceilingTo"):
+        roof = Geometry()
+        start, end = runs[0]
+        entrance = start.lerp(end, (end.z - 3.7 - start.z) / (end.z - start.z))
+        passage_ceiling(roof, start, entrance, width, with_lights=True)
+        passage_ceiling(roof, all_runs[destination][-1][1], start, width, with_lights=True)
+        roof.create(f"{connector['id']} · Underground passage ceiling", stair_enclosures,
+                    "video-informed appearance; placement estimated",
+                    floor=level_of(lower[0]), interior_only=True)
     if connector.get("ceilingBeams"):
         overhead = Geometry()
         start, end = runs[0]
+        passage_ceiling(overhead, start.lerp(end, .045), end, width)
         angle = aspect(end, start)
         for i in range(1, 6):
             center = start.lerp(end, i / 8) + Vector((0, 0, 3.2))
@@ -921,12 +968,27 @@ def column_fixture(geometry, pos, facility, group, floor):
     if facility.get("steelStrip"):
         fixture((0, -depth - .026, .96), (.19, .059, 1.58), "steel")
     if facility.get("label"):
-        fixture((0, -depth - .037, 1.84), (panel + .11, .12, 2.58), "exit")
-        for numeral, high in zip(facility["label"].split(), (2.58, 1.79)):
-            fixture((0, -depth - .105, high), (panel, .043, .66), "ink")
+        height = facility.get("height", 4.14) - .52
+        if "radius" in facility:
+            radius = depth + .018
+            wrap = [module_point(pos, (radius * sin(radians(a)), -radius * cos(radians(a)), .19), angle)
+                    for a in range(-36, 37, 6)]
+            top = Vector((0, 0, height))
+            for a, b in zip(wrap, wrap[1:]):
+                geometry.quad([a, b, b + top, a + top], "exit")
+        else:
+            fixture((0, -depth - .009, .19 + height / 2), (panel + .11, .018, height), "exit")
+        for numeral, high in zip(facility["label"].split(), (2.91, 2.15)):
+            fixture((0, -depth - .052, high), (panel, .043, .66), "ink")
             mesh_text(f"{facility['id']} · {numeral}", numeral,
-                      module_point(pos, (0, -depth - .131, high), angle),
+                      module_point(pos, (0, -depth - .077, high), angle),
                       (radians(90), 0, angle), .54, "exit", group)["floor"] = floor
+        mesh_text(f"{facility['id']} · Exit caption", "나가는 곳" if sign_font else "Exit",
+                  module_point(pos, (0, -depth - .031, 1.62), angle),
+                  (radians(90), 0, angle), .105, "ink", group, sign_font)["floor"] = floor
+        for row in range(3):
+            fixture((-.025, -depth - .022, 1.42 - .15 * row), (.37, .012, .017), "ink")
+            fixture((.22, -depth - .022, 1.42 - .15 * row), (.063, .012, .073), "ink")
     if facility.get("wayfinding"):
         fixture((0, -depth - .046, 2.0), (panel + .12, .12, 1.47), "ink")
         fixture((0, -depth - .110, 1.93), (.36, .025, .36), "stripe5")
@@ -994,6 +1056,18 @@ def safety_cabinet(geo, facility, pos, group, level):
     def part(x, y, z, size, coat):
         geo.box(module_point(pos, (x, y, z), angle), size, coat, angle)
 
+    if facility.get("wallMounted"):
+        part(0, 0, 1.63, (.82, .22, .68), "cabinetRed")
+        part(0, -.123, 1.60, (.67, .018, .42), "ink")
+        for x in (-.18, .18):
+            part(x, -.144, 1.56, (.16, .07, .28), "cabinetRed")
+            part(x, -.151, 1.727, (.095, .086, .054), "steel")
+        part(0, -.204, 1.60, (.67, .018, .43), "passageGlass")
+        mesh_text(f"{facility['id']} · face label", "소화기" if sign_font else "FIRE",
+                  module_point(pos, (0, -.119, 1.91), angle), (radians(90), 0, angle),
+                  .105, "signWhite", group, sign_font)["floor"] = level
+        return
+
     part(0, 0, height / 2, (width, depth, height), finish)
     part(0, 0, .08, (width + .04, depth + .04, .16), "frame")
     part(0, -depth / 2, height * .52, (width * .72, .036, height * .49), "frame")
@@ -1041,6 +1115,65 @@ def gs25_front(geo, facility, pos, group, level):
         mesh_text(f"{facility['id']} · {caption} sign", caption,
                   pos + Vector((x * proportion, .225, 2.84)), (radians(90), 0, pi),
                   .285 * proportion, finish, group)["floor"] = level
+    for caption, x, finish in (("GS", .79, "storeBlue"), ("25", .39, "signWhite")):
+        mesh_text(f"{facility['id']} · Glass {caption}", caption,
+                  pos + Vector((x * proportion, .114, 1.84)), (radians(90), 0, pi),
+                  .21, finish, group)["floor"] = level
+    block(1.76, .106, 1.73, (.65, .019, .67), "signWhite")
+    for i in range(5):
+        block(1.76, .118, 1.92 - i * .085, (.45 - .05 * (i % 2), .016, .017), "wallGrout")
+    block(2.14, .100, 2.68, (1.46, .16, .25), "signWhite")
+    mesh_text(f"{facility['id']} · Store notice", "호빵 판매" if sign_font else "STEAMED BUNS",
+              pos + Vector((2.14 * proportion, .192, 2.68)), (radians(90), 0, pi),
+              .125 if sign_font else .080, "ink", group, sign_font)["floor"] = level
+
+
+def video_landmark(geo, facility, pos, group, level):
+    angle = radians(facility["face"])
+    kind = facility["kind"]
+
+    def part(x, y, z, size, finish):
+        geo.box(module_point(pos, (x, y, z), angle), size, finish, angle)
+
+    if kind == "basket-stack":
+        part(0, 0, .10, (.58, .41, .20), "blue")
+        for i in range(9):
+            h = .18 + i * .065
+            for side in (-1, 1):
+                part(0, side * .204, h, (.61, .035, .037), "cabinetBlue")
+                part(side * .296, 0, h, (.035, .41, .037), "cabinetBlue")
+        for x in (-.24, -.12, 0, .12, .24):
+            for side in (-1, 1):
+                part(x, side * .193, .41, (.025, .025, .51), "blue")
+        part(0, 0, .73, (.48, .037, .036), "frame")
+    elif kind == "exit-wall-sign":
+        height = facility["height"]
+        part(0, 0, height, (1.58, .07, .63), "signWhite")
+        for x, label in ((-.49, "7"), (-.10, "8")):
+            part(x, -.042, height, (.33, .027, .47), "exit")
+            mesh_text(f"{facility['id']} · {label}", label, module_point(pos, (x, -.063, height), angle),
+                      (radians(90), 0, angle), .32, "ink", group)["floor"] = level
+        part(.43, -.061, height, (.44, .018, .05), "ink")
+        for side in (-1, 1):
+            a = module_point(pos, (.46, -.077, height + side * .19), angle)
+            b = module_point(pos, (.67, -.077, height), angle)
+            c = module_point(pos, (.61, -.077, height), angle)
+            d = module_point(pos, (.41, -.077, height + side * .16), angle)
+            geo.quad([d, c, b, a] if side > 0 else [a, b, c, d], "ink")
+    elif kind == "floor-arrow":
+        part(0, 0, .015, (2.45, .81, .025), "ink")
+        center = module_point(pos, (-.27, 0, .032), angle)
+        ring = [center + Vector((.33 * cos(i * pi / 16), .33 * sin(i * pi / 16), 0))
+                for i in range(32)]
+        offset = len(geo.verts)
+        geo.verts.extend(ring)
+        geo.face(range(offset, offset + len(ring)), "stripe5")
+        mesh_text(f"{facility['id']} · Line number", "5", center + Vector((0, 0, .008)),
+                  (0, 0, angle + pi), .44, "signWhite", group)["floor"] = level
+        part(.60, 0, .031, (.59, .057, .012), "signWhite")
+        for side in (-1, 1):
+            geo.box(module_point(pos, (.80, side * .105, .031), angle),
+                    (.30, .057, .012), "signWhite", angle - side * pi / 4)
 
 
 def wall_directory(geo, facility, pos, group, level):
@@ -1132,7 +1265,7 @@ for facility in layout["facilities"]:
                 part((x, -.96, .86), (.43, .10, .14), "frame")
                 part((x, -.96, .48), (.67, .10, .17), "frame")
             part((0, -.43, 2.30), (5.38, .31, .45), "signBlue")
-            mesh_text(f"{facility['id']} · sign", "교통카드 · 보증금 환급" if sign_font else "TICKETS  /  TOP-UP",
+            mesh_text(f"{facility['id']} · sign", "표 사는 곳 · 카드 충전" if sign_font else "TICKETS  /  TOP-UP",
                       module_point(pos, (0, -.59, 2.31), angle), (radians(90), 0, angle),
                       .33, "signWhite", group, sign_font)["floor"] = level
     elif kind == "column":
@@ -1163,6 +1296,8 @@ for facility in layout["facilities"]:
         gs25_front(geo, facility, pos, group, level)
     elif kind == "wall-directory":
         wall_directory(geo, facility, pos, group, level)
+    elif kind in ("basket-stack", "exit-wall-sign", "floor-arrow"):
+        video_landmark(geo, facility, pos, group, level)
     elif kind in ("hydrant", "sos", "aed", "relief"):
         safety_cabinet(geo, facility, pos, group, level)
     elif kind == "benches":
@@ -1229,10 +1364,10 @@ if video_details:
                           video_reference=guide["reference"])
     if not modules:
         equipment = Geometry()
-        for x in (30.4, 32.1, 33.8):
-            equipment.box((x, 9.17, 1), (1.42, .91, 2), "blue")
-            equipment.box((x, 8.69, 1.44), (1.16, .08, .55), "steel")
-            equipment.box((x, 8.64, 1.49), (.60, .023, .25), "bezel")
+        for x in (4.9, 6.6, 8.3):
+            equipment.box((x, -7.7, 1), (1.42, .91, 2), "blue")
+            equipment.box((x, -7.22, 1.44), (1.16, .08, .55), "steel")
+            equipment.box((x, -7.17, 1.49), (.60, .023, .25), "bezel")
         equipment.create("B1 · Ticket and recharge equipment", finishes, appearance, floor="B1")
 
 

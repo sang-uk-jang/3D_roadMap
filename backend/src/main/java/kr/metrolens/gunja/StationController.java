@@ -72,6 +72,8 @@ public class StationController {
         if (start == null || end == null || start.isBlank() || end.isBlank()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Choose a start and destination");
         }
+        if ("tickets".equals(start)) start = "tickets-central";
+        if ("tickets".equals(end)) end = "tickets-central";
         if (!nodes.containsKey(start) || !nodes.containsKey(end)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unknown route node");
         }

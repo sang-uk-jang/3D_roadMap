@@ -25,7 +25,7 @@
     "Exit 8":["B1_Concourse",14.48,16.75]
   },
   "exitOverrides": {
-    "Exit 4":{"upper":["G",4.9,5.88],"videoReference":"gunja1.mp4 00:09–00:42; gunja2.mp4 00:32–00:53"},
+    "Exit 4":{"upper":["G",4.9,5.88],"ceilingTo":"Exits 3–4 · Shared stairs","videoReference":"gunja1.mp4 00:09–00:42; gunja2.mp4 00:32–00:53"},
     "Exit 7":{"upper":["G",42.9,48.0],"width":3.8,"bikeRamp":true},
     "Exit 8":{"width":5.8,"kind":"escalator-pair"}
   },

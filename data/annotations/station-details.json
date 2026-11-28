@@ -4,8 +4,10 @@
   "facilities": [
     {"id":"B1 · Lines 5 and 7 overhead board","area":"B1_Concourse","kind":"direction-sign","point":[-22.1,-26.7],"face":40,"width":5.2,"title":"←  5호선        7호선  →","subtitle":"Line 5       Line 7","reference":"gunja1.mp4 01:01–01:05"},
     {"id":"B1 · Exit 7 and 8 area fire cabinet","area":"B1_Concourse","kind":"hydrant","point":[20.4,-8.8],"face":0,"reference":"gunja1.mp4 02:06, 안내도 B1 7·8번 인근"},
-    {"id":"B1 · Exit 8 fire cabinet","area":"B1_Concourse","kind":"hydrant","point":[12.1,17.9],"face":180,"reference":"안내도 B1 8번 표기 아래"},
-    {"id":"B1 · Exit 7 and 8 wall directory","area":"B1_Concourse","kind":"wall-directory","point":[11.2,18.25],"face":180,"reference":"gunja1.mp4 01:54 벽의 검보라색 테두리 안내도와 빨간 함, 02:06 무렵 7·8번 방향 표지"},
+    {"id":"B1 · Exit 8 fire cabinet","area":"B1_Concourse","kind":"hydrant","point":[11.92,18.82],"face":180,"wallMounted":true,"reference":"gunja1.mp4 01:54, 02:06 및 안내도 B1 8번 표기"},
+    {"id":"B1 · Exit 7 and 8 wall directory","area":"B1_Concourse","kind":"wall-directory","point":[10.34,18.82],"face":180,"reference":"gunja1.mp4 01:54 벽의 검보라색 테두리 안내도와 빨간 함, 02:06 무렵 7·8번 방향 표지"},
+    {"id":"B1 · Exits 7 and 8 wall arrow","area":"B1_Concourse","kind":"exit-wall-sign","point":[10.5,18.82],"face":180,"height":3.08,"reference":"gunja1.mp4 02:06"},
+    {"id":"B1 · Line 5 floor arrow at Exits 3–4","area":"B1_Concourse","kind":"floor-arrow","point":[-22.85,-24.85],"face":8,"reference":"gunja2.mp4 00:00–00:04"},
     {"id":"B2 · Line 5 south direction board","area":"B2_Line5_Island_Platform","kind":"direction-sign","point":[0.3,47.0],"face":180,"width":5.9,"title":"5  장한평 방면","subtitle":"Janghanpyeong","reference":"안내도 B2 5호선 장한평 방면"},
     {"id":"B2 · Line 5 north direction board","area":"B2_Line5_Island_Platform","kind":"direction-sign","point":[0.3,-56.0],"face":0,"width":5.9,"title":"5  아차산 방면","subtitle":"Achasan","reference":"안내도 B2 5호선 아차산 방면"},
     {"id":"B2 · Line 5 central SOS","area":"B2_Line5_Island_Platform","kind":"sos","point":[0.2,-35.2],"face":0,"reference":"안내도 B2 5호선 중앙 적색 SOS 아이콘"},

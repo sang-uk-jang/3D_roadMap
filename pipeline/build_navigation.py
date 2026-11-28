@@ -66,8 +66,11 @@ STAIR_OBJECTS = [obj for obj in bpy.data.collections["Stairs, escalators and ele
                  if obj.get("connector_type")]
 BLOCKER_OBJECTS = WALL_OBJECTS + STAIR_WALLS + FACILITY_OBJECTS + LIFTS + CEILINGS
 BLOCKERS = make_tree(BLOCKER_OBJECTS)
+FLOOR_SLABS = make_tree([obj for level in LEVELS
+                         for obj in bpy.data.collections[f"{level} · Slabs"].objects])
 SUPPORT_MATERIALS = {"Stair concrete", "Video reference · escalator tread", "Stair nosing",
                      "Escalator sides and tactile strips"}
+STAIR_STRUCTURE = SUPPORT_MATERIALS | {"Continuous stair underside and stringer"}
 RAIL_MATERIALS = {"Wall coping", "Platform barriers · dark framing", "Video reference · tinted balustrade",
                  "Escalator side panels"}
 STAIR_RAILS = make_tree(STAIR_OBJECTS, RAIL_MATERIALS)
@@ -136,10 +139,12 @@ def flight_profile(a, b, stairs, crossing_stairs, name, require_treads=True):
         if not require_treads:
             height = max(height, sample.z)
         contact = Vector((sample.x, sample.y, height + .065))
+        if not clear_body(contact, FLOOR_SLABS, 2.10):
+            raise ValueError(f"{name}: insufficient clearance under a floor slab near {tuple(contact)}")
         if not clear_body(contact, BLOCKERS):
             hits = [obj.name for obj in BLOCKER_OBJECTS if not clear_body(contact, make_tree([obj]))]
             raise ValueError(f"{name}: wall or facility intersects stair near {tuple(contact)}: {hits}")
-        if not clear_body(contact, crossing_stairs, 1.82):
+        if not clear_body(contact, crossing_stairs, 2.10):
             raise ValueError(f"{name}: another stair intersects this flight near {tuple(contact)}")
         if not clear_body(contact, STAIR_RAILS, 1.82):
             hits = [obj.name for obj in STAIR_OBJECTS
@@ -190,7 +195,7 @@ for i, connector in enumerate(layout["connectors"]):
         x, z, fraction = connector["bend"]
         points.insert(1, [x, round(a[1] + fraction * (b[1] - a[1]), 4), z])
     stairs_mesh = make_tree([bpy.data.objects[connector["id"]]], SUPPORT_MATERIALS)
-    adjacent = make_tree([obj for obj in STAIR_OBJECTS if obj.name != connector["id"]], SUPPORT_MATERIALS)
+    adjacent = make_tree([obj for obj in STAIR_OBJECTS if obj.name != connector["id"]], STAIR_STRUCTURE)
     quarter = connector["width"] / 4
     lanes = (quarter, -quarter) if kind == "escalator-pair" else (0, .55, -.55, 1.1, -1.1)
     errors = []
