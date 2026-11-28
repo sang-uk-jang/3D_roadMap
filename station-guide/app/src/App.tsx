@@ -279,6 +279,7 @@ export default function App() {
               visibleFloors={visibleFloors}
               departAt={departAt}
               view={route ? view : 'top'}
+              boardView={!!route && steps.length > 0 && stepIndex >= steps.length && !!boardingEnd}
               lang={lang}
             />
             <div className="floor-pick" role="group" aria-label={t(lang, 'floors')}>

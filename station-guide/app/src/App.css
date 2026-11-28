@@ -171,3 +171,5 @@ button.wide { width: 100%; }
 .picker-list li button:hover, .picker-list li button:focus { background: #eff6ff; }
 .picker-list small { color: #6b7280; font-size: 12px; }
 .picker-list .detail { padding: 8px 10px; margin: 0; }
+.picker-toggle { transition: transform 0.15s; }
+.picker-toggle.open { transform: rotate(180deg); }

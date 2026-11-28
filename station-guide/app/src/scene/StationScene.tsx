@@ -1,11 +1,11 @@
 import { Bounds, Html, Line, MapControls, useBounds } from '@react-three/drei'
-import { Canvas, useThree } from '@react-three/fiber'
-import { useEffect, useMemo } from 'react'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 import { nodePosition, type Vec3 } from '../station/graph'
 import type { Route } from '../station/route'
 import type { Area, AreaKind, NodeType, Station } from '../station/types'
-import { baseBoarding, doorsOf, nearestDoor, sidesFor } from '../station/doors'
+import { baseBoarding, doorsOf, nearestDoor, sideOf, sidesFor } from '../station/doors'
 import type { StationProfile } from '../stations/profile'
 import { ElevatorShaft, Escalator, ExitCanopy, FacilityPost, GateRow, PaidFence, PlatformDoors, Stairs, TicketMachines, Train, useElevatorShafts } from './Structures'
 
@@ -192,6 +192,94 @@ function FollowCam({ pts, prev }: { pts: Vec3[]; prev?: Vec3 | null }) {
   return null
 }
 
+/**
+ * 경로 위를 따라 흘러가는 화살표: 어느 쪽으로 가는지 한눈에 보이게 한다.
+ * 선마다 일정 간격(SPACING)으로 화살촉을 두고, 시간에 따라 진행 방향으로 밀어 준다.
+ */
+const SPACING = 4
+const SPEED = 3 // m/s
+function RouteArrows({ lines, color }: { lines: Vec3[][]; color: string }) {
+  const group = useRef<THREE.Group>(null)
+  // 선마다 누적 길이표
+  const paths = useMemo(
+    () =>
+      lines
+        .filter((pts) => pts.length > 1)
+        .map((pts) => {
+          const v = pts.map((p) => new THREE.Vector3(...p))
+          const cum = [0]
+          for (let i = 1; i < v.length; i++) cum.push(cum[i - 1] + v[i].distanceTo(v[i - 1]))
+          return { v, cum, length: cum.at(-1)! }
+        })
+        .filter((p) => p.length > 1),
+    [lines],
+  )
+  const count = paths.map((p) => Math.max(1, Math.floor(p.length / SPACING)))
+  const geometry = useMemo(() => {
+    // 바닥에 눕힌 납작한 꺾쇠(▲) 모양: 끝이 진행 방향(+z)
+    const shape = new THREE.Shape()
+    shape.moveTo(0, 0.75)
+    shape.lineTo(0.7, -0.35)
+    shape.lineTo(0, 0.05)
+    shape.lineTo(-0.7, -0.35)
+    shape.closePath()
+    const g = new THREE.ShapeGeometry(shape)
+    g.rotateX(Math.PI / 2) // (x, y) → (x, 0, y): 바닥에 눕고 끝이 +z
+    return g
+  }, [])
+  const up = useMemo(() => new THREE.Vector3(0, 1, 0), [])
+  useFrame(({ clock }) => {
+    const g = group.current
+    if (!g) return
+    let k = 0
+    const shift = (clock.getElapsedTime() * SPEED) % SPACING
+    paths.forEach((p, pi) => {
+      for (let n = 0; n < count[pi]; n++) {
+        const mesh = g.children[k++] as THREE.Mesh | undefined
+        if (!mesh) continue
+        const d = Math.min(p.length - 0.01, n * SPACING + shift)
+        let i = 1
+        while (i < p.cum.length - 1 && p.cum[i] < d) i++
+        const a = p.v[i - 1]
+        const b = p.v[i]
+        const t = (d - p.cum[i - 1]) / Math.max(1e-6, p.cum[i] - p.cum[i - 1])
+        mesh.position.copy(a).lerp(b, t)
+        mesh.position.y += 0.25
+        // 계단처럼 기울어진 구간에서도 화살촉이 뒤집히지 않도록 위쪽을 고정한 뒤 진행 방향을 본다
+        mesh.up.copy(up)
+        mesh.lookAt(mesh.position.clone().add(b.clone().sub(a)))
+      }
+    })
+  })
+  const total = count.reduce((a, b) => a + b, 0)
+  return (
+    <group ref={group}>
+      {Array.from({ length: total }, (_, i) => (
+        <mesh key={i} geometry={geometry} renderOrder={5}>
+          <meshBasicMaterial color={color} depthTest={false} transparent opacity={0.95} side={THREE.DoubleSide} />
+        </mesh>
+      ))}
+    </group>
+  )
+}
+
+/** 열차 탈 문 앞에서 선로(열차 옆면)를 바라보는 시점 */
+function SideCam({ door, trackSide }: { door: Vec3; trackSide: [number, number] }) {
+  const controls = useThree((s) => s.controls) as unknown as { target: THREE.Vector3; update: () => void } | null
+  const camera = useThree((s) => s.camera)
+  const key = `${door.join(',')}|${trackSide.join(',')}`
+  useEffect(() => {
+    if (!controls) return
+    const [tx, tz] = trackSide
+    // 승강장 안쪽 9m 뒤, 사람 눈보다 조금 높게(4m)에서 열차 쪽(선로 2.3m 안)을 본다
+    camera.position.set(door[0] - tx * 9, door[1] + 4, door[2] - tz * 9)
+    controls.target.set(door[0] + tx * 2.3, door[1] + 1.5, door[2] + tz * 2.3)
+    controls.update()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key, controls])
+  return null
+}
+
 export type SceneProps = {
   station: Station
   /** 역별 설정(엘리베이터 층 이름 등). 없으면 군자역 기본값 */
@@ -208,10 +296,12 @@ export type SceneProps = {
   view?: 'top' | 'front'
   /** 목적지 승강장 열차의 출발 시각(ms). 없으면 열차를 그리지 않는다 */
   departAt?: number | null
+  /** 안내가 끝나 타는 곳에 서 있을 때: 기다릴 문 앞에서 열차 옆면을 본다 */
+  boardView?: boolean
   lang: 'ko' | 'en'
 }
 
-export function StationScene({ station, profile, route, active, here, unavailable = [], visibleFloors, lang, departAt = null, view = 'top' }: SceneProps) {
+export function StationScene({ station, profile, route, active, here, unavailable = [], visibleFloors, lang, departAt = null, view = 'top', boardView = false }: SceneProps) {
   const down = new Set(unavailable)
   // 경로가 없을 때 처음 보여줄 범위: 역 중심부(군자역은 기존 값 유지)
   const home = useMemo(() => {
@@ -338,6 +428,12 @@ export function StationScene({ station, profile, route, active, here, unavailabl
   const routeStart = route?.nodeIds[0] ? baseBoarding(route.nodeIds[0]) : null
   const byId = useMemo(() => new Map(station.nodes.map((n) => [n.id, n])), [station])
   const waitDoor = routeEndId && byId.get(routeEndId)?.type === 'boarding' ? nearestDoor(routeEndId, byId.get(routeEndId)!.pos) : null
+  // 안내를 마치고 타는 곳에 서 있으면: 기다릴 문 앞에서 열차 옆면을 본다(전체로 줌 아웃하지 않게)
+  const endSide = routeEndId ? sideOf(routeEndId) : null
+  const sideCam =
+    boardView && waitDoor && endSide && routeEndId
+      ? { door: [waitDoor.pos[0], floorY.get(nodeFloor.get(routeEndId)!)!, waitDoor.pos[1]] as Vec3, trackSide: endSide.trackSide }
+      : null
   const sides = useMemo(() => sidesFor(station.id).filter((sd) => byId.has(sd.boarding)).map((sd) => ({ side: sd, doors: doorsOf(sd), node: byId.get(sd.boarding)! })), [byId, station.id])
   const herePos = here ? pos.get(here) ?? null : null
   const activeIds = active && route ? new Set(route.nodeIds.slice(active.from, active.to + 1)) : null
@@ -347,7 +443,8 @@ export function StationScene({ station, profile, route, active, here, unavailabl
       <color attach="background" args={['#f4f5f7']} />
       <ambientLight intensity={0.9} />
       <directionalLight position={[60, 120, 80]} intensity={1.3} />
-      {view === 'front' && activePts && activePts.length > 1 && <FollowCam pts={activePts} prev={active && routePoints && active.from > 0 ? routePoints[active.from - 1] : null} />}
+      {sideCam && <SideCam door={sideCam.door} trackSide={sideCam.trackSide} />}
+      {!sideCam && view === 'front' && activePts && activePts.length > 1 && <FollowCam pts={activePts} prev={active && routePoints && active.from > 0 ? routePoints[active.from - 1] : null} />}
       {/* 지도처럼: 한 손가락/왼쪽 끌기 = 이동, 두 손가락/오른쪽 끌기 = 회전, 휠/집기 = 확대 */}
       <MapControls makeDefault screenSpacePanning={false} maxPolarAngle={Math.PI / 2.1} />
 
@@ -357,7 +454,7 @@ export function StationScene({ station, profile, route, active, here, unavailabl
           <AreaSlab key={a.id} area={a} y={floorY.get(a.floor)!} highlight={false} solid={a.floor === lowestFloor} holes={holesByArea.get(a.id)} />
         ))}
       <Bounds margin={1.1}>
-        {!(view === 'front' && activePts && activePts.length > 1) && <FitTo home={home} points={activePts ?? routePoints ?? (herePos ? [herePos] : null)} />}
+        {!sideCam && !(view === 'front' && activePts && activePts.length > 1) && <FitTo home={home} points={activePts ?? routePoints ?? (herePos ? [herePos] : null)} />}
       </Bounds>
       {station.areas
         .filter((a) => a.kind !== 'ground' && show(a.floor))
@@ -500,9 +597,16 @@ export function StationScene({ station, profile, route, active, here, unavailabl
           {donePts && runs(0, active.from).map((pts, i) => <Line key={`d${i}`} points={pts} color="#9ca3af" lineWidth={4} />)}
           {nextPts && runs(active.to, route!.nodeIds.length - 1).map((pts, i) => <Line key={`n${i}`} points={pts} color="#fda4af" lineWidth={3} />)}
           {activePts && runs(active.from, active.to).map((pts, i) => <Line key={`a${i}`} points={pts} color="#e11d48" lineWidth={8} />)}
+          {/* 지금 단계에서 가는 방향을 흐르는 화살표로 */}
+          {activePts && <RouteArrows lines={runs(active.from, active.to)} color="#ffffff" />}
         </>
       ) : (
-        route && runs(0, route.nodeIds.length - 1).map((pts, i) => <Line key={`r${i}`} points={pts} color="#e11d48" lineWidth={6} />)
+        route && !boardView && (
+          <>
+            {runs(0, route.nodeIds.length - 1).map((pts, i) => <Line key={`r${i}`} points={pts} color="#e11d48" lineWidth={6} />)}
+            <RouteArrows lines={runs(0, route.nodeIds.length - 1)} color="#ffffff" />
+          </>
+        )
       )}
     </Canvas>
   )

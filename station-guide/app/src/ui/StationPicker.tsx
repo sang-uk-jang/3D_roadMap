@@ -57,8 +57,9 @@ export function StationPicker({ lang, station, destinations, value, placeholder,
         />
         <button
           type="button"
-          className="picker-toggle"
-          aria-label={lang === 'ko' ? '역 목록 열기' : 'Show stations'}
+          className={`picker-toggle${open && !exact ? ' open' : ''}`}
+          aria-label={open && !exact ? (lang === 'ko' ? '역 목록 닫기' : 'Hide stations') : lang === 'ko' ? '역 목록 열기' : 'Show stations'}
+          aria-expanded={open && !exact}
           // 입력칸 blur보다 먼저 처리되도록 mousedown에서 막는다
           onMouseDown={(e) => {
             e.preventDefault()
