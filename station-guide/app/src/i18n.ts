@@ -48,6 +48,7 @@ const S = {
   rideNext: { ko: '내린 뒤: {target}까지 약 {m}m', en: 'After you get off: about {m} m to {target}' },
   rideBack: { ko: '아직 안 탔어요', en: 'Not on the train yet' },
   offTrain: { ko: '열차에서 내리면', en: 'Off the train' },
+  whichStation: { ko: '지금 있는 역', en: 'Current station' },
   noTimetable: { ko: '이 노선은 시간표 자료가 없어요 (코레일 운영 구간).', en: 'No timetable data for this line (operated by Korail).' },
   arrived: { ko: '도착했어요', en: "I'm here" },
   back: { ko: '이전', en: 'Back' },

@@ -5,6 +5,7 @@ import { t, type Lang } from '../i18n'
 import { isInsideGates } from '../guide/steps'
 import type { FacilityStatus } from '../live'
 import { LiveStatus } from './LiveStatus'
+import { StationPicker } from './StationPicker'
 import { linkFor, onwardTargets } from '../journey/journey'
 import type { Station } from '../station/types'
 
@@ -105,18 +106,15 @@ export function PlanPanel({ station, profile, lang, error, onSubmit, located, on
       </div>
       {destKind === 'train' ? (
         <>
-          <input
-            list="stations"
+          <StationPicker
+            lang={lang}
+            station={station}
+            destinations={profile.destinations}
             value={query}
             placeholder={profile.placeholder[lang]}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && submit()}
+            onChange={setQuery}
+            onEnter={submit}
           />
-          <datalist id="stations">
-            {profile.destinations.map((d) => (
-              <option key={`${d.line}-${d.name.ko}`} value={d.name[lang]}>{lang === 'ko' ? d.name.en : d.name.ko}</option>
-            ))}
-          </datalist>
           {dest ? (
             <p className="dest-info">
               <span className={`line-badge l${dest.line}`}>{dest.line}</span> {dest.name[lang]} · {dest.stops} {t(lang, 'stops')}

@@ -154,3 +154,20 @@ button.wide { width: 100%; }
 .onward { margin-top: 8px; padding: 8px; border-radius: 8px; background: #f8fafc; border: 1px solid #e5e7eb; }
 .onward .chips { margin: 6px 0; }
 .onward .chip:not(.exit-chip) { font-size: 12px; }
+
+/* 지금 있는 역 바꾸기 */
+.station-switch select { font-size: 18px; font-weight: 700; padding: 2px 4px; margin: 2px 0; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; max-width: 220px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* 도착역 고르기(스크롤 목록) */
+.station-picker { position: relative; }
+.picker-input { display: flex; gap: 4px; }
+.picker-input input { flex: 1; min-width: 0; }
+.picker-toggle { width: 40px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; font-size: 16px; }
+.picker-list { margin-top: 4px; max-height: 280px; overflow-y: auto; overscroll-behavior: contain; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; box-shadow: 0 4px 12px rgb(0 0 0 / 0.08); }
+.picker-list section h3 { position: sticky; top: 0; margin: 0; padding: 6px 10px; font-size: 13px; background: #f3f4f6; display: flex; align-items: center; gap: 6px; }
+.picker-list ul { list-style: none; margin: 0; padding: 0; }
+.picker-list li button { width: 100%; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding: 8px 10px; border: 0; border-bottom: 1px solid #f1f5f9; background: none; text-align: left; font-size: 15px; }
+.picker-list li button:hover, .picker-list li button:focus { background: #eff6ff; }
+.picker-list small { color: #6b7280; font-size: 12px; }
+.picker-list .detail { padding: 8px 10px; margin: 0; }

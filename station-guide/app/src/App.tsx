@@ -152,6 +152,20 @@ export default function App() {
     save(null)
   }
 
+  const switchStation = (id: StationProfile['id']) => {
+    if (id === stationId) return
+    restart()
+    setLocated(null)
+    setLocating(false)
+    setError(null)
+    setStationId(id)
+    try {
+      history.replaceState(null, '', id === 'gunja' ? location.pathname : `?station=${id}`)
+    } catch {
+      /* 주소를 못 바꿔도 화면은 바뀐다 */
+    }
+  }
+
   const boarded = () => {
     if (!journey || !plan) return
     const j: Journey = { ...journey, phase: 'ride', boardedAt: Date.now() }
@@ -290,7 +304,19 @@ export default function App() {
       <aside className="panel">
         <header>
           <div>
-            <h1>{riding ? `${PROFILES[link.from].station.name[lang]} → ${link.stops.at(-1)![lang]}` : base.name[lang]}</h1>
+            {riding ? (
+              <h1>{`${PROFILES[link.from].station.name[lang]} → ${link.stops.at(-1)![lang]}`}</h1>
+            ) : (
+              // 지금 있는 역 바꾸기(안내 중이면 안내를 끝내고 바꾼다)
+              <label className="station-switch">
+                <span className="sr-only">{t(lang, 'whichStation')}</span>
+                <select value={stationId} onChange={(e) => switchStation(e.target.value as StationProfile['id'])} aria-label={t(lang, 'whichStation')}>
+                  {Object.values(PROFILES).map((p) => (
+                    <option key={p.id} value={p.id}>{p.station.name[lang]}</option>
+                  ))}
+                </select>
+              </label>
+            )}
             <p className="badge">{t(lang, 'approx')}</p>
           </div>
           <button className="lang" onClick={() => setLang(lang === 'ko' ? 'en' : 'ko')}>{lang === 'ko' ? 'EN' : '한국어'}</button>
