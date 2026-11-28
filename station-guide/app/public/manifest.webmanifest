@@ -1,0 +1,11 @@
+{
+  "name": "Gunja Station Guide · 군자역 길 안내",
+  "short_name": "Station Guide",
+  "description": "3D indoor wayfinding for Gunja Station (Seoul Line 5·7)",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f5f7",
+  "theme_color": "#111827",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

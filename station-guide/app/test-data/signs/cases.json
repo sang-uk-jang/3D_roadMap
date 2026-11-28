@@ -1,0 +1,121 @@
+{
+  "_note": "군자역 영상(gunja1/2.mp4)에서 뽑은 표지판 장면. crop은 사용자가 화면에서 표지판 부분을 지정했다고 가정한 영역 [x, y, w, h] (원본 1080x1920 기준). expect는 정답 위치로 인정할 노드 목록.",
+  "cases": [
+    {
+      "file": "t1_exit4_entrance.jpg",
+      "crop": [
+        0,
+        560,
+        1080,
+        240
+      ],
+      "sees": "4 출입구 Entrance",
+      "expect": [
+        "exit4",
+        "x4_bot",
+        "hall_e"
+      ]
+    },
+    {
+      "file": "t2_exit4_station.jpg",
+      "crop": [
+        0,
+        200,
+        1080,
+        140
+      ],
+      "sees": "544 725 군자 Gunja 4",
+      "expect": [
+        "exit4",
+        "x4_bot",
+        "hall_e"
+      ]
+    },
+    {
+      "file": "t3_exit4_night.jpg",
+      "crop": [
+        0,
+        60,
+        600,
+        120
+      ],
+      "sees": "군자 Gunja 4 (야간, 빛번짐)",
+      "expect": [
+        "exit4",
+        "x4_bot",
+        "hall_e"
+      ]
+    },
+    {
+      "file": "t4_b1_east_ceiling.jpg",
+      "crop": [
+        380,
+        330,
+        700,
+        110
+      ],
+      "sees": "← 5 (장한평/아차산) 화장실 … 7 ↱",
+      "expect": [
+        "hall_e",
+        "gate_e",
+        "link7",
+        "npass"
+      ]
+    },
+    {
+      "file": "t5_b1_line7_arrow.jpg",
+      "crop": [
+        0,
+        0,
+        330,
+        150
+      ],
+      "sees": "7 ↱",
+      "expect": [
+        "hall_e",
+        "link7",
+        "c7_free"
+      ]
+    },
+    {
+      "file": "t6_gate7.jpg",
+      "crop": [
+        380,
+        170,
+        700,
+        130
+      ],
+      "sees": "타는 곳 … 7",
+      "expect": [
+        "gate_7",
+        "c7_free"
+      ]
+    },
+    {
+      "file": "t7_exit34_pillar.jpg",
+      "crop": [
+        590,
+        100,
+        190,
+        500
+      ],
+      "sees": "3 4 나가는 곳",
+      "expect": [
+        "hall_e",
+        "x3_bot",
+        "x4_bot"
+      ]
+    },
+    {
+      "file": "t8_exit_ceiling_small.jpg",
+      "crop": [
+        170,
+        380,
+        600,
+        130
+      ],
+      "sees": "나가는 곳 … ↑ (작고 흐림)",
+      "expect": []
+    }
+  ]
+}

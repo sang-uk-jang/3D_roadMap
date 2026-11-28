@@ -1,0 +1,8 @@
+:root {
+  font-family: system-ui, -apple-system, 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  color: #111827;
+  background: #f4f5f7;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+button { cursor: pointer; border-radius: 6px; border: 1px solid #d1d5db; background: #fff; }

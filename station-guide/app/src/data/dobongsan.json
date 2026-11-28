@@ -1,0 +1,8485 @@
+{
+ "id": "dobongsan",
+ "name": {
+  "ko": "도봉산",
+  "en": "Dobongsan"
+ },
+ "note": "7호선: 서울교통공사 안내도(in_2712)·역사심도/건축/면적정보·편의시설 API 기준 근사. 1호선(코레일): 공공데이터 없음, 안내도 3D 그림만 보고 근사(승강장 1면, 210m 가정, 대합실 다리 높이 6.35m 가정, 에스컬레이터는 API에 없어 계단으로 표시).",
+ "sources": [
+  "서울교통공사 사이버스테이션 역 이용 및 비상대피 안내도 (in_2712.jpg)",
+  "서울교통공사_역사심도정보_20250814",
+  "서울교통공사_역사건축정보_20251231",
+  "서울교통공사_역사면적정보_20260831",
+  "공공데이터포털 서울교통공사_편의시설위치정보 API (stnNm=도봉산)",
+  "국가철도공단_서울교통공사_환승정보_20260630"
+ ],
+ "floors": [
+  {
+   "id": "F1",
+   "label": {
+    "ko": "지상1층 (7호선 대합실 · 1호선 승강장)",
+    "en": "1F (Line 7 concourse · Line 1 platform)"
+   },
+   "y": 0
+  },
+  {
+   "id": "F2",
+   "label": {
+    "ko": "지상2층 (7호선 승강장 · 1호선 대합실)",
+    "en": "2F (Line 7 platforms · Line 1 concourse)"
+   },
+   "y": 6.35
+  }
+ ],
+ "areas": [
+  {
+   "id": "p7n",
+   "floor": "F2",
+   "kind": "platform",
+   "label": {
+    "ko": "7호선 장암 방면 승강장",
+    "en": "Line 7 platform to Jangam"
+   },
+   "polygon": [
+    [
+     -82.5,
+     -11
+    ],
+    [
+     82.5,
+     -11
+    ],
+    [
+     82.5,
+     -4
+    ],
+    [
+     -82.5,
+     -4
+    ]
+   ],
+   "line": "7"
+  },
+  {
+   "id": "t7",
+   "floor": "F2",
+   "kind": "track",
+   "label": {
+    "ko": "7호선 선로",
+    "en": "Line 7 tracks"
+   },
+   "polygon": [
+    [
+     -82.5,
+     -4
+    ],
+    [
+     82.5,
+     -4
+    ],
+    [
+     82.5,
+     4
+    ],
+    [
+     -82.5,
+     4
+    ]
+   ]
+  },
+  {
+   "id": "p7s",
+   "floor": "F2",
+   "kind": "platform",
+   "label": {
+    "ko": "7호선 수락산 방면 승강장",
+    "en": "Line 7 platform to Suraksan"
+   },
+   "polygon": [
+    [
+     -82.5,
+     4
+    ],
+    [
+     82.5,
+     4
+    ],
+    [
+     82.5,
+     11
+    ],
+    [
+     -82.5,
+     11
+    ]
+   ],
+   "line": "7"
+  },
+  {
+   "id": "hall7",
+   "floor": "F1",
+   "kind": "concourse",
+   "label": {
+    "ko": "7호선 대합실 (2번 출구 쪽)",
+    "en": "Line 7 concourse (Exit 2 side)"
+   },
+   "polygon": [
+    [
+     16,
+     -11
+    ],
+    [
+     66,
+     -11
+    ],
+    [
+     66,
+     11
+    ],
+    [
+     16,
+     11
+    ]
+   ]
+  },
+  {
+   "id": "paid7w",
+   "floor": "F1",
+   "kind": "paid",
+   "label": {
+    "ko": "7호선 개찰구 안 (장암 쪽 · 1호선 갈아타는 곳)",
+    "en": "Line 7 paid area (Jangam side · transfer to Line 1)"
+   },
+   "polygon": [
+    [
+     -96,
+     -11
+    ],
+    [
+     16,
+     -11
+    ],
+    [
+     16,
+     11
+    ],
+    [
+     -96,
+     11
+    ]
+   ]
+  },
+  {
+   "id": "paid7e",
+   "floor": "F1",
+   "kind": "paid",
+   "label": {
+    "ko": "7호선 개찰구 안 (수락산 쪽)",
+    "en": "Line 7 paid area (Suraksan side)"
+   },
+   "polygon": [
+    [
+     66,
+     -11
+    ],
+    [
+     90,
+     -11
+    ],
+    [
+     90,
+     11
+    ],
+    [
+     66,
+     11
+    ]
+   ]
+  },
+  {
+   "id": "lobby11",
+   "floor": "F1",
+   "kind": "concourse",
+   "label": {
+    "ko": "1-1번 출구 앞 대합실",
+    "en": "Exit 1-1 hall"
+   },
+   "polygon": [
+    [
+     -114,
+     -11
+    ],
+    [
+     -96,
+     -11
+    ],
+    [
+     -96,
+     11
+    ],
+    [
+     -114,
+     11
+    ]
+   ]
+  },
+  {
+   "id": "plaza2",
+   "floor": "F1",
+   "kind": "concourse",
+   "label": {
+    "ko": "2번 출구 앞 (1호선 대합실 아래)",
+    "en": "Exit 2 forecourt (under Line 1 concourse)"
+   },
+   "polygon": [
+    [
+     16,
+     11
+    ],
+    [
+     66,
+     11
+    ],
+    [
+     66,
+     22
+    ],
+    [
+     16,
+     22
+    ]
+   ]
+  },
+  {
+   "id": "street11",
+   "floor": "F2",
+   "kind": "ground",
+   "label": {
+    "ko": "1-1번 출구 앞 길",
+    "en": "Street at Exit 1-1"
+   },
+   "polygon": [
+    [
+     -120,
+     -12
+    ],
+    [
+     -97,
+     -12
+    ],
+    [
+     -97,
+     10
+    ],
+    [
+     -120,
+     10
+    ]
+   ]
+  },
+  {
+   "id": "p1",
+   "floor": "F1",
+   "kind": "platform",
+   "label": {
+    "ko": "1호선 승강장",
+    "en": "Line 1 platform"
+   },
+   "polygon": [
+    [
+     -150,
+     46
+    ],
+    [
+     60,
+     46
+    ],
+    [
+     60,
+     56
+    ],
+    [
+     -150,
+     56
+    ]
+   ],
+   "line": "1"
+  },
+  {
+   "id": "t1n",
+   "floor": "F1",
+   "kind": "track",
+   "label": {
+    "ko": "1호선 선로 (도봉 방면)",
+    "en": "Line 1 track (to Dobong)"
+   },
+   "polygon": [
+    [
+     -150,
+     41
+    ],
+    [
+     60,
+     41
+    ],
+    [
+     60,
+     46
+    ],
+    [
+     -150,
+     46
+    ]
+   ]
+  },
+  {
+   "id": "t1s",
+   "floor": "F1",
+   "kind": "track",
+   "label": {
+    "ko": "1호선 선로 (망월사 방면)",
+    "en": "Line 1 track (to Mangwolsa)"
+   },
+   "polygon": [
+    [
+     -150,
+     56
+    ],
+    [
+     60,
+     56
+    ],
+    [
+     60,
+     61
+    ],
+    [
+     -150,
+     61
+    ]
+   ]
+  },
+  {
+   "id": "xfer",
+   "floor": "F1",
+   "kind": "paid",
+   "label": {
+    "ko": "1호선 갈아타는 통로",
+    "en": "Transfer passage to Line 1"
+   },
+   "polygon": [
+    [
+     -96,
+     11
+    ],
+    [
+     -88,
+     11
+    ],
+    [
+     -88,
+     30
+    ],
+    [
+     -96,
+     30
+    ]
+   ]
+  },
+  {
+   "id": "xfer2",
+   "floor": "F1",
+   "kind": "paid",
+   "label": {
+    "ko": "1호선 갈아타는 통로",
+    "en": "Transfer passage to Line 1"
+   },
+   "polygon": [
+    [
+     -160,
+     30
+    ],
+    [
+     -88,
+     30
+    ],
+    [
+     -88,
+     38
+    ],
+    [
+     -160,
+     38
+    ]
+   ]
+  },
+  {
+   "id": "xfer3",
+   "floor": "F1",
+   "kind": "paid",
+   "label": {
+    "ko": "1호선 갈아타는 통로 (승강장 끝)",
+    "en": "Transfer passage (platform end)"
+   },
+   "polygon": [
+    [
+     -160,
+     38
+    ],
+    [
+     -150,
+     38
+    ],
+    [
+     -150,
+     51
+    ],
+    [
+     -160,
+     51
+    ]
+   ]
+  },
+  {
+   "id": "c1_free",
+   "floor": "F2",
+   "kind": "concourse",
+   "label": {
+    "ko": "1호선 대합실 (개찰구 밖, 1·2·3번 출구 통로)",
+    "en": "Line 1 concourse (unpaid, Exits 1–3)"
+   },
+   "polygon": [
+    [
+     31,
+     12
+    ],
+    [
+     44,
+     12
+    ],
+    [
+     44,
+     72
+    ],
+    [
+     31,
+     72
+    ]
+   ]
+  },
+  {
+   "id": "c1_paid",
+   "floor": "F2",
+   "kind": "paid",
+   "label": {
+    "ko": "1호선 개찰구 안",
+    "en": "Line 1 paid area"
+   },
+   "polygon": [
+    [
+     20,
+     28
+    ],
+    [
+     31,
+     28
+    ],
+    [
+     31,
+     68
+    ],
+    [
+     20,
+     68
+    ]
+   ]
+  }
+ ],
+ "nodes": [
+  {
+   "id": "st7nw_top",
+   "type": "landing",
+   "floor": "F2",
+   "pos": [
+    -76,
+    -7.5
+   ],
+   "label": {
+    "ko": "장암 방면 승강장 계단 (장암 쪽 끝) (위)",
+    "en": "Stairs, Jangam-bound platform (west end) (top)"
+   }
+  },
+  {
+   "id": "st7nw_bot",
+   "type": "landing",
+   "floor": "F1",
+   "pos": [
+    -86.79,
+    -7.5
+   ],
+   "label": {
+    "ko": "장암 방면 승강장 계단 (장암 쪽 끝) (아래)",
+    "en": "Stairs, Jangam-bound platform (west end) (bottom)"
+   }
+  },
+  {
+   "id": "st7sw_top",
+   "type": "landing",
+   "floor": "F2",
+   "pos": [
+    -76,
+    7.5
+   ],
+   "label": {
+    "ko": "수락산 방면 승강장 계단 (장암 쪽 끝) (위)",
+    "en": "Stairs, Suraksan-bound platform (west end) (top)"
+   }
+  },
+  {
+   "id": "st7sw_bot",
+   "type": "landing",
+   "floor": "F1",
+   "pos": [
+    -86.79,
+    7.5
+   ],
+   "label": {
+    "ko": "수락산 방면 승강장 계단 (장암 쪽 끝) (아래)",
+    "en": "Stairs, Suraksan-bound platform (west end) (bottom)"
+   }
+  },
+  {
+   "id": "st7ne_top",
+   "type": "landing",
+   "floor": "F2",
+   "pos": [
+    76,
+    -7.5
+   ],
+   "label": {
+    "ko": "장암 방면 승강장 계단 (수락산 쪽 끝) (위)",
+    "en": "Stairs, Jangam-bound platform (east end) (top)"
+   }
+  },
+  {
+   "id": "st7ne_bot",
+   "type": "landing",
+   "floor": "F1",
+   "pos": [
+    86.8,
+    -7.5
+   ],
+   "label": {
+    "ko": "장암 방면 승강장 계단 (수락산 쪽 끝) (아래)",
+    "en": "Stairs, Jangam-bound platform (east end) (bottom)"
+   }
+  },
+  {
+   "id": "st7se_top",
+   "type": "landing",
+   "floor": "F2",
+   "pos": [
+    76,
+    7.5
+   ],
+   "label": {
+    "ko": "수락산 방면 승강장 계단 (수락산 쪽 끝) (위)",
+    "en": "Stairs, Suraksan-bound platform (east end) (top)"
+   }
+  },
+  {
+   "id": "st7se_bot",
+   "type": "landing",
+   "floor": "F1",
+   "pos": [
+    86.8,
+    7.5
+   ],
+   "label": {
+    "ko": "수락산 방면 승강장 계단 (수락산 쪽 끝) (아래)",
+    "en": "Stairs, Suraksan-bound platform (east end) (bottom)"
+   }
+  },
+  {
+   "id": "el3_F1",
+   "type": "elevator",
+   "floor": "F1",
+   "pos": [
+    -22.5,
+    -7.5
+   ],
+   "label": {
+    "ko": "엘리베이터 (내부3, 장암 방면 3-4)",
+    "en": "Elevator 3 (Jangam-bound, door 3-4)"
+   },
+   "facilityRef": "1311282",
+   "press": "1"
+  },
+  {
+   "id": "el3_F2",
+   "type": "elevator",
+   "floor": "F2",
+   "pos": [
+    -22.5,
+    -7.5
+   ],
+   "label": {
+    "ko": "엘리베이터 (내부3, 장암 방면 3-4)",
+    "en": "Elevator 3 (Jangam-bound, door 3-4)"
+   },
+   "facilityRef": "1311282",
+   "press": "2"
+  },
+  {
+   "id": "el4_F1",
+   "type": "elevator",
+   "floor": "F1",
+   "pos": [
+    12.5,
+    7.5
+   ],
+   "label": {
+    "ko": "엘리베이터 (내부4, 수락산 방면 4-2)",
+    "en": "Elevator 4 (Suraksan-bound, door 4-2)"
+   },
+   "facilityRef": "1311283",
+   "press": "1"
+  },
+  {
+   "id": "el4_F2",
+   "type": "elevator",
+   "floor": "F2",
+   "pos": [
+    12.5,
+    7.5
+   ],
+   "label": {
+    "ko": "엘리베이터 (내부4, 수락산 방면 4-2)",
+    "en": "Elevator 4 (Suraksan-bound, door 4-2)"
+   },
+   "facilityRef": "1311283",
+   "press": "2"
+  },
+  {
+   "id": "elx1_F1",
+   "type": "elevator",
+   "floor": "F1",
+   "pos": [
+    47.5,
+    -7.5
+   ],
+   "label": {
+    "ko": "엘리베이터 (외부1, 장암 방면 7-2)",
+    "en": "Elevator (Exit 2 side, Jangam-bound 7-2)"
+   },
+   "facilityRef": "1311280",
+   "press": "1"
+  },
+  {
+   "id": "elx1_F2",
+   "type": "elevator",
+   "floor": "F2",
+   "pos": [
+    47.5,
+    -7.5
+   ],
+   "label": {
+    "ko": "엘리베이터 (외부1, 장암 방면 7-2)",
+    "en": "Elevator (Exit 2 side, Jangam-bound 7-2)"
+   },
+   "facilityRef": "1311280",
+   "press": "2"
+  },
+  {
+   "id": "elx2_F1",
+   "type": "elevator",
+   "floor": "F1",
+   "pos": [
+    62.5,
+    7.5
+   ],
+   "label": {
+    "ko": "엘리베이터 (외부2, 수락산 방면 1-4)",
+    "en": "Elevator (Exit 2 side, Suraksan-bound 1-4)"
+   },
+   "facilityRef": "1311281",
+   "press": "1"
+  },
+  {
+   "id": "elx2_F2",
+   "type": "elevator",
+   "floor": "F2",
+   "pos": [
+    62.5,
+    7.5
+   ],
+   "label": {
+    "ko": "엘리베이터 (외부2, 수락산 방면 1-4)",
+    "en": "Elevator (Exit 2 side, Suraksan-bound 1-4)"
+   },
+   "facilityRef": "1311281",
+   "press": "2"
+  },
+  {
+   "id": "gate_lift1",
+   "type": "gate",
+   "floor": "F1",
+   "pos": [
+    47.5,
+    -3
+   ],
+   "label": {
+    "ko": "엘리베이터 앞 개찰구 (장암 방면)",
+    "en": "Gate at elevator (Jangam-bound)"
+   }
+  },
+  {
+   "id": "gate_lift2",
+   "type": "gate",
+   "floor": "F1",
+   "pos": [
+    62.5,
+    3
+   ],
+   "label": {
+    "ko": "엘리베이터 앞 개찰구 (수락산 방면)",
+    "en": "Gate at elevator (Suraksan-bound)"
+   }
+  },
+  {
+   "id": "gate_7w",
+   "type": "gate",
+   "floor": "F1",
+   "pos": [
+    16,
+    0
+   ],
+   "label": {
+    "ko": "7호선 개찰구 (장암 쪽 · 1호선 갈아타는 곳 방향)",
+    "en": "Line 7 gates (Jangam side)"
+   }
+  },
+  {
+   "id": "gate_7e",
+   "type": "gate",
+   "floor": "F1",
+   "pos": [
+    66,
+    0
+   ],
+   "label": {
+    "ko": "7호선 개찰구 (수락산 쪽)",
+    "en": "Line 7 gates (Suraksan side)"
+   }
+  },
+  {
+   "id": "gate_11",
+   "type": "gate",
+   "floor": "F1",
+   "pos": [
+    -96,
+    -2
+   ],
+   "label": {
+    "ko": "7호선 개찰구 (1-1번 출구 쪽)",
+    "en": "Line 7 gates (Exit 1-1)"
+   }
+  },
+  {
+   "id": "ticket_7e",
+   "type": "ticket",
+   "floor": "F1",
+   "pos": [
+    40,
+    6
+   ],
+   "label": {
+    "ko": "승차권 발매기 · 교통카드 충전기 (2번 출구 쪽)",
+    "en": "Ticket machine (Exit 2 side)"
+   }
+  },
+  {
+   "id": "ticket_11",
+   "type": "ticket",
+   "floor": "F1",
+   "pos": [
+    -102,
+    8
+   ],
+   "label": {
+    "ko": "승차권 발매기 · 교통카드 충전기 (1-1번 출구 쪽)",
+    "en": "Ticket machine (Exit 1-1 side)"
+   }
+  },
+  {
+   "id": "toilet_7e",
+   "type": "toilet",
+   "floor": "F1",
+   "pos": [
+    32,
+    -8
+   ],
+   "label": {
+    "ko": "화장실 (2번 출구 쪽)",
+    "en": "Toilet (Exit 2 side)"
+   }
+  },
+  {
+   "id": "toilet_7w",
+   "type": "toilet",
+   "floor": "F1",
+   "pos": [
+    -50,
+    0
+   ],
+   "label": {
+    "ko": "화장실 (개찰구 안, 장암 쪽)",
+    "en": "Toilet (paid area, Jangam side)"
+   }
+  },
+  {
+   "id": "info7",
+   "type": "info",
+   "floor": "F1",
+   "pos": [
+    72,
+    0
+   ],
+   "label": {
+    "ko": "7호선 고객안전실",
+    "en": "Line 7 information"
+   }
+  },
+  {
+   "id": "exit1-1",
+   "type": "exit",
+   "floor": "F2",
+   "pos": [
+    -110.8,
+    -6
+   ],
+   "label": {
+    "ko": "1-1번 출구",
+    "en": "Exit 1-1"
+   }
+  },
+  {
+   "id": "x11_bot",
+   "type": "landing",
+   "floor": "F1",
+   "pos": [
+    -100,
+    -6
+   ],
+   "label": {
+    "ko": "1-1번 출구 계단 (아래)",
+    "en": "Exit 1-1 stairs (bottom)"
+   }
+  },
+  {
+   "id": "el_x11_F1",
+   "type": "elevator",
+   "floor": "F1",
+   "pos": [
+    -112.5,
+    4
+   ],
+   "label": {
+    "ko": "1-1번 출구 엘리베이터 (외부5)",
+    "en": "Exit 1-1 elevator"
+   },
+   "facilityRef": "1620269",
+   "press": "B1"
+  },
+  {
+   "id": "el_x11_F2",
+   "type": "elevator",
+   "floor": "F2",
+   "pos": [
+    -112.5,
+    4
+   ],
+   "label": {
+    "ko": "1-1번 출구 엘리베이터 (외부5)",
+    "en": "Exit 1-1 elevator"
+   },
+   "facilityRef": "1620269",
+   "press": "1"
+  },
+  {
+   "id": "xfer_p1",
+   "type": "junction",
+   "floor": "F1",
+   "pos": [
+    -150,
+    48.5
+   ],
+   "label": {
+    "ko": "1호선 승강장 망월사 쪽 끝",
+    "en": "Line 1 platform (Mangwolsa end)"
+   }
+  },
+  {
+   "id": "gate_1",
+   "type": "gate",
+   "floor": "F2",
+   "pos": [
+    31,
+    48
+   ],
+   "label": {
+    "ko": "1호선 개찰구",
+    "en": "Line 1 gates"
+   }
+  },
+  {
+   "id": "ticket_1",
+   "type": "ticket",
+   "floor": "F2",
+   "pos": [
+    40,
+    44
+   ],
+   "label": {
+    "ko": "승차권 발매기 (1호선 대합실)",
+    "en": "Ticket machine (Line 1 concourse)"
+   }
+  },
+  {
+   "id": "st1a_top",
+   "type": "landing",
+   "floor": "F2",
+   "pos": [
+    24,
+    49
+   ],
+   "label": {
+    "ko": "1호선 승강장 계단 (도봉 방면 쪽) (위)",
+    "en": "Stairs to Line 1 platform (north) (top)"
+   }
+  },
+  {
+   "id": "st1a_bot",
+   "type": "landing",
+   "floor": "F1",
+   "pos": [
+    13.21,
+    49
+   ],
+   "label": {
+    "ko": "1호선 승강장 계단 (도봉 방면 쪽) (아래)",
+    "en": "Stairs to Line 1 platform (north) (bottom)"
+   }
+  },
+  {
+   "id": "st1b_top",
+   "type": "landing",
+   "floor": "F2",
+   "pos": [
+    24,
+    53
+   ],
+   "label": {
+    "ko": "1호선 승강장 계단 (망월사 방면 쪽) (위)",
+    "en": "Stairs to Line 1 platform (south) (top)"
+   }
+  },
+  {
+   "id": "st1b_bot",
+   "type": "landing",
+   "floor": "F1",
+   "pos": [
+    13.21,
+    53
+   ],
+   "label": {
+    "ko": "1호선 승강장 계단 (망월사 방면 쪽) (아래)",
+    "en": "Stairs to Line 1 platform (south) (bottom)"
+   }
+  },
+  {
+   "id": "el1_F1",
+   "type": "elevator",
+   "floor": "F1",
+   "pos": [
+    28,
+    51
+   ],
+   "label": {
+    "ko": "1호선 승강장 엘리베이터",
+    "en": "Line 1 platform elevator"
+   },
+   "press": "1"
+  },
+  {
+   "id": "el1_F2",
+   "type": "elevator",
+   "floor": "F2",
+   "pos": [
+    28,
+    51
+   ],
+   "label": {
+    "ko": "1호선 승강장 엘리베이터",
+    "en": "Line 1 platform elevator"
+   },
+   "press": "2"
+  },
+  {
+   "id": "x1_top",
+   "type": "landing",
+   "floor": "F2",
+   "pos": [
+    37,
+    70
+   ],
+   "label": {
+    "ko": "1번 출구 계단 (위)",
+    "en": "Exit 1 stairs (top)"
+   }
+  },
+  {
+   "id": "x1_bot",
+   "type": "landing",
+   "floor": "F1",
+   "pos": [
+    37,
+    80.8
+   ],
+   "label": {
+    "ko": "1번 출구 계단 (아래)",
+    "en": "Exit 1 stairs (bottom)"
+   }
+  },
+  {
+   "id": "exit1",
+   "type": "exit",
+   "floor": "F1",
+   "pos": [
+    39.5,
+    86
+   ],
+   "label": {
+    "ko": "1번 출구",
+    "en": "Exit 1"
+   }
+  },
+  {
+   "id": "el_x1_F1",
+   "type": "elevator",
+   "floor": "F1",
+   "pos": [
+    42.5,
+    70.5
+   ],
+   "label": {
+    "ko": "1번 출구 엘리베이터",
+    "en": "Exit 1 elevator"
+   },
+   "press": "1"
+  },
+  {
+   "id": "el_x1_F2",
+   "type": "elevator",
+   "floor": "F2",
+   "pos": [
+    42.5,
+    70.5
+   ],
+   "label": {
+    "ko": "1번 출구 엘리베이터",
+    "en": "Exit 1 elevator"
+   },
+   "press": "2"
+  },
+  {
+   "id": "x3_top",
+   "type": "landing",
+   "floor": "F2",
+   "pos": [
+    43,
+    26
+   ],
+   "label": {
+    "ko": "3번 출구 계단 (위)",
+    "en": "Exit 3 stairs (top)"
+   }
+  },
+  {
+   "id": "x3_bot",
+   "type": "landing",
+   "floor": "F1",
+   "pos": [
+    53.8,
+    26
+   ],
+   "label": {
+    "ko": "3번 출구 계단 (아래)",
+    "en": "Exit 3 stairs (bottom)"
+   }
+  },
+  {
+   "id": "exit3",
+   "type": "exit",
+   "floor": "F1",
+   "pos": [
+    58,
+    30.5
+   ],
+   "label": {
+    "ko": "3번 출구",
+    "en": "Exit 3"
+   }
+  },
+  {
+   "id": "el_x3_F1",
+   "type": "elevator",
+   "floor": "F1",
+   "pos": [
+    41,
+    31
+   ],
+   "label": {
+    "ko": "3번 출구 엘리베이터",
+    "en": "Exit 3 elevator"
+   },
+   "press": "1"
+  },
+  {
+   "id": "el_x3_F2",
+   "type": "elevator",
+   "floor": "F2",
+   "pos": [
+    41,
+    31
+   ],
+   "label": {
+    "ko": "3번 출구 엘리베이터",
+    "en": "Exit 3 elevator"
+   },
+   "press": "2"
+  },
+  {
+   "id": "st2_top",
+   "type": "landing",
+   "floor": "F2",
+   "pos": [
+    40,
+    17
+   ],
+   "label": {
+    "ko": "1호선 대합실 계단 (2번 출구 쪽) (위)",
+    "en": "Stairs to Line 1 concourse (Exit 2) (top)"
+   }
+  },
+  {
+   "id": "st2_bot",
+   "type": "landing",
+   "floor": "F1",
+   "pos": [
+    50.8,
+    17
+   ],
+   "label": {
+    "ko": "1호선 대합실 계단 (2번 출구 쪽) (아래)",
+    "en": "Stairs to Line 1 concourse (Exit 2) (bottom)"
+   }
+  },
+  {
+   "id": "el_2_F1",
+   "type": "elevator",
+   "floor": "F1",
+   "pos": [
+    34,
+    14
+   ],
+   "label": {
+    "ko": "1호선 대합실 엘리베이터 (2번 출구 쪽)",
+    "en": "Line 1 concourse elevator (Exit 2)"
+   },
+   "press": "1"
+  },
+  {
+   "id": "el_2_F2",
+   "type": "elevator",
+   "floor": "F2",
+   "pos": [
+    34,
+    14
+   ],
+   "label": {
+    "ko": "1호선 대합실 엘리베이터 (2번 출구 쪽)",
+    "en": "Line 1 concourse elevator (Exit 2)"
+   },
+   "press": "2"
+  },
+  {
+   "id": "exit2",
+   "type": "exit",
+   "floor": "F1",
+   "pos": [
+    24,
+    20
+   ],
+   "label": {
+    "ko": "2번 출구",
+    "en": "Exit 2"
+   }
+  },
+  {
+   "id": "board7_jangam",
+   "type": "boarding",
+   "floor": "F2",
+   "pos": [
+    0,
+    -9
+   ],
+   "label": {
+    "ko": "7호선 장암 방면 타는 곳",
+    "en": "Line 7 to Jangam"
+   },
+   "line": "7",
+   "direction": {
+    "ko": "장암 방면",
+    "en": "to Jangam"
+   }
+  },
+  {
+   "id": "board7_suraksan",
+   "type": "boarding",
+   "floor": "F2",
+   "pos": [
+    0,
+    9
+   ],
+   "label": {
+    "ko": "7호선 수락산 방면 타는 곳",
+    "en": "Line 7 to Suraksan"
+   },
+   "line": "7",
+   "direction": {
+    "ko": "수락산 방면",
+    "en": "to Suraksan"
+   }
+  },
+  {
+   "id": "board1_dobong",
+   "type": "boarding",
+   "floor": "F1",
+   "pos": [
+    -70,
+    48
+   ],
+   "label": {
+    "ko": "1호선 도봉 방면 타는 곳",
+    "en": "Line 1 to Dobong"
+   },
+   "line": "1",
+   "direction": {
+    "ko": "도봉 방면",
+    "en": "to Dobong"
+   }
+  },
+  {
+   "id": "board1_mangwolsa",
+   "type": "boarding",
+   "floor": "F1",
+   "pos": [
+    -70,
+    54
+   ],
+   "label": {
+    "ko": "1호선 망월사 방면 타는 곳",
+    "en": "Line 1 to Mangwolsa"
+   },
+   "line": "1",
+   "direction": {
+    "ko": "망월사 방면",
+    "en": "to Mangwolsa"
+   }
+  },
+  {
+   "id": "p7n_mid",
+   "type": "junction",
+   "floor": "F2",
+   "pos": [
+    0,
+    -6.5
+   ],
+   "label": {
+    "ko": "7호선 장암 방면 승강장 가운데",
+    "en": "Middle of Jangam-bound platform"
+   }
+  },
+  {
+   "id": "p7s_mid",
+   "type": "junction",
+   "floor": "F2",
+   "pos": [
+    0,
+    6.5
+   ],
+   "label": {
+    "ko": "7호선 수락산 방면 승강장 가운데",
+    "en": "Middle of Suraksan-bound platform"
+   }
+  },
+  {
+   "id": "p1_mid",
+   "type": "junction",
+   "floor": "F1",
+   "pos": [
+    -70,
+    51
+   ],
+   "label": {
+    "ko": "1호선 승강장 가운데",
+    "en": "Middle of Line 1 platform"
+   }
+  },
+  {
+   "id": "p7w_mid",
+   "type": "junction",
+   "floor": "F1",
+   "pos": [
+    -40,
+    0
+   ],
+   "label": {
+    "ko": "7호선 개찰구 안 대합실 가운데",
+    "en": "Line 7 paid concourse (middle)"
+   }
+  },
+  {
+   "id": "sign_map_p7",
+   "type": "sign",
+   "floor": "F2",
+   "pos": [
+    -30,
+    -9.5
+   ],
+   "label": {
+    "ko": "역 이용 및 비상대피 안내도 (현위치)",
+    "en": "Station & evacuation map (You are here)"
+   }
+  },
+  {
+   "id": "wp_F2_0_1",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    -75.4,
+    -9.9
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_0_3",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    -75.4,
+    -5.1
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_1_1",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    -75.4,
+    5.1
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_1_3",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    -75.4,
+    9.9
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_2_0",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    75.4,
+    -9.9
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_2_2",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    75.4,
+    -5.1
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_3_0",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    75.4,
+    5.1
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_3_2",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    75.4,
+    9.9
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_5_1",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    24.6,
+    46.6
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_5_3",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    24.6,
+    51.4
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_6_1",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    24.6,
+    50.6
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_6_3",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    24.6,
+    55.4
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_7_0",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    34.6,
+    69.4
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_7_1",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    39.4,
+    69.4
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_8_0",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    42.4,
+    23.6
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_8_2",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    42.4,
+    28.4
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_9_0",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    39.4,
+    14.6
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_9_2",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    39.4,
+    19.4
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_10_0",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    -24.5,
+    -9.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_10_1",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    -20.5,
+    -9.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_10_2",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    -24.5,
+    -5.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_10_3",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    -20.5,
+    -5.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_11_0",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    10.5,
+    5.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_11_1",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    14.5,
+    5.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_11_2",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    10.5,
+    9.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_11_3",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    14.5,
+    9.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_12_0",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    45.5,
+    -9.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_12_1",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    49.5,
+    -9.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_12_2",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    45.5,
+    -5.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_12_3",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    49.5,
+    -5.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_13_0",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    60.5,
+    5.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_13_1",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    64.5,
+    5.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_13_2",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    60.5,
+    9.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_13_3",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    64.5,
+    9.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_15_0",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    26,
+    49
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_15_1",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    30,
+    49
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_15_2",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    26,
+    53
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_15_3",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    30,
+    53
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_16_0",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    40.5,
+    68.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_17_0",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    39,
+    29
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_17_1",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    43,
+    29
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_17_2",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    39,
+    33
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_17_3",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    43,
+    33
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_18_2",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    32,
+    16
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F2_18_3",
+   "type": "waypoint",
+   "floor": "F2",
+   "pos": [
+    36,
+    16
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_0_0",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    -87.39,
+    -9.9
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_0_1",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    -75.4,
+    -9.9
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_0_2",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    -87.39,
+    -5.1
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_0_3",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    -75.4,
+    -5.1
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_1_0",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    -87.39,
+    5.1
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_1_1",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    -75.4,
+    5.1
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_1_2",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    -87.39,
+    9.9
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_1_3",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    -75.4,
+    9.9
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_2_0",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    75.4,
+    -9.9
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_2_1",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    87.4,
+    -9.9
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_2_2",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    75.4,
+    -5.1
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_2_3",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    87.4,
+    -5.1
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_3_0",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    75.4,
+    5.1
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_3_1",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    87.4,
+    5.1
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_3_2",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    75.4,
+    9.9
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_3_3",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    87.4,
+    9.9
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_4_0",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    -111.4,
+    -8.4
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_4_1",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    -99.4,
+    -8.4
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_4_2",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    -111.4,
+    -3.6
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_4_3",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    -99.4,
+    -3.6
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_5_0",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    12.61,
+    46.6
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_5_1",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    24.6,
+    46.6
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_5_2",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    12.61,
+    51.4
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_5_3",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    24.6,
+    51.4
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_6_0",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    12.61,
+    50.6
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_6_1",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    24.6,
+    50.6
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_6_2",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    12.61,
+    55.4
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_6_3",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    24.6,
+    55.4
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_9_0",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    39.4,
+    14.6
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_9_1",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    51.4,
+    14.6
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_9_2",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    39.4,
+    19.4
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_9_3",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    51.4,
+    19.4
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_10_0",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    -24.5,
+    -9.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_10_1",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    -20.5,
+    -9.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_10_2",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    -24.5,
+    -5.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_10_3",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    -20.5,
+    -5.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_11_0",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    10.5,
+    5.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_11_1",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    14.5,
+    5.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_11_2",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    10.5,
+    9.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_11_3",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    14.5,
+    9.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_12_0",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    45.5,
+    -9.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_12_1",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    49.5,
+    -9.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_12_2",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    45.5,
+    -5.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_12_3",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    49.5,
+    -5.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_13_0",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    60.5,
+    5.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_13_1",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    64.5,
+    5.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_13_2",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    60.5,
+    9.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_13_3",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    64.5,
+    9.5
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_14_1",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    -110.5,
+    2
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_14_3",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    -110.5,
+    6
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_15_0",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    26,
+    49
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_15_1",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    30,
+    49
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_15_2",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    26,
+    53
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_15_3",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    30,
+    53
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_18_0",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    32,
+    12
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_18_1",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    36,
+    12
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_18_2",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    32,
+    16
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "wp_F1_18_3",
+   "type": "waypoint",
+   "floor": "F1",
+   "pos": [
+    36,
+    16
+   ],
+   "label": {
+    "ko": "통로",
+    "en": "Walkway"
+   }
+  },
+  {
+   "id": "portal_hall7_plaza2_0",
+   "type": "junction",
+   "floor": "F1",
+   "pos": [
+    17.5,
+    11
+   ],
+   "label": {
+    "ko": "2번 출구 앞 (1호선 대합실 아래) 입구",
+    "en": "Entrance to Exit 2 forecourt (under Line 1 concourse)"
+   }
+  },
+  {
+   "id": "portal_hall7_plaza2_1",
+   "type": "junction",
+   "floor": "F1",
+   "pos": [
+    41,
+    11
+   ],
+   "label": {
+    "ko": "2번 출구 앞 (1호선 대합실 아래) 입구",
+    "en": "Entrance to Exit 2 forecourt (under Line 1 concourse)"
+   }
+  },
+  {
+   "id": "portal_hall7_plaza2_2",
+   "type": "junction",
+   "floor": "F1",
+   "pos": [
+    64.5,
+    11
+   ],
+   "label": {
+    "ko": "2번 출구 앞 (1호선 대합실 아래) 입구",
+    "en": "Entrance to Exit 2 forecourt (under Line 1 concourse)"
+   }
+  },
+  {
+   "id": "portal_paid7w_xfer",
+   "type": "junction",
+   "floor": "F1",
+   "pos": [
+    -92,
+    11
+   ],
+   "label": {
+    "ko": "1호선 갈아타는 통로 입구",
+    "en": "Entrance to Transfer passage to Line 1"
+   }
+  },
+  {
+   "id": "portal_xfer_xfer2",
+   "type": "junction",
+   "floor": "F1",
+   "pos": [
+    -92,
+    30
+   ],
+   "label": {
+    "ko": "1호선 갈아타는 통로 입구",
+    "en": "Entrance to Transfer passage to Line 1"
+   }
+  },
+  {
+   "id": "portal_xfer2_xfer3",
+   "type": "junction",
+   "floor": "F1",
+   "pos": [
+    -155,
+    38
+   ],
+   "label": {
+    "ko": "1호선 갈아타는 통로 (승강장 끝) 입구",
+    "en": "Entrance to Transfer passage (platform end)"
+   }
+  }
+ ],
+ "edges": [
+  {
+   "from": "st7nw_top",
+   "to": "st7nw_bot",
+   "kind": "stairs",
+   "width": 3
+  },
+  {
+   "from": "st7sw_top",
+   "to": "st7sw_bot",
+   "kind": "stairs",
+   "width": 3
+  },
+  {
+   "from": "st7ne_top",
+   "to": "st7ne_bot",
+   "kind": "stairs",
+   "width": 3
+  },
+  {
+   "from": "st7se_top",
+   "to": "st7se_bot",
+   "kind": "stairs",
+   "width": 3
+  },
+  {
+   "from": "el3_F1",
+   "to": "el3_F2",
+   "kind": "elevator",
+   "facilityRefs": [
+    "1311282"
+   ]
+  },
+  {
+   "from": "el4_F1",
+   "to": "el4_F2",
+   "kind": "elevator",
+   "facilityRefs": [
+    "1311283"
+   ]
+  },
+  {
+   "from": "elx1_F1",
+   "to": "elx1_F2",
+   "kind": "elevator",
+   "facilityRefs": [
+    "1311280"
+   ]
+  },
+  {
+   "from": "elx2_F1",
+   "to": "elx2_F2",
+   "kind": "elevator",
+   "facilityRefs": [
+    "1311281"
+   ]
+  },
+  {
+   "from": "gate_lift1",
+   "to": "elx1_F1",
+   "kind": "walk"
+  },
+  {
+   "from": "gate_lift2",
+   "to": "elx2_F1",
+   "kind": "walk"
+  },
+  {
+   "from": "exit1-1",
+   "to": "x11_bot",
+   "kind": "stairs",
+   "width": 3
+  },
+  {
+   "from": "el_x11_F1",
+   "to": "el_x11_F2",
+   "kind": "elevator",
+   "facilityRefs": [
+    "1620269"
+   ]
+  },
+  {
+   "from": "el_x11_F2",
+   "to": "exit1-1",
+   "kind": "walk"
+  },
+  {
+   "from": "st1a_top",
+   "to": "st1a_bot",
+   "kind": "stairs",
+   "width": 3
+  },
+  {
+   "from": "st1b_top",
+   "to": "st1b_bot",
+   "kind": "stairs",
+   "width": 3
+  },
+  {
+   "from": "el1_F1",
+   "to": "el1_F2",
+   "kind": "elevator"
+  },
+  {
+   "from": "x1_top",
+   "to": "x1_bot",
+   "kind": "stairs",
+   "width": 3
+  },
+  {
+   "from": "x1_bot",
+   "to": "exit1",
+   "kind": "walk"
+  },
+  {
+   "from": "el_x1_F1",
+   "to": "el_x1_F2",
+   "kind": "elevator"
+  },
+  {
+   "from": "el_x1_F1",
+   "to": "exit1",
+   "kind": "walk"
+  },
+  {
+   "from": "x3_top",
+   "to": "x3_bot",
+   "kind": "stairs",
+   "width": 3
+  },
+  {
+   "from": "x3_bot",
+   "to": "exit3",
+   "kind": "walk"
+  },
+  {
+   "from": "el_x3_F1",
+   "to": "el_x3_F2",
+   "kind": "elevator"
+  },
+  {
+   "from": "el_x3_F1",
+   "to": "exit3",
+   "kind": "walk"
+  },
+  {
+   "from": "st2_top",
+   "to": "st2_bot",
+   "kind": "stairs",
+   "width": 3
+  },
+  {
+   "from": "el_2_F1",
+   "to": "el_2_F2",
+   "kind": "elevator"
+  },
+  {
+   "from": "st7nw_top",
+   "to": "el3_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7nw_top",
+   "to": "sign_map_p7",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7nw_top",
+   "to": "wp_F2_0_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7nw_top",
+   "to": "wp_F2_0_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7nw_top",
+   "to": "wp_F2_10_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7nw_top",
+   "to": "wp_F2_10_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7nw_top",
+   "to": "wp_F2_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7nw_top",
+   "to": "wp_F2_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7ne_top",
+   "to": "elx1_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7ne_top",
+   "to": "wp_F2_2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7ne_top",
+   "to": "wp_F2_2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7ne_top",
+   "to": "wp_F2_12_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7ne_top",
+   "to": "wp_F2_12_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7ne_top",
+   "to": "wp_F2_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7ne_top",
+   "to": "wp_F2_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F2",
+   "to": "elx1_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F2",
+   "to": "board7_jangam",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F2",
+   "to": "p7n_mid",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F2",
+   "to": "sign_map_p7",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F2",
+   "to": "wp_F2_0_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F2",
+   "to": "wp_F2_0_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F2",
+   "to": "wp_F2_2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F2",
+   "to": "wp_F2_2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F2",
+   "to": "wp_F2_10_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F2",
+   "to": "wp_F2_10_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F2",
+   "to": "wp_F2_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F2",
+   "to": "wp_F2_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F2",
+   "to": "wp_F2_12_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F2",
+   "to": "wp_F2_12_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F2",
+   "to": "wp_F2_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F2",
+   "to": "wp_F2_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx1_F2",
+   "to": "board7_jangam",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx1_F2",
+   "to": "p7n_mid",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx1_F2",
+   "to": "sign_map_p7",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx1_F2",
+   "to": "wp_F2_2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx1_F2",
+   "to": "wp_F2_2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx1_F2",
+   "to": "wp_F2_10_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx1_F2",
+   "to": "wp_F2_10_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx1_F2",
+   "to": "wp_F2_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx1_F2",
+   "to": "wp_F2_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx1_F2",
+   "to": "wp_F2_12_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx1_F2",
+   "to": "wp_F2_12_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx1_F2",
+   "to": "wp_F2_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx1_F2",
+   "to": "wp_F2_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_jangam",
+   "to": "p7n_mid",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_jangam",
+   "to": "sign_map_p7",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_jangam",
+   "to": "wp_F2_0_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_jangam",
+   "to": "wp_F2_2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_jangam",
+   "to": "wp_F2_10_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_jangam",
+   "to": "wp_F2_10_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_jangam",
+   "to": "wp_F2_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_jangam",
+   "to": "wp_F2_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_jangam",
+   "to": "wp_F2_12_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_jangam",
+   "to": "wp_F2_12_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_jangam",
+   "to": "wp_F2_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_jangam",
+   "to": "wp_F2_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7n_mid",
+   "to": "wp_F2_0_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7n_mid",
+   "to": "wp_F2_2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7n_mid",
+   "to": "wp_F2_10_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7n_mid",
+   "to": "wp_F2_10_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7n_mid",
+   "to": "wp_F2_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7n_mid",
+   "to": "wp_F2_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7n_mid",
+   "to": "wp_F2_12_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7n_mid",
+   "to": "wp_F2_12_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7n_mid",
+   "to": "wp_F2_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7n_mid",
+   "to": "wp_F2_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "sign_map_p7",
+   "to": "wp_F2_0_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "sign_map_p7",
+   "to": "wp_F2_0_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "sign_map_p7",
+   "to": "wp_F2_10_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "sign_map_p7",
+   "to": "wp_F2_10_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "sign_map_p7",
+   "to": "wp_F2_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "sign_map_p7",
+   "to": "wp_F2_12_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "sign_map_p7",
+   "to": "wp_F2_12_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "sign_map_p7",
+   "to": "wp_F2_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "sign_map_p7",
+   "to": "wp_F2_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_0_1",
+   "to": "wp_F2_0_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_0_1",
+   "to": "wp_F2_10_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_0_1",
+   "to": "wp_F2_10_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_0_1",
+   "to": "wp_F2_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_0_1",
+   "to": "wp_F2_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_0_3",
+   "to": "wp_F2_10_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_0_3",
+   "to": "wp_F2_10_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_0_3",
+   "to": "wp_F2_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_0_3",
+   "to": "wp_F2_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_2_0",
+   "to": "wp_F2_2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_2_0",
+   "to": "wp_F2_10_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_2_0",
+   "to": "wp_F2_10_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_2_0",
+   "to": "wp_F2_12_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_2_0",
+   "to": "wp_F2_12_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_2_0",
+   "to": "wp_F2_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_2_0",
+   "to": "wp_F2_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_2_2",
+   "to": "wp_F2_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_2_2",
+   "to": "wp_F2_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_2_2",
+   "to": "wp_F2_12_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_2_2",
+   "to": "wp_F2_12_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_2_2",
+   "to": "wp_F2_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_2_2",
+   "to": "wp_F2_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_0",
+   "to": "wp_F2_10_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_0",
+   "to": "wp_F2_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_0",
+   "to": "wp_F2_12_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_0",
+   "to": "wp_F2_12_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_0",
+   "to": "wp_F2_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_0",
+   "to": "wp_F2_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_1",
+   "to": "wp_F2_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_1",
+   "to": "wp_F2_12_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_1",
+   "to": "wp_F2_12_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_1",
+   "to": "wp_F2_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_1",
+   "to": "wp_F2_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_2",
+   "to": "wp_F2_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_2",
+   "to": "wp_F2_12_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_2",
+   "to": "wp_F2_12_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_2",
+   "to": "wp_F2_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_2",
+   "to": "wp_F2_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_3",
+   "to": "wp_F2_12_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_3",
+   "to": "wp_F2_12_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_3",
+   "to": "wp_F2_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_10_3",
+   "to": "wp_F2_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_12_0",
+   "to": "wp_F2_12_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_12_0",
+   "to": "wp_F2_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_12_1",
+   "to": "wp_F2_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_12_2",
+   "to": "wp_F2_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7sw_top",
+   "to": "el4_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7sw_top",
+   "to": "board7_suraksan",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7sw_top",
+   "to": "p7s_mid",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7sw_top",
+   "to": "wp_F2_1_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7sw_top",
+   "to": "wp_F2_1_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7sw_top",
+   "to": "wp_F2_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7sw_top",
+   "to": "wp_F2_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7sw_top",
+   "to": "wp_F2_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7sw_top",
+   "to": "wp_F2_11_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7se_top",
+   "to": "elx2_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7se_top",
+   "to": "wp_F2_3_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7se_top",
+   "to": "wp_F2_3_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7se_top",
+   "to": "wp_F2_13_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7se_top",
+   "to": "wp_F2_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7se_top",
+   "to": "wp_F2_13_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7se_top",
+   "to": "wp_F2_13_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F2",
+   "to": "elx2_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F2",
+   "to": "board7_suraksan",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F2",
+   "to": "p7s_mid",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F2",
+   "to": "wp_F2_1_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F2",
+   "to": "wp_F2_1_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F2",
+   "to": "wp_F2_3_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F2",
+   "to": "wp_F2_3_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F2",
+   "to": "wp_F2_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F2",
+   "to": "wp_F2_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F2",
+   "to": "wp_F2_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F2",
+   "to": "wp_F2_11_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F2",
+   "to": "wp_F2_13_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F2",
+   "to": "wp_F2_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F2",
+   "to": "wp_F2_13_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F2",
+   "to": "wp_F2_13_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx2_F2",
+   "to": "wp_F2_3_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx2_F2",
+   "to": "wp_F2_3_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx2_F2",
+   "to": "wp_F2_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx2_F2",
+   "to": "wp_F2_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx2_F2",
+   "to": "wp_F2_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx2_F2",
+   "to": "wp_F2_11_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx2_F2",
+   "to": "wp_F2_13_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx2_F2",
+   "to": "wp_F2_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx2_F2",
+   "to": "wp_F2_13_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "elx2_F2",
+   "to": "wp_F2_13_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_suraksan",
+   "to": "p7s_mid",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_suraksan",
+   "to": "wp_F2_1_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_suraksan",
+   "to": "wp_F2_1_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_suraksan",
+   "to": "wp_F2_3_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_suraksan",
+   "to": "wp_F2_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_suraksan",
+   "to": "wp_F2_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_suraksan",
+   "to": "wp_F2_11_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_suraksan",
+   "to": "wp_F2_13_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board7_suraksan",
+   "to": "wp_F2_13_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7s_mid",
+   "to": "wp_F2_1_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7s_mid",
+   "to": "wp_F2_1_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7s_mid",
+   "to": "wp_F2_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7s_mid",
+   "to": "wp_F2_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7s_mid",
+   "to": "wp_F2_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_1_1",
+   "to": "wp_F2_1_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_1_1",
+   "to": "wp_F2_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_1_1",
+   "to": "wp_F2_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_1_1",
+   "to": "wp_F2_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_1_1",
+   "to": "wp_F2_11_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_1_3",
+   "to": "wp_F2_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_1_3",
+   "to": "wp_F2_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_1_3",
+   "to": "wp_F2_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_1_3",
+   "to": "wp_F2_11_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_3_0",
+   "to": "wp_F2_3_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_3_0",
+   "to": "wp_F2_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_3_0",
+   "to": "wp_F2_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_3_0",
+   "to": "wp_F2_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_3_0",
+   "to": "wp_F2_11_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_3_0",
+   "to": "wp_F2_13_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_3_0",
+   "to": "wp_F2_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_3_0",
+   "to": "wp_F2_13_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_3_2",
+   "to": "wp_F2_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_3_2",
+   "to": "wp_F2_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_3_2",
+   "to": "wp_F2_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_3_2",
+   "to": "wp_F2_11_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_3_2",
+   "to": "wp_F2_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_3_2",
+   "to": "wp_F2_13_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_3_2",
+   "to": "wp_F2_13_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_0",
+   "to": "wp_F2_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_0",
+   "to": "wp_F2_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_0",
+   "to": "wp_F2_13_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_0",
+   "to": "wp_F2_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_0",
+   "to": "wp_F2_13_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_0",
+   "to": "wp_F2_13_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_1",
+   "to": "wp_F2_11_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_1",
+   "to": "wp_F2_13_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_1",
+   "to": "wp_F2_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_1",
+   "to": "wp_F2_13_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_1",
+   "to": "wp_F2_13_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_2",
+   "to": "wp_F2_11_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_2",
+   "to": "wp_F2_13_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_2",
+   "to": "wp_F2_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_2",
+   "to": "wp_F2_13_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_2",
+   "to": "wp_F2_13_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_3",
+   "to": "wp_F2_13_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_3",
+   "to": "wp_F2_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_3",
+   "to": "wp_F2_13_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_11_3",
+   "to": "wp_F2_13_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_13_0",
+   "to": "wp_F2_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_13_0",
+   "to": "wp_F2_13_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_13_1",
+   "to": "wp_F2_13_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_13_2",
+   "to": "wp_F2_13_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift1",
+   "to": "gate_lift2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift1",
+   "to": "gate_7w",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift1",
+   "to": "gate_7e",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift1",
+   "to": "ticket_7e",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift1",
+   "to": "toilet_7e",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift1",
+   "to": "wp_F1_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift1",
+   "to": "wp_F1_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift1",
+   "to": "wp_F1_13_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift1",
+   "to": "wp_F1_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift1",
+   "to": "wp_F1_13_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift1",
+   "to": "portal_hall7_plaza2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift1",
+   "to": "portal_hall7_plaza2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift2",
+   "to": "gate_7w",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift2",
+   "to": "gate_7e",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift2",
+   "to": "ticket_7e",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift2",
+   "to": "toilet_7e",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift2",
+   "to": "wp_F1_12_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift2",
+   "to": "wp_F1_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift2",
+   "to": "wp_F1_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift2",
+   "to": "wp_F1_13_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift2",
+   "to": "wp_F1_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift2",
+   "to": "portal_hall7_plaza2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_lift2",
+   "to": "portal_hall7_plaza2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "gate_7e",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "ticket_7e",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "toilet_7e",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "wp_F1_12_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "wp_F1_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "wp_F1_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "wp_F1_13_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "wp_F1_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "wp_F1_13_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "wp_F1_13_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "portal_hall7_plaza2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "portal_hall7_plaza2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "portal_hall7_plaza2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7e",
+   "to": "ticket_7e",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7e",
+   "to": "toilet_7e",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7e",
+   "to": "wp_F1_12_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7e",
+   "to": "wp_F1_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7e",
+   "to": "wp_F1_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7e",
+   "to": "wp_F1_13_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7e",
+   "to": "wp_F1_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7e",
+   "to": "wp_F1_13_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7e",
+   "to": "portal_hall7_plaza2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7e",
+   "to": "portal_hall7_plaza2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7e",
+   "to": "portal_hall7_plaza2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_7e",
+   "to": "toilet_7e",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_7e",
+   "to": "wp_F1_12_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_7e",
+   "to": "wp_F1_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_7e",
+   "to": "wp_F1_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_7e",
+   "to": "wp_F1_13_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_7e",
+   "to": "wp_F1_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_7e",
+   "to": "wp_F1_13_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_7e",
+   "to": "wp_F1_13_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_7e",
+   "to": "portal_hall7_plaza2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_7e",
+   "to": "portal_hall7_plaza2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_7e",
+   "to": "portal_hall7_plaza2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7e",
+   "to": "wp_F1_12_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7e",
+   "to": "wp_F1_12_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7e",
+   "to": "wp_F1_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7e",
+   "to": "wp_F1_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7e",
+   "to": "wp_F1_13_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7e",
+   "to": "wp_F1_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7e",
+   "to": "wp_F1_13_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7e",
+   "to": "portal_hall7_plaza2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7e",
+   "to": "portal_hall7_plaza2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7e",
+   "to": "portal_hall7_plaza2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_12_0",
+   "to": "wp_F1_12_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_12_0",
+   "to": "wp_F1_12_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_12_0",
+   "to": "portal_hall7_plaza2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_12_0",
+   "to": "portal_hall7_plaza2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_12_1",
+   "to": "wp_F1_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_12_1",
+   "to": "wp_F1_13_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_12_1",
+   "to": "wp_F1_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_12_1",
+   "to": "wp_F1_13_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_12_2",
+   "to": "wp_F1_12_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_12_2",
+   "to": "wp_F1_13_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_12_2",
+   "to": "wp_F1_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_12_2",
+   "to": "wp_F1_13_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_12_2",
+   "to": "portal_hall7_plaza2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_12_2",
+   "to": "portal_hall7_plaza2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_12_3",
+   "to": "wp_F1_13_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_12_3",
+   "to": "wp_F1_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_12_3",
+   "to": "wp_F1_13_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_12_3",
+   "to": "portal_hall7_plaza2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_12_3",
+   "to": "portal_hall7_plaza2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_13_0",
+   "to": "wp_F1_13_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_13_0",
+   "to": "wp_F1_13_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_13_0",
+   "to": "portal_hall7_plaza2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_13_0",
+   "to": "portal_hall7_plaza2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_13_1",
+   "to": "wp_F1_13_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_13_1",
+   "to": "portal_hall7_plaza2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_13_1",
+   "to": "portal_hall7_plaza2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_13_2",
+   "to": "wp_F1_13_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_13_2",
+   "to": "portal_hall7_plaza2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_13_2",
+   "to": "portal_hall7_plaza2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_13_2",
+   "to": "portal_hall7_plaza2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_13_3",
+   "to": "portal_hall7_plaza2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_13_3",
+   "to": "portal_hall7_plaza2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_13_3",
+   "to": "portal_hall7_plaza2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "portal_hall7_plaza2_0",
+   "to": "portal_hall7_plaza2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "portal_hall7_plaza2_0",
+   "to": "portal_hall7_plaza2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "portal_hall7_plaza2_1",
+   "to": "portal_hall7_plaza2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7nw_bot",
+   "to": "st7sw_bot",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7nw_bot",
+   "to": "gate_11",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7nw_bot",
+   "to": "wp_F1_0_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7nw_bot",
+   "to": "wp_F1_0_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7nw_bot",
+   "to": "wp_F1_1_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7nw_bot",
+   "to": "wp_F1_1_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7nw_bot",
+   "to": "portal_paid7w_xfer",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7sw_bot",
+   "to": "gate_11",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7sw_bot",
+   "to": "wp_F1_0_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7sw_bot",
+   "to": "wp_F1_0_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7sw_bot",
+   "to": "wp_F1_1_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7sw_bot",
+   "to": "wp_F1_1_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7sw_bot",
+   "to": "portal_paid7w_xfer",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F1",
+   "to": "el4_F1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F1",
+   "to": "gate_7w",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F1",
+   "to": "gate_11",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F1",
+   "to": "toilet_7w",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F1",
+   "to": "p7w_mid",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F1",
+   "to": "wp_F1_0_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F1",
+   "to": "wp_F1_0_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F1",
+   "to": "wp_F1_0_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F1",
+   "to": "wp_F1_0_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F1",
+   "to": "wp_F1_1_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F1",
+   "to": "wp_F1_1_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F1",
+   "to": "wp_F1_1_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F1",
+   "to": "wp_F1_10_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F1",
+   "to": "wp_F1_10_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F1",
+   "to": "wp_F1_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F1",
+   "to": "wp_F1_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F1",
+   "to": "wp_F1_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F1",
+   "to": "wp_F1_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el3_F1",
+   "to": "wp_F1_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F1",
+   "to": "gate_7w",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F1",
+   "to": "toilet_7w",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F1",
+   "to": "p7w_mid",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F1",
+   "to": "wp_F1_0_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F1",
+   "to": "wp_F1_0_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F1",
+   "to": "wp_F1_1_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F1",
+   "to": "wp_F1_1_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F1",
+   "to": "wp_F1_1_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F1",
+   "to": "wp_F1_1_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F1",
+   "to": "wp_F1_10_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F1",
+   "to": "wp_F1_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F1",
+   "to": "wp_F1_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F1",
+   "to": "wp_F1_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F1",
+   "to": "wp_F1_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F1",
+   "to": "wp_F1_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el4_F1",
+   "to": "wp_F1_11_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "toilet_7w",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "p7w_mid",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "wp_F1_0_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "wp_F1_0_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "wp_F1_1_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "wp_F1_1_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "wp_F1_10_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "wp_F1_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "wp_F1_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "wp_F1_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "wp_F1_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7w",
+   "to": "wp_F1_11_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "toilet_7w",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "p7w_mid",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "wp_F1_0_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "wp_F1_0_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "wp_F1_0_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "wp_F1_1_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "wp_F1_1_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "wp_F1_1_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "wp_F1_10_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "wp_F1_10_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "wp_F1_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "wp_F1_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "portal_paid7w_xfer",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7w",
+   "to": "p7w_mid",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7w",
+   "to": "wp_F1_0_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7w",
+   "to": "wp_F1_0_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7w",
+   "to": "wp_F1_0_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7w",
+   "to": "wp_F1_1_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7w",
+   "to": "wp_F1_1_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7w",
+   "to": "wp_F1_1_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7w",
+   "to": "wp_F1_10_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7w",
+   "to": "wp_F1_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7w",
+   "to": "wp_F1_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7w",
+   "to": "wp_F1_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7w",
+   "to": "wp_F1_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7w",
+   "to": "wp_F1_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "toilet_7w",
+   "to": "wp_F1_11_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7w_mid",
+   "to": "wp_F1_0_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7w_mid",
+   "to": "wp_F1_0_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7w_mid",
+   "to": "wp_F1_0_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7w_mid",
+   "to": "wp_F1_1_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7w_mid",
+   "to": "wp_F1_1_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7w_mid",
+   "to": "wp_F1_1_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7w_mid",
+   "to": "wp_F1_10_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7w_mid",
+   "to": "wp_F1_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7w_mid",
+   "to": "wp_F1_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7w_mid",
+   "to": "wp_F1_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7w_mid",
+   "to": "wp_F1_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7w_mid",
+   "to": "wp_F1_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p7w_mid",
+   "to": "wp_F1_11_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_0",
+   "to": "wp_F1_0_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_0",
+   "to": "wp_F1_0_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_0",
+   "to": "wp_F1_1_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_0",
+   "to": "wp_F1_1_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_0",
+   "to": "wp_F1_10_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_0",
+   "to": "wp_F1_10_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_0",
+   "to": "portal_paid7w_xfer",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_1",
+   "to": "wp_F1_0_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_1",
+   "to": "wp_F1_1_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_1",
+   "to": "wp_F1_1_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_1",
+   "to": "wp_F1_10_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_1",
+   "to": "wp_F1_10_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_1",
+   "to": "wp_F1_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_1",
+   "to": "wp_F1_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_1",
+   "to": "wp_F1_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_1",
+   "to": "wp_F1_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_1",
+   "to": "wp_F1_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_2",
+   "to": "wp_F1_0_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_2",
+   "to": "wp_F1_1_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_2",
+   "to": "wp_F1_1_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_2",
+   "to": "wp_F1_1_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_2",
+   "to": "wp_F1_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_2",
+   "to": "wp_F1_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_2",
+   "to": "wp_F1_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_2",
+   "to": "wp_F1_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_2",
+   "to": "portal_paid7w_xfer",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_3",
+   "to": "wp_F1_1_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_3",
+   "to": "wp_F1_1_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_3",
+   "to": "wp_F1_1_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_3",
+   "to": "wp_F1_10_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_3",
+   "to": "wp_F1_10_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_3",
+   "to": "wp_F1_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_3",
+   "to": "wp_F1_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_3",
+   "to": "wp_F1_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_3",
+   "to": "wp_F1_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_3",
+   "to": "wp_F1_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_0_3",
+   "to": "wp_F1_11_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_0",
+   "to": "wp_F1_1_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_0",
+   "to": "wp_F1_1_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_0",
+   "to": "wp_F1_10_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_0",
+   "to": "wp_F1_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_0",
+   "to": "wp_F1_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_0",
+   "to": "wp_F1_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_0",
+   "to": "wp_F1_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_0",
+   "to": "portal_paid7w_xfer",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_1",
+   "to": "wp_F1_1_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_1",
+   "to": "wp_F1_10_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_1",
+   "to": "wp_F1_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_1",
+   "to": "wp_F1_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_1",
+   "to": "wp_F1_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_1",
+   "to": "wp_F1_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_1",
+   "to": "wp_F1_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_1",
+   "to": "wp_F1_11_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_2",
+   "to": "wp_F1_1_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_2",
+   "to": "wp_F1_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_2",
+   "to": "wp_F1_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_2",
+   "to": "portal_paid7w_xfer",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_3",
+   "to": "wp_F1_10_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_3",
+   "to": "wp_F1_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_3",
+   "to": "wp_F1_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_3",
+   "to": "wp_F1_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_3",
+   "to": "wp_F1_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_3",
+   "to": "wp_F1_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_3",
+   "to": "wp_F1_11_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_1_3",
+   "to": "portal_paid7w_xfer",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_10_0",
+   "to": "wp_F1_10_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_10_0",
+   "to": "wp_F1_10_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_10_1",
+   "to": "wp_F1_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_10_1",
+   "to": "wp_F1_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_10_1",
+   "to": "wp_F1_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_10_1",
+   "to": "wp_F1_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_10_2",
+   "to": "wp_F1_10_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_10_2",
+   "to": "wp_F1_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_10_2",
+   "to": "wp_F1_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_10_2",
+   "to": "wp_F1_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_10_3",
+   "to": "wp_F1_11_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_10_3",
+   "to": "wp_F1_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_10_3",
+   "to": "wp_F1_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_11_0",
+   "to": "wp_F1_11_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_11_0",
+   "to": "wp_F1_11_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_11_1",
+   "to": "wp_F1_11_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_11_2",
+   "to": "wp_F1_11_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7ne_bot",
+   "to": "st7se_bot",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7ne_bot",
+   "to": "wp_F1_2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7ne_bot",
+   "to": "wp_F1_2_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7ne_bot",
+   "to": "wp_F1_3_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7ne_bot",
+   "to": "wp_F1_3_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7se_bot",
+   "to": "wp_F1_2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7se_bot",
+   "to": "wp_F1_2_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7se_bot",
+   "to": "wp_F1_3_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st7se_bot",
+   "to": "wp_F1_3_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7e",
+   "to": "info7",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7e",
+   "to": "wp_F1_2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7e",
+   "to": "wp_F1_2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7e",
+   "to": "wp_F1_2_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7e",
+   "to": "wp_F1_3_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7e",
+   "to": "wp_F1_3_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_7e",
+   "to": "wp_F1_3_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "info7",
+   "to": "wp_F1_2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "info7",
+   "to": "wp_F1_2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "info7",
+   "to": "wp_F1_2_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "info7",
+   "to": "wp_F1_3_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "info7",
+   "to": "wp_F1_3_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "info7",
+   "to": "wp_F1_3_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_2_0",
+   "to": "wp_F1_2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_2_0",
+   "to": "wp_F1_2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_2_0",
+   "to": "wp_F1_3_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_2_0",
+   "to": "wp_F1_3_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_2_1",
+   "to": "wp_F1_2_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_2_1",
+   "to": "wp_F1_3_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_2_1",
+   "to": "wp_F1_3_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_2_2",
+   "to": "wp_F1_2_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_2_2",
+   "to": "wp_F1_3_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_2_2",
+   "to": "wp_F1_3_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_2_2",
+   "to": "wp_F1_3_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_2_3",
+   "to": "wp_F1_3_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_2_3",
+   "to": "wp_F1_3_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_2_3",
+   "to": "wp_F1_3_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_3_0",
+   "to": "wp_F1_3_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_3_0",
+   "to": "wp_F1_3_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_3_1",
+   "to": "wp_F1_3_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_3_2",
+   "to": "wp_F1_3_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "ticket_11",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "x11_bot",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "el_x11_F1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "wp_F1_4_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "wp_F1_4_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "wp_F1_4_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "wp_F1_14_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_11",
+   "to": "wp_F1_14_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_11",
+   "to": "el_x11_F1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_11",
+   "to": "wp_F1_4_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_11",
+   "to": "wp_F1_4_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_11",
+   "to": "wp_F1_4_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_11",
+   "to": "wp_F1_14_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_11",
+   "to": "wp_F1_14_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x11_bot",
+   "to": "wp_F1_4_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x11_bot",
+   "to": "wp_F1_4_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x11_F1",
+   "to": "wp_F1_4_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x11_F1",
+   "to": "wp_F1_4_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x11_F1",
+   "to": "wp_F1_4_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x11_F1",
+   "to": "wp_F1_14_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x11_F1",
+   "to": "wp_F1_14_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_4_0",
+   "to": "wp_F1_4_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_4_0",
+   "to": "wp_F1_4_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_4_0",
+   "to": "wp_F1_14_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_4_0",
+   "to": "wp_F1_14_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_4_1",
+   "to": "wp_F1_4_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_4_2",
+   "to": "wp_F1_4_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_4_2",
+   "to": "wp_F1_14_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_4_2",
+   "to": "wp_F1_14_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_4_3",
+   "to": "wp_F1_14_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_4_3",
+   "to": "wp_F1_14_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_14_1",
+   "to": "wp_F1_14_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st2_bot",
+   "to": "wp_F1_9_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st2_bot",
+   "to": "wp_F1_9_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st2_bot",
+   "to": "portal_hall7_plaza2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F1",
+   "to": "exit2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F1",
+   "to": "wp_F1_9_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F1",
+   "to": "wp_F1_9_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F1",
+   "to": "wp_F1_9_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F1",
+   "to": "wp_F1_18_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F1",
+   "to": "wp_F1_18_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F1",
+   "to": "wp_F1_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F1",
+   "to": "wp_F1_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F1",
+   "to": "portal_hall7_plaza2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F1",
+   "to": "portal_hall7_plaza2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F1",
+   "to": "portal_hall7_plaza2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "exit2",
+   "to": "wp_F1_9_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "exit2",
+   "to": "wp_F1_9_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "exit2",
+   "to": "wp_F1_9_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "exit2",
+   "to": "wp_F1_18_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "exit2",
+   "to": "wp_F1_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "exit2",
+   "to": "wp_F1_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "exit2",
+   "to": "portal_hall7_plaza2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_9_0",
+   "to": "wp_F1_9_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_9_0",
+   "to": "wp_F1_9_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_9_0",
+   "to": "wp_F1_18_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_9_0",
+   "to": "wp_F1_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_9_0",
+   "to": "wp_F1_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_9_0",
+   "to": "portal_hall7_plaza2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_9_0",
+   "to": "portal_hall7_plaza2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_9_1",
+   "to": "wp_F1_9_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_9_1",
+   "to": "wp_F1_18_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_9_1",
+   "to": "wp_F1_18_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_9_1",
+   "to": "portal_hall7_plaza2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_9_1",
+   "to": "portal_hall7_plaza2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_9_2",
+   "to": "wp_F1_9_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_9_2",
+   "to": "wp_F1_18_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_9_2",
+   "to": "wp_F1_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_9_2",
+   "to": "wp_F1_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_9_2",
+   "to": "portal_hall7_plaza2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_9_3",
+   "to": "portal_hall7_plaza2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_18_0",
+   "to": "wp_F1_18_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_18_0",
+   "to": "wp_F1_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_18_0",
+   "to": "portal_hall7_plaza2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_18_0",
+   "to": "portal_hall7_plaza2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_18_0",
+   "to": "portal_hall7_plaza2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_18_1",
+   "to": "wp_F1_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_18_1",
+   "to": "portal_hall7_plaza2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_18_1",
+   "to": "portal_hall7_plaza2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_18_1",
+   "to": "portal_hall7_plaza2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_18_2",
+   "to": "wp_F1_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_18_2",
+   "to": "portal_hall7_plaza2_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_18_2",
+   "to": "portal_hall7_plaza2_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_18_3",
+   "to": "portal_hall7_plaza2_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "xfer_p1",
+   "to": "board1_dobong",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "xfer_p1",
+   "to": "board1_mangwolsa",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "xfer_p1",
+   "to": "p1_mid",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1a_bot",
+   "to": "st1b_bot",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1a_bot",
+   "to": "board1_dobong",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1a_bot",
+   "to": "board1_mangwolsa",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1a_bot",
+   "to": "p1_mid",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1a_bot",
+   "to": "wp_F1_5_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1a_bot",
+   "to": "wp_F1_5_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1a_bot",
+   "to": "wp_F1_6_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1a_bot",
+   "to": "wp_F1_6_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1b_bot",
+   "to": "board1_dobong",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1b_bot",
+   "to": "board1_mangwolsa",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1b_bot",
+   "to": "p1_mid",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1b_bot",
+   "to": "wp_F1_5_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1b_bot",
+   "to": "wp_F1_5_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1b_bot",
+   "to": "wp_F1_6_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1b_bot",
+   "to": "wp_F1_6_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el1_F1",
+   "to": "p1_mid",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el1_F1",
+   "to": "wp_F1_5_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el1_F1",
+   "to": "wp_F1_5_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el1_F1",
+   "to": "wp_F1_6_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el1_F1",
+   "to": "wp_F1_6_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el1_F1",
+   "to": "wp_F1_15_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el1_F1",
+   "to": "wp_F1_15_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el1_F1",
+   "to": "wp_F1_15_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el1_F1",
+   "to": "wp_F1_15_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board1_dobong",
+   "to": "board1_mangwolsa",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board1_dobong",
+   "to": "p1_mid",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board1_dobong",
+   "to": "wp_F1_5_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board1_dobong",
+   "to": "wp_F1_5_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board1_dobong",
+   "to": "wp_F1_5_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board1_dobong",
+   "to": "wp_F1_6_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board1_dobong",
+   "to": "wp_F1_6_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board1_mangwolsa",
+   "to": "p1_mid",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board1_mangwolsa",
+   "to": "wp_F1_5_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board1_mangwolsa",
+   "to": "wp_F1_5_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board1_mangwolsa",
+   "to": "wp_F1_6_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board1_mangwolsa",
+   "to": "wp_F1_6_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "board1_mangwolsa",
+   "to": "wp_F1_6_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p1_mid",
+   "to": "wp_F1_5_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p1_mid",
+   "to": "wp_F1_5_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p1_mid",
+   "to": "wp_F1_5_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p1_mid",
+   "to": "wp_F1_6_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p1_mid",
+   "to": "wp_F1_6_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "p1_mid",
+   "to": "wp_F1_6_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_5_0",
+   "to": "wp_F1_5_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_5_0",
+   "to": "wp_F1_5_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_5_0",
+   "to": "wp_F1_6_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_5_0",
+   "to": "wp_F1_6_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_5_1",
+   "to": "wp_F1_5_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_5_1",
+   "to": "wp_F1_6_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_5_1",
+   "to": "wp_F1_6_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_5_1",
+   "to": "wp_F1_15_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_5_1",
+   "to": "wp_F1_15_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_5_1",
+   "to": "wp_F1_15_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_5_2",
+   "to": "wp_F1_6_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_5_2",
+   "to": "wp_F1_6_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_5_3",
+   "to": "wp_F1_6_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_5_3",
+   "to": "wp_F1_6_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_5_3",
+   "to": "wp_F1_15_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_5_3",
+   "to": "wp_F1_15_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_6_0",
+   "to": "wp_F1_6_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_6_1",
+   "to": "wp_F1_6_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_6_1",
+   "to": "wp_F1_15_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_6_1",
+   "to": "wp_F1_15_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_6_2",
+   "to": "wp_F1_6_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_6_3",
+   "to": "wp_F1_15_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_6_3",
+   "to": "wp_F1_15_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_6_3",
+   "to": "wp_F1_15_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_15_0",
+   "to": "wp_F1_15_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_15_0",
+   "to": "wp_F1_15_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_15_1",
+   "to": "wp_F1_15_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F1_15_2",
+   "to": "wp_F1_15_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "portal_paid7w_xfer",
+   "to": "portal_xfer_xfer2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "portal_xfer_xfer2",
+   "to": "portal_xfer2_xfer3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "xfer_p1",
+   "to": "portal_xfer2_xfer3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "ticket_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "x1_top",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "el_x1_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "el_x3_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "st2_top",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "el_2_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "wp_F2_7_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "wp_F2_7_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "wp_F2_8_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "wp_F2_9_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "wp_F2_9_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "wp_F2_16_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "wp_F2_17_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "wp_F2_17_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "wp_F2_17_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "wp_F2_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "wp_F2_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_1",
+   "to": "x1_top",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_1",
+   "to": "el_x1_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_1",
+   "to": "el_x3_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_1",
+   "to": "el_2_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_1",
+   "to": "wp_F2_7_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_1",
+   "to": "wp_F2_7_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_1",
+   "to": "wp_F2_16_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_1",
+   "to": "wp_F2_17_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_1",
+   "to": "wp_F2_17_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_1",
+   "to": "wp_F2_17_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_1",
+   "to": "wp_F2_17_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_1",
+   "to": "wp_F2_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "ticket_1",
+   "to": "wp_F2_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x1_top",
+   "to": "el_x3_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x1_top",
+   "to": "st2_top",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x1_top",
+   "to": "el_2_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x1_top",
+   "to": "wp_F2_7_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x1_top",
+   "to": "wp_F2_7_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x1_top",
+   "to": "wp_F2_9_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x1_top",
+   "to": "wp_F2_9_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x1_top",
+   "to": "wp_F2_16_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x1_top",
+   "to": "wp_F2_17_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x1_top",
+   "to": "wp_F2_17_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x1_top",
+   "to": "wp_F2_17_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x1_top",
+   "to": "wp_F2_17_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x1_top",
+   "to": "wp_F2_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x1_top",
+   "to": "wp_F2_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x1_F2",
+   "to": "x3_top",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x1_F2",
+   "to": "el_x3_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x1_F2",
+   "to": "el_2_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x1_F2",
+   "to": "wp_F2_7_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x1_F2",
+   "to": "wp_F2_7_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x1_F2",
+   "to": "wp_F2_8_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x1_F2",
+   "to": "wp_F2_8_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x1_F2",
+   "to": "wp_F2_16_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x1_F2",
+   "to": "wp_F2_17_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x1_F2",
+   "to": "wp_F2_17_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x1_F2",
+   "to": "wp_F2_17_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x1_F2",
+   "to": "wp_F2_17_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x1_F2",
+   "to": "wp_F2_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x1_F2",
+   "to": "wp_F2_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x3_top",
+   "to": "el_x3_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x3_top",
+   "to": "el_2_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x3_top",
+   "to": "wp_F2_7_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x3_top",
+   "to": "wp_F2_8_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x3_top",
+   "to": "wp_F2_8_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x3_top",
+   "to": "wp_F2_9_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x3_top",
+   "to": "wp_F2_16_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x3_top",
+   "to": "wp_F2_17_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x3_top",
+   "to": "wp_F2_17_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x3_top",
+   "to": "wp_F2_17_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x3_top",
+   "to": "wp_F2_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "x3_top",
+   "to": "wp_F2_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x3_F2",
+   "to": "el_2_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x3_F2",
+   "to": "wp_F2_7_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x3_F2",
+   "to": "wp_F2_7_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x3_F2",
+   "to": "wp_F2_8_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x3_F2",
+   "to": "wp_F2_8_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x3_F2",
+   "to": "wp_F2_9_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x3_F2",
+   "to": "wp_F2_9_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x3_F2",
+   "to": "wp_F2_16_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x3_F2",
+   "to": "wp_F2_17_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x3_F2",
+   "to": "wp_F2_17_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x3_F2",
+   "to": "wp_F2_17_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x3_F2",
+   "to": "wp_F2_17_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x3_F2",
+   "to": "wp_F2_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_x3_F2",
+   "to": "wp_F2_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st2_top",
+   "to": "el_2_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st2_top",
+   "to": "wp_F2_7_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st2_top",
+   "to": "wp_F2_9_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st2_top",
+   "to": "wp_F2_9_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st2_top",
+   "to": "wp_F2_17_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st2_top",
+   "to": "wp_F2_17_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st2_top",
+   "to": "wp_F2_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st2_top",
+   "to": "wp_F2_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F2",
+   "to": "wp_F2_7_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F2",
+   "to": "wp_F2_7_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F2",
+   "to": "wp_F2_8_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F2",
+   "to": "wp_F2_8_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F2",
+   "to": "wp_F2_9_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F2",
+   "to": "wp_F2_9_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F2",
+   "to": "wp_F2_16_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F2",
+   "to": "wp_F2_17_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F2",
+   "to": "wp_F2_17_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F2",
+   "to": "wp_F2_17_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F2",
+   "to": "wp_F2_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el_2_F2",
+   "to": "wp_F2_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_7_0",
+   "to": "wp_F2_7_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_7_0",
+   "to": "wp_F2_9_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_7_0",
+   "to": "wp_F2_9_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_7_0",
+   "to": "wp_F2_16_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_7_0",
+   "to": "wp_F2_17_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_7_0",
+   "to": "wp_F2_17_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_7_0",
+   "to": "wp_F2_17_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_7_0",
+   "to": "wp_F2_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_7_0",
+   "to": "wp_F2_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_7_1",
+   "to": "wp_F2_9_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_7_1",
+   "to": "wp_F2_9_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_7_1",
+   "to": "wp_F2_16_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_7_1",
+   "to": "wp_F2_17_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_7_1",
+   "to": "wp_F2_17_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_7_1",
+   "to": "wp_F2_17_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_7_1",
+   "to": "wp_F2_17_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_7_1",
+   "to": "wp_F2_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_7_1",
+   "to": "wp_F2_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_8_0",
+   "to": "wp_F2_8_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_8_0",
+   "to": "wp_F2_9_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_8_0",
+   "to": "wp_F2_17_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_8_0",
+   "to": "wp_F2_17_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_8_0",
+   "to": "wp_F2_17_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_8_0",
+   "to": "wp_F2_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_8_0",
+   "to": "wp_F2_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_8_2",
+   "to": "wp_F2_9_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_8_2",
+   "to": "wp_F2_17_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_8_2",
+   "to": "wp_F2_17_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_8_2",
+   "to": "wp_F2_17_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_8_2",
+   "to": "wp_F2_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_8_2",
+   "to": "wp_F2_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_9_0",
+   "to": "wp_F2_9_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_9_0",
+   "to": "wp_F2_17_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_9_0",
+   "to": "wp_F2_17_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_9_0",
+   "to": "wp_F2_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_9_0",
+   "to": "wp_F2_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_9_2",
+   "to": "wp_F2_17_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_9_2",
+   "to": "wp_F2_17_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_9_2",
+   "to": "wp_F2_17_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_9_2",
+   "to": "wp_F2_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_9_2",
+   "to": "wp_F2_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_16_0",
+   "to": "wp_F2_17_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_16_0",
+   "to": "wp_F2_17_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_16_0",
+   "to": "wp_F2_17_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_16_0",
+   "to": "wp_F2_17_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_16_0",
+   "to": "wp_F2_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_16_0",
+   "to": "wp_F2_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_17_0",
+   "to": "wp_F2_17_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_17_0",
+   "to": "wp_F2_17_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_17_0",
+   "to": "wp_F2_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_17_0",
+   "to": "wp_F2_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_17_1",
+   "to": "wp_F2_17_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_17_1",
+   "to": "wp_F2_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_17_1",
+   "to": "wp_F2_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_17_2",
+   "to": "wp_F2_17_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_17_2",
+   "to": "wp_F2_18_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_17_2",
+   "to": "wp_F2_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_18_2",
+   "to": "wp_F2_18_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "st1a_top",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "el1_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "wp_F2_5_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "wp_F2_15_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "wp_F2_15_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "gate_1",
+   "to": "wp_F2_15_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1a_top",
+   "to": "st1b_top",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1a_top",
+   "to": "el1_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1a_top",
+   "to": "wp_F2_5_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1a_top",
+   "to": "wp_F2_5_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1a_top",
+   "to": "wp_F2_6_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1a_top",
+   "to": "wp_F2_6_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1a_top",
+   "to": "wp_F2_15_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1a_top",
+   "to": "wp_F2_15_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1a_top",
+   "to": "wp_F2_15_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1b_top",
+   "to": "el1_F2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1b_top",
+   "to": "wp_F2_5_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1b_top",
+   "to": "wp_F2_5_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1b_top",
+   "to": "wp_F2_6_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1b_top",
+   "to": "wp_F2_6_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1b_top",
+   "to": "wp_F2_15_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1b_top",
+   "to": "wp_F2_15_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "st1b_top",
+   "to": "wp_F2_15_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el1_F2",
+   "to": "wp_F2_5_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el1_F2",
+   "to": "wp_F2_5_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el1_F2",
+   "to": "wp_F2_6_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el1_F2",
+   "to": "wp_F2_6_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el1_F2",
+   "to": "wp_F2_15_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el1_F2",
+   "to": "wp_F2_15_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el1_F2",
+   "to": "wp_F2_15_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "el1_F2",
+   "to": "wp_F2_15_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_5_1",
+   "to": "wp_F2_5_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_5_1",
+   "to": "wp_F2_6_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_5_1",
+   "to": "wp_F2_6_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_5_1",
+   "to": "wp_F2_15_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_5_1",
+   "to": "wp_F2_15_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_5_1",
+   "to": "wp_F2_15_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_5_3",
+   "to": "wp_F2_6_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_5_3",
+   "to": "wp_F2_6_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_5_3",
+   "to": "wp_F2_15_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_5_3",
+   "to": "wp_F2_15_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_6_1",
+   "to": "wp_F2_6_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_6_1",
+   "to": "wp_F2_15_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_6_1",
+   "to": "wp_F2_15_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_6_3",
+   "to": "wp_F2_15_0",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_6_3",
+   "to": "wp_F2_15_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_6_3",
+   "to": "wp_F2_15_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_15_0",
+   "to": "wp_F2_15_1",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_15_0",
+   "to": "wp_F2_15_2",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_15_1",
+   "to": "wp_F2_15_3",
+   "kind": "walk",
+   "open": true
+  },
+  {
+   "from": "wp_F2_15_2",
+   "to": "wp_F2_15_3",
+   "kind": "walk",
+   "open": true
+  }
+ ]
+}

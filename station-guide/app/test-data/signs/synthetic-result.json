@@ -1,0 +1,158 @@
+{
+ "_note": "합성 표지판 13종 × 6조건을 브라우저(eval.html)에서 앱과 같은 readSign()+matchSignText()로 읽은 결과. 측정일 2026-11-27, 전처리: 흑백 원본+반전, 짧은 변 240px 목표·최대 4배 확대.",
+ "summary": {
+  "total": 78,
+  "auto": 32,
+  "confirmInCandidates": 22,
+  "askNumber": 3,
+  "wrongConfident": 0,
+  "nothing": 21,
+  "avgMs": 173,
+  "byVariant": {
+   "clean": {
+    "useful": 12,
+    "total": 13,
+    "wrong": 0
+   },
+   "blur": {
+    "useful": 9,
+    "total": 13,
+    "wrong": 0
+   },
+   "small": {
+    "useful": 8,
+    "total": 13,
+    "wrong": 0
+   },
+   "tilt": {
+    "useful": 8,
+    "total": 13,
+    "wrong": 0
+   },
+   "lowlight": {
+    "useful": 12,
+    "total": 13,
+    "wrong": 0
+   },
+   "noise": {
+    "useful": 8,
+    "total": 13,
+    "wrong": 0
+   }
+  }
+ },
+ "variants": [
+  "clean",
+  "blur",
+  "small",
+  "tilt",
+  "lowlight",
+  "noise"
+ ],
+ "outcomes": {
+  "exit1": {
+   "clean": "auto",
+   "blur": "askNumber",
+   "small": "none",
+   "tilt": "none",
+   "lowlight": "auto",
+   "noise": "none"
+  },
+  "exit3": {
+   "clean": "auto",
+   "blur": "auto",
+   "small": "none",
+   "tilt": "none",
+   "lowlight": "auto",
+   "noise": "none"
+  },
+  "exit4": {
+   "clean": "auto",
+   "blur": "auto",
+   "small": "none",
+   "tilt": "auto",
+   "lowlight": "auto",
+   "noise": "none"
+  },
+  "exit6": {
+   "clean": "auto",
+   "blur": "auto",
+   "small": "none",
+   "tilt": "auto",
+   "lowlight": "auto",
+   "noise": "none"
+  },
+  "exit8": {
+   "clean": "auto",
+   "blur": "auto",
+   "small": "none",
+   "tilt": "askNumber",
+   "lowlight": "auto",
+   "noise": "none"
+  },
+  "station4": {
+   "clean": "auto",
+   "blur": "auto",
+   "small": "askNumber",
+   "tilt": "auto",
+   "lowlight": "auto",
+   "noise": "auto"
+  },
+  "board5": {
+   "clean": "confirm",
+   "blur": "confirm",
+   "small": "confirm",
+   "tilt": "confirm",
+   "lowlight": "confirm",
+   "noise": "confirm"
+  },
+  "board7": {
+   "clean": "auto",
+   "blur": "auto",
+   "small": "auto",
+   "tilt": "auto",
+   "lowlight": "auto",
+   "noise": "auto"
+  },
+  "transfer7": {
+   "clean": "auto",
+   "blur": "auto",
+   "small": "auto",
+   "tilt": "none",
+   "lowlight": "auto",
+   "noise": "auto"
+  },
+  "dir_Junggok": {
+   "clean": "confirm",
+   "blur": "none",
+   "small": "confirm",
+   "tilt": "none",
+   "lowlight": "confirm",
+   "noise": "confirm"
+  },
+  "dir_Achasan": {
+   "clean": "confirm",
+   "blur": "none",
+   "small": "confirm",
+   "tilt": "confirm",
+   "lowlight": "confirm",
+   "noise": "confirm"
+  },
+  "dir_Janghanpyeong": {
+   "clean": "confirm",
+   "blur": "none",
+   "small": "confirm",
+   "tilt": "none",
+   "lowlight": "confirm",
+   "noise": "confirm"
+  },
+  "toilet": {
+   "clean": "none",
+   "blur": "none",
+   "small": "confirm",
+   "tilt": "confirm",
+   "lowlight": "none",
+   "noise": "confirm"
+  }
+ }
+}

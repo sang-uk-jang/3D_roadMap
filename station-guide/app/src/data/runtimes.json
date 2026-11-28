@@ -1,0 +1,22 @@
+{
+ "source": "서울교통공사 사이버스테이션 열차시간표, 열차번호로 두 역 출발 시각 비교",
+ "fetchedAt": "2026-11-28T02:05:52.964Z",
+ "links": {
+  "gunja-dobongsan": {
+   "boarding": "board7_e",
+   "alight": "board7_jangam",
+   "minutes": 29,
+   "min": 28,
+   "max": 30,
+   "trains": 236
+  },
+  "dobongsan-gunja": {
+   "boarding": "board7_suraksan",
+   "alight": "board7_w",
+   "minutes": 28,
+   "min": 28,
+   "max": 30,
+   "trains": 516
+  }
+ }
+}

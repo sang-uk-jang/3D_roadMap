@@ -1,0 +1,117 @@
+{
+ "summary": {
+  "cases": 8,
+  "autoCorrect": 0,
+  "correctInCandidates": 1,
+  "exitSignButNumberAsked": 2,
+  "wrongButConfident": 0,
+  "fellBackToButtons": 8,
+  "avgMs": 433
+ },
+ "rows": [
+  {
+   "file": "t1_exit4_entrance.jpg",
+   "sees": "4 출입구 Entrance",
+   "ocr": "227 00102 yo 0017 20 oh 21 El AH 랑아 제 a Entrance 출입구 227 00102 ye “Hh 9 2h 1 ja AH LS ® a Entrance 출입구",
+   "ms": 754,
+   "top": "x2_bot",
+   "confident": false,
+   "ask": "exitNumber",
+   "auto": false,
+   "inTop": false,
+   "wrongConfident": false,
+   "askedExitNumber": true
+  },
+  {
+   "file": "t2_exit4_station.jpg",
+   "sees": "544 725 군자 Gunja 4",
+   "ocr": "군 자 rom — 544 00 784 | 군 자 mf = 544 0 784 |",
+   "ms": 493,
+   "top": null,
+   "confident": false,
+   "ask": "exitNumber",
+   "auto": false,
+   "inTop": false,
+   "wrongConfident": false,
+   "askedExitNumber": true
+  },
+  {
+   "file": "t3_exit4_night.jpg",
+   "sees": "군자 Gunja 4 (야간, 빛번짐)",
+   "ocr": "",
+   "ms": 87,
+   "top": null,
+   "confident": false,
+   "ask": "where",
+   "auto": false,
+   "inTop": false,
+   "wrongConfident": false,
+   "askedExitNumber": false
+  },
+  {
+   "file": "t4_b1_east_ceiling.jpg",
+   "sees": "← 5 (장한평/아차산) 화장실 … 7 ↱",
+   "ocr": "CODE ㅜ CODE ㅜ",
+   "ms": 271,
+   "top": null,
+   "confident": false,
+   "ask": "where",
+   "auto": false,
+   "inTop": false,
+   "wrongConfident": false,
+   "askedExitNumber": false
+  },
+  {
+   "file": "t5_b1_line7_arrow.jpg",
+   "sees": "7 ↱",
+   "ocr": "=@ (3 이=(7) (>",
+   "ms": 193,
+   "top": null,
+   "confident": false,
+   "ask": "where",
+   "auto": false,
+   "inTop": false,
+   "wrongConfident": false,
+   "askedExitNumber": false
+  },
+  {
+   "file": "t6_gate7.jpg",
+   "sees": "타는 곳 … 7",
+   "ocr": "- ————— 에 타는 곳 중소. a a ~~ 예 ————— - qez== EE +",
+   "ms": 1076,
+   "top": "gate_w",
+   "confident": false,
+   "ask": "where",
+   "auto": false,
+   "inTop": true,
+   "wrongConfident": false,
+   "askedExitNumber": false
+  },
+  {
+   "file": "t7_exit34_pillar.jpg",
+   "sees": "3 4 나가는 곳",
+   "ocr": "[HEN E i : [TTT E i <",
+   "ms": 281,
+   "top": null,
+   "confident": false,
+   "ask": "where",
+   "auto": false,
+   "inTop": false,
+   "wrongConfident": false,
+   "askedExitNumber": false
+  },
+  {
+   "file": "t8_exit_ceiling_small.jpg",
+   "sees": "나가는 곳 … ↑ (작고 흐림)",
+   "ocr": "a i a i 해",
+   "ms": 310,
+   "top": null,
+   "confident": false,
+   "ask": "where",
+   "auto": false,
+   "inTop": false,
+   "wrongConfident": false,
+   "askedExitNumber": false
+  }
+ ]
+}

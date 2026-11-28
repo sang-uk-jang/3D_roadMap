@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign OCR Eval</title>
+    <style>
+      body { font-family: system-ui, 'Malgun Gothic', sans-serif; margin: 16px; background: #fff; color: #111; }
+      table { border-collapse: collapse; font-size: 12px; }
+      td, th { border: 1px solid #ddd; padding: 4px 6px; vertical-align: top; }
+      .ok { background: #dcfce7; } .ask { background: #fef9c3; } .bad { background: #fee2e2; } .none { background: #f3f4f6; }
+      img { max-width: 240px; display: block; }
+    </style>
+  </head>
+  <body>
+    <h1>합성 표지판 OCR 정확도 (개발용)</h1>
+    <p id="status">준비 중…</p>
+    <pre id="summary"></pre>
+    <table id="out"></table>
+    <script type="module" src="/src/eval/synthetic.ts"></script>
+  </body>
+</html>
